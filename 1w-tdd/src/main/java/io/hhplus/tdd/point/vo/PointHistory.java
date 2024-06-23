@@ -1,4 +1,4 @@
-package io.hhplus.tdd.point.dto;
+package io.hhplus.tdd.point.vo;
 
 public record PointHistory(
         long id,
@@ -7,4 +7,5 @@ public record PointHistory(
         TransactionType type,
         long updateMillis
 ) {
+
 }

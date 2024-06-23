@@ -6,3 +6,12 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+/compiler.xml
+/gradle.xml
+/hanghaePlus_2024.iml
+/modules/hhplus-tdd-jvm.main.iml
+/jarRepositories.xml
+/misc.xml
+/modules.xml
+/uiDesigner.xml
+/vcs.xml
