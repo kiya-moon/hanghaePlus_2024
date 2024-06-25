@@ -1,10 +1,7 @@
 package com.hhplus.lecture.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.sql.Timestamp;
 import java.util.*;
@@ -12,6 +9,7 @@ import java.util.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Getter
+@Builder
 @Entity
 public class Lecture {
     @Id
@@ -30,5 +28,6 @@ public class Lecture {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "lecture")
     private List<LectureHistory> LectureHistory;
+
 
 }
