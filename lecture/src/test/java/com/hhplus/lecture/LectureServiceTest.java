@@ -44,7 +44,7 @@ public class LectureServiceTest {
         request.setUserId(1L);
         request.setLectureScheduleId(1L);
 
-        when(lectureScheduleRepository.findById(request.getLectureScheduleId()))
+        when(lectureScheduleRepository.findByIdWithLock(request.getLectureScheduleId()))
                 .thenReturn(Optional.empty());
 
         // When
@@ -65,7 +65,7 @@ public class LectureServiceTest {
         request.setLectureScheduleId(1L);
         LectureSchedule lectureSchedule = LectureSchedule.builder().build();
 
-        when(lectureScheduleRepository.findById(request.getLectureScheduleId()))
+        when(lectureScheduleRepository.findByIdWithLock(request.getLectureScheduleId()))
                 .thenReturn(Optional.of(lectureSchedule));
         when(lectureHistoryRepository.findByUserIdAndLectureScheduleId(request.getUserId(), request.getLectureScheduleId()))
                 .thenReturn(Optional.of(LectureHistory.builder().build()));
@@ -91,7 +91,7 @@ public class LectureServiceTest {
                 .maxPersonnel(30)
                 .build();
 
-        when(lectureScheduleRepository.findById(request.getLectureScheduleId()))
+        when(lectureScheduleRepository.findByIdWithLock(request.getLectureScheduleId()))
                 .thenReturn(Optional.of(lectureSchedule));
         when(lectureHistoryRepository.findByUserIdAndLectureScheduleId(request.getUserId(), request.getLectureScheduleId()))
                 .thenReturn(Optional.empty());
@@ -117,12 +117,12 @@ public class LectureServiceTest {
                 .maxPersonnel(30)
                 .build();
 
-        when(lectureScheduleRepository.findById(request.getLectureScheduleId()))
+        when(lectureScheduleRepository.findByIdWithLock(request.getLectureScheduleId()))
                 .thenReturn(Optional.of(lectureSchedule));
         when(lectureHistoryRepository.findByUserIdAndLectureScheduleId(request.getUserId(), request.getLectureScheduleId()))
                 .thenReturn(Optional.empty());
         when(lectureHistoryRepository.countByLectureScheduleId(request.getLectureScheduleId()))
-                .thenReturn(10);
+                .thenReturn(30);
 
         // When
         IllegalStateException exception = assertThrows(IllegalStateException.class, () -> {
@@ -145,7 +145,7 @@ public class LectureServiceTest {
                 .maxPersonnel(30)
                 .build();
 
-        when(lectureScheduleRepository.findById(request.getLectureScheduleId()))
+        when(lectureScheduleRepository.findByIdWithLock(request.getLectureScheduleId()))
                 .thenReturn(Optional.of(lectureSchedule));
         when(lectureHistoryRepository.findByUserIdAndLectureScheduleId(request.getUserId(), request.getLectureScheduleId()))
                 .thenReturn(Optional.empty());
