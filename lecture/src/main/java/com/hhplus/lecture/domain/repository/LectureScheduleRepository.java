@@ -11,15 +11,9 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 
-public interface LectureScheduleRepository extends JpaRepository<LectureSchedule, Long> {
+public interface LectureScheduleRepository extends JpaRepository<LectureSchedule, Long>, LectureScheduleRepositoryCustom {
     // 비관적 락을 적용한 쿼리 메소드 추가
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("SELECT ls FROM LectureSchedule ls WHERE ls.id = :id")
     Optional<LectureSchedule> findByIdWithLock(Long id);
-
-    @Modifying
-    @Transactional
-    @Query("UPDATE LectureSchedule ls SET ls.currentPersonnel = :currentPersonnel WHERE ls.id = :id")
-    void updateCurrentPersonnel(@Param("id") Long id, @Param("currentPersonnel") int currentPersonnel);
-
 }

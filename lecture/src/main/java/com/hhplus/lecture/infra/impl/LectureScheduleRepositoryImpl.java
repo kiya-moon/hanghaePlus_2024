@@ -18,11 +18,12 @@ public class LectureHistoryRepositoryImpl implements LectureHistoryRepositoryCus
 
     @Override
     @Modifying
-    @Query(value = "update lecture_history lh set lh.current_personnel = :newCurrentPersonnel where lh.lecture_schedule_id = :lectureScheduleId", nativeQuery = true)
-    public void updateCurrentPersonnel(@Param("lectureScheduleId") Long lectureScheduleId, @Param("newCurrentPersonnel") int newCurrentPersonnel) {
-        entityManager.createNativeQuery("update lecture_history lh set lh.current_personnel = :newCurrentPersonnel where lh.lecture_schedule_id = :lectureScheduleId")
-                .setParameter("newCurrentPersonnel", newCurrentPersonnel)
-                .setParameter("lectureScheduleId", lectureScheduleId)
+    @Transactional
+    @Query("UPDATE LectureSchedule ls SET ls.currentPersonnel = :currentPersonnel WHERE ls.id = :id")
+    public void updateCurrentPersonnel(Long id, int currentPersonnel) {
+        entityManager.createQuery("UPDATE LectureSchedule ls SET ls.currentPersonnel = :currentPersonnel WHERE ls.id = :id")
+                .setParameter("currentPersonnel", currentPersonnel)
+                .setParameter("id", id)
                 .executeUpdate();
     }
 
