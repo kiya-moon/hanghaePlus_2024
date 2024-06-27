@@ -1,4 +1,4 @@
-package com.hhplus.lecture.entity;
+package com.hhplus.lecture.infra.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -20,14 +20,10 @@ public class Lecture {
     @Column(name = "lecture_nm", nullable = false)
     private String lectureNm;   // 특강명
 
-    @Column(name = "application_date", nullable = false)
-    private Timestamp applicationDate;   // 특강신청 오픈일
+    @Column(name = "teacher_nm", nullable = false)
+    private String teacherNm;   // 강사명
 
-    @Column(name = "lecture_capacity", nullable = false)
-    private String lectureCapacity;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "lecture")
-    private List<LectureHistory> LectureHistory;
-
+    @Column(name = "max_personnel")
+    private Integer maxPersonnel = 30;   // 최대인원
 
 }

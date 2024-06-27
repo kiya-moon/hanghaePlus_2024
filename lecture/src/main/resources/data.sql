@@ -32,4 +32,4 @@ insert into user (ID, USER_NM) values (31, 'user31');
 insert into user (ID, USER_NM) values (32, 'user32');
 insert into user (ID, USER_NM) values (33, 'user33');
 
-insert into lecture (ID, LECTURE_NM, APPLICATION_DATE, LECTURE_CAPACITY) values (1, 'lecture1', TIMESTAMP '2024-04-20 13:00:00', 30);
+insert into lecture (ID, LECTURE_NM, TEACHER_NM, MAX_PERSONNEL) values (1, '클린아키텍처', '하현우', 30);
