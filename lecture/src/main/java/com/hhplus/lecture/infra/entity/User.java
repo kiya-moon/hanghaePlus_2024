@@ -1,4 +1,4 @@
-package com.hhplus.lecture.entity;
+package com.hhplus.lecture.infra.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -20,7 +20,4 @@ public class User {
 
     @Column(name = "user_nm", nullable = false)
     private String userNm;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<LectureHistory> LectureHistory;
 }
