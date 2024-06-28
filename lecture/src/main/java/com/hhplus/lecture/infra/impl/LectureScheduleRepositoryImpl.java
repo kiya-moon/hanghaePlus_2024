@@ -1,17 +1,16 @@
 package com.hhplus.lecture.infra.impl;
 
-import com.hhplus.lecture.domain.repository.LectureHistoryRepositoryCustom;
+import com.hhplus.lecture.domain.repository.LectureScheduleRepositoryCustom;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
 @Transactional
-public class LectureHistoryRepositoryImpl implements LectureHistoryRepositoryCustom {
+public class LectureScheduleRepositoryImpl implements LectureScheduleRepositoryCustom {
 
     @PersistenceContext
     private EntityManager entityManager;
