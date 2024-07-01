@@ -5,6 +5,7 @@ import com.hhplus.lecture.infra.entity.LectureHistory;
 import com.hhplus.lecture.infra.entity.LectureSchedule;
 import com.hhplus.lecture.domain.repository.LectureHistoryRepository;
 import com.hhplus.lecture.domain.repository.LectureScheduleRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -21,9 +22,11 @@ public class LectureService {
     private final LectureHistoryRepository lectureHistoryRepository;
 
     // 특강 신청 로직
+    // 트랜잭션과 락 적용
+    @Transactional
     public ResponseEntity<String> applyLecture(LectureRequest request) {
         // 특강 조회
-        LectureSchedule lectureSchedule = lectureScheduleRepository.findById(request.getLectureScheduleId())
+        LectureSchedule lectureSchedule = lectureScheduleRepository.findByIdWithLock(request.getLectureScheduleId())
                 .orElseThrow(() -> new IllegalStateException("해당 특강이 존재하지 않습니다."));
 
         // 특강 신청 가능 여부 확인
@@ -46,7 +49,7 @@ public class LectureService {
             try {
                 lectureHistoryRepository.save(lectureHistory);
                 // 현재 인원 업데이트
-                lectureHistoryRepository.updateCurrentPersonnel(request.getLectureScheduleId(), countPersonnel + 1);
+                lectureScheduleRepository.updateCurrentPersonnel(request.getLectureScheduleId(), countPersonnel + 1);
                 return ResponseEntity.ok("특강 신청이 완료되었습니다.");
             } catch (Exception e) {
                 throw new IllegalStateException("특강 신청에 실패했습니다.");
