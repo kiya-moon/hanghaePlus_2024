@@ -1,6 +1,9 @@
 ## 📑목차
 1. [3주차 과제](#-3주차-과제)
 2. [마일스톤](#-마일스톤)
+3. [시퀀스 다이어그램](#-시퀀스-다이어그램)
+4. [ERD 다이어그램](#-erd-다이어그램)
+5. [API 명세서](#-api-명세서)
 
 <br />
 
@@ -75,7 +78,21 @@
 - 유저간 대기열을 요청 순서대로 정확하게 제공할 방법을 고민해 봅니다.
 - 동시에 여러 사용자가 예약 요청을 했을 때, 좌석이 중복으로 배정 가능하지 않도록 합니다.
 </details>
-<br /><br /><br />
+<br />
 
 ## 📌 마일스톤
-🔗 [링크](https://github.com/users/kiya-moon/projects/2)
+🔗 [링크](https://github.com/users/kiya-moon/projects/2/views/1?sortedBy%5Bdirection%5D=asc&sortedBy%5BcolumnId%5D=118995284) 
+
+<br />
+
+## 📌 시퀀스 다이어그램
+
+<br />
+
+## 📌 ERD 다이어그램
+
+<br />
+
+## 📌 API 명세서
+
+<br />
