@@ -86,7 +86,26 @@
 <br />
 
 ## 📌 시퀀스 다이어그램
-
+<details>
+<summary>
+  자세히
+</summary>  
+  1. 유저 토큰 발급 API <br />
+  
+  <br />
+  2. 예약 가능 날짜/좌석 조회 API <br />
+  
+  <br />
+  3. 좌석 예약 API <br />
+  
+  <br />
+  4. 잔액 조회/충전 API <br />
+  
+  <br />
+  5. 결제 API <br />
+  
+  <br />
+</details>
 <br />
 
 ## 📌 ERD 다이어그램
