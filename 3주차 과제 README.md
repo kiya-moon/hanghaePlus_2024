@@ -91,8 +91,92 @@
 <br />
 
 ## 📌 ERD 다이어그램
+<details>
+  <summary>
+    자세히
+  </summary>
+  <br />
+
 ![image](https://github.com/kiya-moon/hanghaePlus_2024/assets/101784768/29796fba-bec1-4689-a3ec-ceb8fb03e85c)
 
+### CUSTOMER DOMAIN
+#### 1. CUSTOMER
+- 속성
+  - id(PK) : 고객 아이디
+  - user_name : 고객 이름
+  - balance : 고객 잔액
+- 고객 정보를 담는 테이블
+<br />
+
+### TOKEN DOMAIN
+#### 1. TOKEN
+- 속성
+  - id(PK) : 토큰 아이디
+  - user_id(FK) : 고객 아이디
+  - token : 유저 토큰
+  - status : 토큰 상태
+  - created_at : 토큰 발급 시간
+  - expires_at : 토큰 만료 시간
+- 대기열을 관리하는 토큰 테이블
+- 토큰은 RandomUUID + / + ConcertId로 구성하여 콘서트별로 구분이 가능하도록 할 예정
+- 대기, 활성화, 만료로 상태가 구분된다
+- 토큰 만료 시간은 토큰 발급 시간으로부터 5분 뒤가 설정된다   
+<br />
+
+### CONCERT DOMAIN
+#### 1. CONCERT
+- 속성
+  - id(PK) : 콘서트 아이디
+  - name : 콘서트 이름
+- 콘서트 기본 테이블
+<br />
+
+#### 2. CONCERT_OPTION
+- 속성
+  - id(PK) : 콘서트 옵션 아이디
+  - concert_id(FK) : 콘서트 아이디
+  - concert_date : 콘서트 날짜
+  - price : 콘서트 가격
+- 콘서트 시간별 옵션 테이블
+- 동일 콘서트가 시간대별로 들어올 수 있기 때문에 1:N 관계
+- (가격 seat 테이블로 옮길 예정. 현재는 좌석에 차등이 없으나 보통 콘서트는 좌석별로 가격이 다르기 때무네...)
+<br />
+
+#### 3. SEAT
+- 속성
+  - id(PK) : 좌석 아이디
+  - concert_option_id(FK) : 콘서트 옵션 아이디
+  - seat_number : 좌석 번호
+  - status: 좌석 상태
+- 좌석 테이블
+- 콘서트 옵션 별로 50개의 좌석 정보가 들어가는 테이블(1:N 관계)
+<br />
+
+### RESEVATION DOMAIN
+#### 1. RESERVATION
+- 속성
+  - id(PK) : 예약 아이디
+  - user_id(FK) : 고객 아이디
+  - seat_id(FK) : 좌석 아이디
+  - status : 예약 상태
+  - created_at : 예약 생성 시간
+  - updated_at : 예약 업데이트 시간
+- 예약 관리 테이블
+- 고객이 좌석을 선택하고 예약 버튼 클릭 시 해당 테이블에 들어온다
+- 예약 전, 예약 만료, 결제 완료로 상태가 구분된다
+<br />
+
+#### 2. PAYMENT
+- 속성
+  - id(PK) : 결제 아이디
+  - reservation_id(FK) : 예약 아이디
+  - amount : 결제된 금액
+  - payment_date : 결제일
+- 결제 테이블
+- 예약 테이블의 예약을 결제 완료 시 해당 테이블에 들어온다.
+<br />
+
+</details>
 <br />
 
 ## 📌 API 명세서
@@ -101,7 +185,6 @@
     자세히
   </summary>
   <br />
-  ### API 명세서
 
 #### 1. 유저 토큰 발급 API
 
@@ -116,6 +199,8 @@
     | 항목   | Type | 설명    | 비고 |
     | ------ | ---- | ------- | ---- |
     | userId | Long | 유저 ID |      |
+    | concertId | Long | 콘서트 ID |      |
+    | token | String | 토큰 | null 가능 |
 
 - **Response**
   - **HTTP Status Codes**: 
@@ -146,7 +231,7 @@
         "result": "200",
         "message": "Success",
         "data": {
-            "token": "randomUUID",
+            "token": "randomUUID/concertId",
             "queuePosition": 1,
             "expiresAt": "2024-07-04T12:00:00"
         }
