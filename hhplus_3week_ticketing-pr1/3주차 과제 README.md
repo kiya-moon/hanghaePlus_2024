@@ -97,7 +97,8 @@
   </summary>
   <br />
 
-![image](https://github.com/kiya-moon/hanghaePlus_2024/assets/101784768/29796fba-bec1-4689-a3ec-ceb8fb03e85c)
+![image](https://github.com/kiya-moon/hanghaePlus_2024/assets/101784768/c997879e-3a33-4d3e-9253-d4615ca32845)
+
 
 ### CUSTOMER DOMAIN
 #### 1. CUSTOMER
