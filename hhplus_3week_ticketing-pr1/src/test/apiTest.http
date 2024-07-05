@@ -1,0 +1,62 @@
+### 토큰 발급 API 테스트
+POST http://localhost:8080/token
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "concertId": 1
+}
+
+###
+
+### 예약 가능 날짜 조회 API 테스트
+GET http://localhost:8080/api/1/available-dates?token=validToken
+Accept: application/json
+
+###
+
+### 예약 가능 좌석 조회 API 테스트
+GET http://localhost:8080/api/1/available-seats?token=validToken
+Accept: application/json
+
+###
+
+### 좌석 예약 API 테스트
+POST http://localhost:8080/api/reserve
+Content-Type: application/json
+
+{
+  "token": "validToken",
+  "concertOptionId": 1,
+  "seatId": 1,
+  "userId": 1
+}
+
+###
+
+### 잔액 충전 API 테스트
+PATCH http://localhost:8080/api/balance/charge
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "amount": 100.00
+}
+
+###
+
+### 잔액 조회 API 테스트
+GET http://localhost:8080/api/balance?userId=1
+Accept: application/json
+
+###
+
+### 결제 API 테스트
+POST http://localhost:8080/api/pay
+Content-Type: application/json
+
+{
+  "token": "validToken",
+  "reservationId": 123,
+  "amount": 100.00
+}
