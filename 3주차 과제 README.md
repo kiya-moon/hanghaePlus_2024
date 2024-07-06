@@ -199,8 +199,6 @@
     | 항목   | Type | 설명    | 비고 |
     | ------ | ---- | ------- | ---- |
     | userId | Long | 유저 ID |      |
-    | concertId | Long | 콘서트 ID |      |
-    | token | String | 토큰 | null 가능 |
 
 - **Response**
   - **HTTP Status Codes**: 
