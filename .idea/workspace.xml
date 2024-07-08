@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d9d8606a-99af-4f76-a512-fb2a53087a14" name="변경" comment="feat: api mock 작성">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3주차 과제 README.md" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/3주차 과제 README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/main/java/com/hhplus/concert_ticketing/ConcertTicketingApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/ConcertTicketingApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/main/java/com/hhplus/concert_ticketing/presentation/TicketingMockApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/TicketingMockApiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/main/java/com/hhplus/concert_ticketing/presentation/dto/ConcertOption.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/dto/ConcertOption.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/main/java/com/hhplus/concert_ticketing/presentation/dto/PayData.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/dto/PayData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/main/java/com/hhplus/concert_ticketing/presentation/dto/ReserveData.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/dto/ReserveData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/main/java/com/hhplus/concert_ticketing/presentation/dto/Seat.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/dto/Seat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/main/java/com/hhplus/concert_ticketing/presentation/dto/TokenData.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/dto/TokenData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/main/java/com/hhplus/concert_ticketing/presentation/dto/request/ChargeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/dto/request/ChargeRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/main/java/com/hhplus/concert_ticketing/presentation/dto/request/PayRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/dto/request/PayRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/main/java/com/hhplus/concert_ticketing/presentation/dto/request/ReserveRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/dto/request/ReserveRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/main/java/com/hhplus/concert_ticketing/presentation/dto/request/TokenRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/dto/request/TokenRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/main/java/com/hhplus/concert_ticketing/presentation/dto/response/AvailableDatesResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/dto/response/AvailableDatesResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/main/java/com/hhplus/concert_ticketing/presentation/dto/response/AvailableSeatsResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/dto/response/AvailableSeatsResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/main/java/com/hhplus/concert_ticketing/presentation/dto/response/BalanceResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/dto/response/BalanceResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/main/java/com/hhplus/concert_ticketing/presentation/dto/response/ChargeResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/dto/response/ChargeResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/main/java/com/hhplus/concert_ticketing/presentation/dto/response/ErrorResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/dto/response/ErrorResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/main/java/com/hhplus/concert_ticketing/presentation/dto/response/PayResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/dto/response/PayResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/main/java/com/hhplus/concert_ticketing/presentation/dto/response/ReserveResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/dto/response/ReserveResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/main/java/com/hhplus/concert_ticketing/presentation/dto/response/TokenResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/dto/response/TokenResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/test/apiTest.http" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/apiTest.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/test/java/com/hhplus/concert_ticketing/ConcertTicketingApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/ConcertTicketingApplicationTests.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/1w-tdd">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/hhplus_3week_ticketing-pr1">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/lecture">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$/1w-tdd">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/lecture">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/hhplus_3week_ticketing-pr1">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="concert-ticketing" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="lecture" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="AnnotationType" />
+        <option value="JUnit5 Test Class" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="3w-06step" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;kiya-moon&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/kiya-moon/hanghaePlus_2024.git&quot;,
+    &quot;accountId&quot;: &quot;d268aba9-689c-40de-a7e1-344d18ab4395&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2i35vjBLD5tCpNDF0l55ge0iB92" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Gradle.'concert-ticketing'에 있는 테스트.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.1w-tdd 빌드.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build lecture.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureControllerIntegrationTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureControllerIntegrationTest.testApplyLecture.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureControllerIntegrationTest.testGetLectureList.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureControllerIntegrationTest.testIsAppliedLecture.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureControllerTest.applyLectureTest_FAIL.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureControllerTest.applyLectureTest_SUCCESS.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureControllerTest.applyLecture_Success.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureControllerTest.getAllLecuresTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureControllerTest.getLectureListTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureControllerTest.isAppliedLectureTest_FAIL.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureControllerTest.isAppliedLectureTest_SUCCESS.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureControllerTest.signUpLectureSuccessTest (1).executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureControllerTest.signUpLectureSuccessTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureControllerTest.signUpLectureTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureControllerTest.testSignUpLecture.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureServiceIntegrationTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureServiceIntegrationTest.testApplyLecture.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureServiceTest.getLectureInfo.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureServiceTest.getLectureInfoFailure.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureServiceTest.isValidLectureTime.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureServiceTest.testApplyLecture_FullCapacity.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureServiceTest.testApplyLecture_LectureNotFound.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureServiceTest.testApplyLecture_SUCCESS.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureServiceTest.testGetLectureList.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureServiceTest.testIsAppliedLecture_FAIL.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureServiceTest.testIsAppliedLecture_NotFound.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureServiceTest.testIsAppliedLecture_SUCCESS.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.LectureServiceTest.testIsAppliedLecture_Success.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PointControllerTest.testGetUserPoint.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PointManagementTest.isChargePointSuccess.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PointServiceConcurrencyTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PointServiceConcurrencyTest.testConcurrentOperations.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PointServiceTest.ReturnUsePoint.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PointServiceTest.ReturnUsePointTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PointServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PointServiceTest.returnChargePoint.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PointServiceTest.returnFailUsePointInsufficientBalance.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PointServiceTest.returnGetPointHistoryTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PointServiceTest.returnGetPointTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PointServiceTest.testConcurrency.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.hhplus_3week_ticketing-pr1 [dependencies].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.hhplus_3week_ticketing-pr1 빌드.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.lecture 빌드.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP 요청.apiTest | 유저 토큰 발급 성공 테스트.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP 요청.apiTest | 유저 토큰 발급 실패 - concertId 누락.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP 요청.apiTest | 유저 토큰 발급 실패 - userId 누락.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP 요청.apiTest | 토큰 발급 API 테스트.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP 요청.apiTest 내 전체.executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ConcertTicketingApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.LectureApplication.executor&quot;: &quot;Run&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;/Users/kiya/IdeaProjects/hanghaePlus_2024/lecture/src/test/java/com/hhplus/lecture&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDK&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;h2&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.hhplus.concert_ticketing.presentation.dto" />
+      <recent name="com.hhplus.lecture.controller.exception" />
+      <recent name="com.hhplus.lecture.dto" />
+      <recent name="com.hhplus.lecture.controller" />
+      <recent name="com.hhplus.lecture.entity" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/hhplus_3week_ticketing-pr1" />
+      <recent name="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/main/java/com/hhplus/concert_ticketing/presentation" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/1w-tdd" />
+      <recent name="$PROJECT_DIR$/lecture" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveInnerDialog.RECENTS_KEY">
+      <recent name="io.hhplus.tdd.point.service" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.hhplus.lecture.service" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <myKeys>
+      <visibility group="Gradle 작업" flag="true" />
+      <visibility group="Grunt" flag="true" />
+      <visibility group="Gulp" flag="true" />
+      <visibility group="HTTP 요청" flag="true" />
+      <visibility group="Maven Goal" flag="true" />
+      <visibility group="Node.js" flag="true" />
+      <visibility group="npm" flag="true" />
+      <visibility group="yarn" flag="true" />
+      <visibility group="실행 구성" flag="true" />
+      <visibility group="최근 프로젝트" flag="true" />
+    </myKeys>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="MicronautRunConfigurationType" />
+        <option value="QuarkusRunConfigurationType" />
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.ConcertTicketingApplication">
+    <configuration name="apiTest | 유저 토큰 발급 실패 - concertId 누락" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/test/apiTest.http" index="3" requestIdentifier="유저 토큰 발급 실패 - concertId 누락" runType="단일 요청 실행">
+      <method v="2" />
+    </configuration>
+    <configuration name="apiTest | 유저 토큰 발급 실패 - userId 누락" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/test/apiTest.http" index="2" requestIdentifier="유저 토큰 발급 실패 - userId 누락" runType="단일 요청 실행">
+      <method v="2" />
+    </configuration>
+    <configuration name="apiTest | 토큰 발급 API 테스트" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/test/apiTest.http" requestIdentifier="토큰 발급 API 테스트" runType="단일 요청 실행">
+      <method v="2" />
+    </configuration>
+    <configuration name="apiTest | 유저 토큰 발급 성공 테스트" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/test/apiTest.http" requestIdentifier="유저 토큰 발급 성공 테스트" runType="단일 요청 실행">
+      <method v="2" />
+    </configuration>
+    <configuration name="apiTest 내 전체" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$PROJECT_DIR$/hhplus_3week_ticketing-pr1/src/test/apiTest.http">
+      <method v="2" />
+    </configuration>
+    <configuration name="ConcertTicketingApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="concert-ticketing.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.hhplus.concert_ticketing.ConcertTicketingApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LectureApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="lecture.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.hhplus.lecture.LectureApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TddApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="hhplus-tdd-jvm.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="io.hhplus.tdd.util.TddApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="HTTP 요청.apiTest | 토큰 발급 API 테스트" />
+      <item itemvalue="HTTP 요청.apiTest 내 전체" />
+      <item itemvalue="HTTP 요청.apiTest | 유저 토큰 발급 성공 테스트" />
+      <item itemvalue="HTTP 요청.apiTest | 유저 토큰 발급 실패 - concertId 누락" />
+      <item itemvalue="HTTP 요청.apiTest | 유저 토큰 발급 실패 - userId 누락" />
+      <item itemvalue="Spring Boot.ConcertTicketingApplication" />
+      <item itemvalue="Spring Boot.LectureApplication" />
+      <item itemvalue="Spring Boot.TddApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP 요청.apiTest | 유저 토큰 발급 실패 - userId 누락" />
+        <item itemvalue="HTTP 요청.apiTest | 유저 토큰 발급 실패 - concertId 누락" />
+        <item itemvalue="HTTP 요청.apiTest | 유저 토큰 발급 성공 테스트" />
+        <item itemvalue="HTTP 요청.apiTest 내 전체" />
+        <item itemvalue="HTTP 요청.apiTest | 토큰 발급 API 테스트" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="d9d8606a-99af-4f76-a512-fb2a53087a14" name="변경" comment="" />
+      <created>1718706653354</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1718706653354</updated>
+      <workItem from="1718706654419" duration="2182000" />
+      <workItem from="1718709083506" duration="12578000" />
+      <workItem from="1718886410271" duration="1529000" />
+      <workItem from="1718887951047" duration="554000" />
+      <workItem from="1718888512595" duration="720000" />
+      <workItem from="1718889237623" duration="13637000" />
+      <workItem from="1718973047114" duration="623000" />
+      <workItem from="1719151530388" duration="4737000" />
+      <workItem from="1719156274760" duration="3656000" />
+      <workItem from="1719160386842" duration="13070000" />
+      <workItem from="1719306777339" duration="738000" />
+      <workItem from="1719307519761" duration="71000" />
+      <workItem from="1719307599776" duration="44162000" />
+      <workItem from="1719511372327" duration="153000" />
+      <workItem from="1719511533777" duration="273000" />
+      <workItem from="1719511814759" duration="7159000" />
+      <workItem from="1719518988767" duration="6220000" />
+      <workItem from="1719731851568" duration="3947000" />
+      <workItem from="1720131978298" duration="4004000" />
+      <workItem from="1720135989889" duration="108000" />
+      <workItem from="1720136100619" duration="571000" />
+      <workItem from="1720136674363" duration="9147000" />
+      <workItem from="1720462921751" duration="116000" />
+      <workItem from="1720463049606" duration="52000" />
+      <workItem from="1720463126266" duration="112000" />
+      <workItem from="1720463240322" duration="41000" />
+    </task>
+    <task id="LOCAL-00001" summary="feat: 1주차 과제 베이스">
+      <option name="closed" value="true" />
+      <created>1718706741115</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1718706741115</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat: 포인트 충전 테스트 추가">
+      <option name="closed" value="true" />
+      <created>1718709442045</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1718709442045</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat: 포인트 사용, 조회, 내역 조회 테스트 추가">
+      <option name="closed" value="true" />
+      <created>1718721748696</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1718721748696</updated>
+    </task>
+    <task id="LOCAL-00004" summary="refactor: 프로젝트 구조 변경">
+      <option name="closed" value="true" />
+      <created>1718722333029</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1718722333029</updated>
+    </task>
+    <task id="LOCAL-00005" summary="refactor: 프로젝트 구조 변경">
+      <option name="closed" value="true" />
+      <created>1718899818579</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1718899818579</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat: 1주차 과제 2차 제출&#10;&#10;- PointServiceTest에서 서비스 분리&#10;- 컨트롤러 추가&#10;- 레포지토리 추가&#10;- TDD 테스트 수정&#10;- 동시성 테스트 추가">
+      <option name="closed" value="true" />
+      <created>1718900289369</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1718900289369</updated>
+    </task>
+    <task id="LOCAL-00007" summary="feat: 기타">
+      <option name="closed" value="true" />
+      <created>1719154732703</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1719154732703</updated>
+    </task>
+    <task id="LOCAL-00008" summary="feat: 기타2">
+      <option name="closed" value="true" />
+      <created>1719154824842</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1719154824842</updated>
+    </task>
+    <task id="LOCAL-00009" summary="init: 2주차 프로젝트 폴더 생성">
+      <option name="closed" value="true" />
+      <created>1719155473393</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1719155473393</updated>
+    </task>
+    <task id="LOCAL-00010" summary="refactor: 1주차 과제 스케치 파일 위치 이동">
+      <option name="closed" value="true" />
+      <created>1719156154936</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1719156154936</updated>
+    </task>
+    <task id="LOCAL-00011" summary="feat: 기본 구조 및 DB 생성">
+      <option name="closed" value="true" />
+      <created>1719275973131</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1719275973131</updated>
+    </task>
+    <task id="LOCAL-00012" summary="feat: 특강 조회 단위 테스트 진행">
+      <option name="closed" value="true" />
+      <created>1719317982469</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1719317982469</updated>
+    </task>
+    <task id="LOCAL-00013" summary="feat: step03 과제 완료">
+      <option name="closed" value="true" />
+      <created>1719521528915</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1719521528915</updated>
+    </task>
+    <task id="LOCAL-00014" summary="feat: 비관적락 적용 및 일부 파일 수정">
+      <option name="closed" value="true" />
+      <created>1719529193362</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1719529193362</updated>
+    </task>
+    <task id="LOCAL-00015" summary="init: 3w 과제">
+      <option name="closed" value="true" />
+      <created>1720140090941</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1720140090941</updated>
+    </task>
+    <task id="LOCAL-00016" summary="feat: 파일 정리">
+      <option name="closed" value="true" />
+      <created>1720140186079</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1720140186079</updated>
+    </task>
+    <task id="LOCAL-00017" summary="feat: README 작성">
+      <option name="closed" value="true" />
+      <created>1720140295453</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1720140295453</updated>
+    </task>
+    <task id="LOCAL-00018" summary="feat: api mock 작성">
+      <option name="closed" value="true" />
+      <created>1720140673592</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1720140673592</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="feat: 1주차 과제 베이스" />
+    <MESSAGE value="feat: 포인트 충전 테스트 추가" />
+    <MESSAGE value="feat: 포인트 사용, 조회, 내역 조회 테스트 추가" />
+    <MESSAGE value="refactor: 프로젝트 구조 변경" />
+    <MESSAGE value="feat: 1주차 과제 2차 제출&#10;&#10;- PointServiceTest에서 서비스 분리&#10;- 컨트롤러 추가&#10;- 레포지토리 추가&#10;- TDD 테스트 수정&#10;- 동시성 테스트 추가" />
+    <MESSAGE value="feat: 기타" />
+    <MESSAGE value="feat: 기타2" />
+    <MESSAGE value="init: 2주차 프로젝트 폴더 생성" />
+    <MESSAGE value="refactor: 1주차 과제 스케치 파일 위치 이동" />
+    <MESSAGE value="feat: 기본 구조 및 DB 생성" />
+    <MESSAGE value="feat: 특강 조회 단위 테스트 진행" />
+    <MESSAGE value="feat: step03 과제 완료" />
+    <MESSAGE value="feat: 비관적락 적용 및 일부 파일 수정" />
+    <MESSAGE value="init: 3w 과제" />
+    <MESSAGE value="feat: 파일 정리" />
+    <MESSAGE value="feat: README 작성" />
+    <MESSAGE value="feat: api mock 작성" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: api mock 작성" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
