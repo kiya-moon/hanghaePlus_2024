@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-public class TicketingMockApiController {
+public class TicketingController {
 
     @PostMapping("/token")
     public ResponseEntity<TokenResponse> issueToken(@RequestBody TokenRequest request) {
