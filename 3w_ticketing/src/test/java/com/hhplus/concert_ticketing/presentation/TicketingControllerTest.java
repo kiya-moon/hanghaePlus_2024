@@ -1,9 +1,6 @@
 package com.hhplus.concert_ticketing.presentation;
 
-import com.hhplus.concert_ticketing.presentation.dto.request.ChargeRequest;
-import com.hhplus.concert_ticketing.presentation.dto.request.PayRequest;
-import com.hhplus.concert_ticketing.presentation.dto.request.ReserveRequest;
-import com.hhplus.concert_ticketing.presentation.dto.request.TokenRequest;
+import com.hhplus.concert_ticketing.presentation.user.ChargeRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -14,7 +11,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(TicketingController.class)
+@WebMvcTest(TicketingMockApiController.class)
 public class TicketingControllerTest {
 
     @Autowired

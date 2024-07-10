@@ -1,4 +1,4 @@
-package com.hhplus.concert_ticketing.presentation.dto.request;
+package com.hhplus.concert_ticketing.presentation.concert;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,15 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReserveRequest {
-    private String token;
-    private Long concertOptionId;
+public class Seat {
     private Long seatId;
-    private Long userId;
+    private String seatNumber;
+    private String status;
 }
+
+
+
+
+
+
+

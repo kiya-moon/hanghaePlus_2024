@@ -1,11 +1,16 @@
 package com.hhplus.concert_ticketing.presentation;
 
-import com.hhplus.concert_ticketing.presentation.dto.*;
-import com.hhplus.concert_ticketing.presentation.dto.request.ChargeRequest;
-import com.hhplus.concert_ticketing.presentation.dto.request.PayRequest;
-import com.hhplus.concert_ticketing.presentation.dto.request.ReserveRequest;
-import com.hhplus.concert_ticketing.presentation.dto.request.TokenRequest;
-import com.hhplus.concert_ticketing.presentation.dto.response.*;
+import com.hhplus.concert_ticketing.presentation.concert.AvailableDatesResponse;
+import com.hhplus.concert_ticketing.presentation.concert.AvailableSeatsResponse;
+import com.hhplus.concert_ticketing.presentation.concert.ConcertOption;
+import com.hhplus.concert_ticketing.presentation.concert.Seat;
+import com.hhplus.concert_ticketing.presentation.reservation.*;
+import com.hhplus.concert_ticketing.presentation.user.BalanceResponse;
+import com.hhplus.concert_ticketing.presentation.user.ChargeRequest;
+import com.hhplus.concert_ticketing.presentation.queue.TokenData;
+import com.hhplus.concert_ticketing.presentation.queue.TokenRequest;
+import com.hhplus.concert_ticketing.presentation.queue.TokenResponse;
+import com.hhplus.concert_ticketing.presentation.user.ChargeResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@RestController
-public class TicketingController {
+//@RestController
+public class TicketingMockApiController {
 
     @PostMapping("/token")
     public ResponseEntity<TokenResponse> issueToken(@RequestBody TokenRequest request) {

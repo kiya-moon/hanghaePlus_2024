@@ -1,15 +1,16 @@
-package com.hhplus.concert_ticketing.presentation.dto.request;
+package com.hhplus.concert_ticketing.presentation.concert;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChargeRequest {
-    private Long userId;
-    private Double amount;
+public class AvailableDatesResponse {
+    private List<ConcertOption> concertOptions;
 }

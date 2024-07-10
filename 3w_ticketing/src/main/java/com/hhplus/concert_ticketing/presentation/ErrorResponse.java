@@ -1,6 +1,5 @@
-package com.hhplus.concert_ticketing.presentation.dto.response;
+package com.hhplus.concert_ticketing.presentation;
 
-import com.hhplus.concert_ticketing.presentation.dto.ReserveData;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,8 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReserveResponse {
+public class ErrorResponse {
     private String result;
     private String message;
-    private ReserveData data;
 }
