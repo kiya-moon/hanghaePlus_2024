@@ -11,6 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class TokenData {
     private String token;
-    private Integer queuePosition;
+    private Integer queuePosition;  // 서비스에서 계산 필요
     private String expiresAt;
 }

@@ -24,17 +24,13 @@ public class TicketingMockApiController {
     @PostMapping("/token")
     public ResponseEntity<TokenResponse> issueToken(@RequestBody TokenRequest request) {
         Long userId = request.getUserId();
-        Long concertId = request.getConcertId();
-        String token = request.getToken();
 
-        if (userId == null || concertId == null) {
+        if (userId == null) {
             return new ResponseEntity<>(new TokenResponse("400", "값이 유효하지 않습니다. 관리자에게 문의해주세요.", null), HttpStatus.BAD_REQUEST);
         }
 
-        // token이 없으면 새로 생성
-        if (token == null) {
-            token = UUID.randomUUID().toString() + "/" + concertId;
-        }
+        // token 새로 생성
+        String token = UUID.randomUUID().toString();
 
         TokenResponse response = new TokenResponse("200", "Success", new TokenData(token, 1, "2024-07-04T12:00:00"));
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -110,10 +106,6 @@ public class TicketingMockApiController {
 
     @PostMapping("/api/pay")
     public ResponseEntity<?> pay(@RequestBody PayRequest request) {
-        if (request.getToken() == null || request.getToken().isEmpty()) {
-            return new ResponseEntity<>(new ErrorResponse("401", "대기시간이 초과되었습니다."), HttpStatus.UNAUTHORIZED);
-        }
-
         if (request.getReservationId() == null || request.getAmount() == null || request.getAmount() <= 0) {
             return new ResponseEntity<>(new ErrorResponse("400", "값이 유효하지 않습니다. 관리자에게 문의해주세요."), HttpStatus.BAD_REQUEST);
         }

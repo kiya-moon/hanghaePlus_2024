@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PayRequest {
-    private String token;
+    private Long userId;
     private Long reservationId;
     private Double amount;
 }

@@ -1,13 +1,8 @@
 Spring:
   application:
-    name: ticketing # projectName
+    name: ticketing
   datasource:
     driver-class-name: org.h2.Driver
-    # url: 'jdbc:h2:mem:test'  # In-Memory Mode
-    # url: 'jdbc:h2:~/test'  # Embedded Mode
-    #DB_CLOSE_DELAY=-1? ?????? ??? ??? ??? ???? ????? ??,
-    #DB_CLOSE_ON_EXIT=FALSE? ?????? ?? ? ??????? ?? ??? ??
-    #url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;NON_KEYWORDS=USER
     url: jdbc:h2:mem:testdb
     username: sa
     password:
@@ -21,16 +16,52 @@ Spring:
       ddl-auto: create
     properties:
       hibernate:
-        # ??? ID ??? ??? ???? ??? ?????.
-        # Hibernate 5??? ??? ID ??? ??? ??????, ? ??? ?? ?? ???? ? ??
         use_new_id_generator_mappings: true
-        # ??? SQL? ??? ???? ??? ?????.
-        # SQL ??? ??? ???? ??? ? ??? ? ? ????
         use_sql_comments: true
         dialect: org.hibernate.dialect.H2Dialect
-        # ??? SQL? ?? ?? ????? ??? ?????.
-        # true? ???? ???? SQL? ?? ?? ???? ??
         format_sql: true
-        # ??? SQL? ??? ???? ??? ?????.
-        # true? ???? Hibernate? ??? SQL ??? ??? ??
         show_sql: true
+
+springdoc:
+  swagger-ui:
+    # 대체 URL 설정
+    path: /concert-ticketing-swagger
+    # Swagger UI에서 API 그룹을 내림차순으로 정렬
+    groups-order: DESC
+    # API 문서에서 태그를 알파벳 순으로 정렬
+    tags-sorter: alpha
+    # API 문서에서 작업(operations)을 HTTP 메서드 순으로 정렬
+    operations-sorter: method
+    # 기본 Swagger URL을 비활성화 => 기본 URL이 노출되지 않음
+    # Swagger UI: http://localhost:8080/swagger-ui.html
+    #  => Swagger UI의 웹 인터페이스. 이 URL을 통해 브라우저에서 API 문서를 시각적으로 탐색 가능
+    # OpenAPI 문서: http://localhost:8080/v3/api-docs
+    #  => OpenAPI 문서의 JSON 형식. 이 URL을 통해 API 문서를 JSON 형식으로 확인 가능
+    disable-swagger-default-url: true
+    # 요청 시간(duration)을 Swagger UI에 표시
+    display-request-duration: true
+    # Swagger UI에서 기본 모델의 확장 깊이를 설정
+    # => defaultModelsExpandDepth : API 문서의 전체 모델 목록에서 각 모델이 얼마나 깊이까지 자동으로 확장될지를 설정
+    # => defaultModelExpandDepth : 특정 모델을 선택했을 때 해당 모델의 속성이 얼마나 깊이까지 자동으로 확장될지를 설정
+    defaultModelsExpandDepth: 2
+    defaultModelExpandDepth: 2
+  api-docs:
+    # API 문서의 엔드포인트 경로
+    path: /api-docs
+  # Actuator 엔드포인트를 Swagger 문서에 포함할지를 설정
+  # Actuator
+  # => 애플리케이션의 운영 및 모니터링을 지원하기 위해 다양한 엔드포인트를 제공하는 라이브러리
+  # => SpringDoc과의 통합을 통해 Swagger UI에서 쉽게 접근하고 문서화할 수 있음
+  show-actuator: true
+  # API가 기본적으로 소비하는(consume) 미디어 타입을 설정
+  default-consumes-media-type: application/json
+  # API가 기본적으로 생성하는(produce) 미디어 타입을 설정
+  default-produces-media-type: application/json
+  # JSON 출력을 예쁘게(pretty-print) 출력할지를 설정 => true : 예쁘게:D
+  writer-with-default-pretty-printer: true
+  # Spring MVC의 ModelAndView 객체를 Swagger 문서에 포함할지를 설정 => true : 포함
+  model-and-view-allowed: true
+  # Swagger 문서에 포함할 경로를 설정 => /api/v1/로 시작하는 모든 경로를 포함
+  paths-to-match:
+    - /queue/**
+    - /api/**

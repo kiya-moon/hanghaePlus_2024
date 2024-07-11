@@ -11,6 +11,4 @@ import lombok.Setter;
 @AllArgsConstructor
 public class TokenRequest {
     private Long userId;
-    private Long concertId;
-    private String token;
 }
