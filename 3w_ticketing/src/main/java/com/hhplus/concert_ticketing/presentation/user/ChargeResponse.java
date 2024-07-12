@@ -1,4 +1,4 @@
-package com.hhplus.concert_ticketing.presentation.dto;
+package com.hhplus.concert_ticketing.presentation.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ConcertOption {
-    private Long concertOptionId;
-    private String concertDate;
+public class ChargeResponse {
+    private Double balance;
 }

@@ -1,4 +1,4 @@
-package com.hhplus.concert_ticketing.presentation.dto.request;
+package com.hhplus.concert_ticketing.presentation.queue;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PayRequest {
+public class TokenData {
     private String token;
-    private Long reservationId;
-    private Double amount;
+    private Integer queuePosition;  // 서비스에서 계산 필요
+    private String expiresAt;
 }

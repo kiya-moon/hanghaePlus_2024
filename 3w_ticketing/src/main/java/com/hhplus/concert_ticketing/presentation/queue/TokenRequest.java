@@ -1,4 +1,4 @@
-package com.hhplus.concert_ticketing.presentation.dto.response;
+package com.hhplus.concert_ticketing.presentation.queue;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BalanceResponse {
-    private Double balance;
+public class TokenRequest {
+    private Long userId;
 }
