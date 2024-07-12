@@ -713,11 +713,7 @@
 <br />   
 
 ## 📌 Swagger
-<details>
-  <summary>
-    자세히
-  </summary>
-  <br />
 
-</details>
+[concert-ticketing-swagger.pdf](https://github.com/user-attachments/files/16186285/concert-ticketing-swagger.pdf)
+
 <br />
