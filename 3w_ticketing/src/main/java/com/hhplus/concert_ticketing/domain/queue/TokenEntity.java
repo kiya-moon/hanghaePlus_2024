@@ -12,7 +12,6 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 public class TokenEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +19,17 @@ public class TokenEntity {
 
     private Long userId;
     private String token;
-    private String status;
+    private TokenStatus status;
     private Timestamp createdAt;
     private Timestamp expiresAt;
+
+    @Builder
+    public TokenEntity(Long id, Long userId, String token, TokenStatus status, Timestamp createdAt, Timestamp expiresAt) {
+        this.id = id;
+        this.userId = userId;
+        this.token = token;
+        this.status = status;
+        this.createdAt = createdAt;
+        this.expiresAt = expiresAt;
+    }
 }

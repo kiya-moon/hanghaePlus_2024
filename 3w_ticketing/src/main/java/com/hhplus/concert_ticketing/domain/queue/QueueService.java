@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.util.UUID;
 
+import static com.hhplus.concert_ticketing.domain.queue.TokenStatus.*;
+
 @Service
 @RequiredArgsConstructor
 public class QueueService {
@@ -38,26 +40,17 @@ public class QueueService {
         tokenEntity.setUserId(userId);  // 유저 ID 설정
         tokenEntity.setCreatedAt(now);
         tokenEntity.setExpiresAt(expiresAt);
-        tokenEntity.setStatus("WAITING");  // 새로운 토큰은 항상 웨이팅 상태로 생성
+        tokenEntity.setStatus(WAITING);  // 새로운 토큰은 항상 웨이팅 상태로 생성
 
         return queueRepository.save(tokenEntity);
     }
 
-    // 토큰 조회 메서드(폴링용)
-    // 토큰이 조회되지 않으면 401 에러 - 유효하지 않은 접근 반환
-    // 토큰테이블을 조회해서 대기('WAITING') 상태라면 100 반환. 계속 로딩 페이지 대기
-    // 토큰테이블을 조회해서 활성('ACTIVATE') 상태라면 'reservation-page'로 이동
-    public ResponseEntity<String> checkToken(String token) {
+    // 대기열 조회 메서드
+    public TokenStatus checkToken(String token) {
         TokenEntity tokenEntity = queueRepository.findByToken(token)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 접근입니다."));
 
-        if (tokenEntity.getStatus().equals("WAITING")) {
-            return ResponseEntity.status(HttpStatus.CONTINUE).body("100");  // 대기 상태
-        } else if (tokenEntity.getStatus().equals("ACTIVATE")) {
-            return ResponseEntity.status(HttpStatus.SEE_OTHER).body("reservation-page");  // 활성 상태
-        } else {
-            throw new IllegalArgumentException("유효하지 않은 접근입니다.");
-        }
+        return TokenStatus.valueOf(String.valueOf(tokenEntity.getStatus()));  // Enum으로 변환하여 반환
     }
 
     // 토큰 유효성 확인 메서드
@@ -65,14 +58,14 @@ public class QueueService {
         TokenEntity tokenEntity = queueRepository.findByToken(token)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 접근입니다."));
 
-        return "ACTIVATE".equals(tokenEntity.getStatus());
+        return ACTIVE.equals(tokenEntity.getStatus());
     }
 
     // 토큰 만료시키는 메서드
     public void expireToken(String token) {
         TokenEntity tokenEntity = queueRepository.findByToken(token)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 토큰입니다."));
-        tokenEntity.setStatus("EXPIRED");
+        tokenEntity.setStatus(EXPIRED);
         queueRepository.save(tokenEntity);
     }
 }
