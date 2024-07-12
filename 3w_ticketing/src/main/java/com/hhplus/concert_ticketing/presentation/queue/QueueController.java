@@ -15,10 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.UUID;
-
-import static com.hhplus.concert_ticketing.domain.queue.TokenStatus.ACTIVE;
-import static com.hhplus.concert_ticketing.domain.queue.TokenStatus.WAITING;
 
 @RestController
 @RequestMapping("/queue")
@@ -79,23 +75,28 @@ public class QueueController {
                     @ApiResponse(responseCode = "401", description = "접근이 유효하지 않습니다.",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
                     ),
+                    @ApiResponse(responseCode = "400", description = "잘못된 토큰 상태입니다.",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
+                    ),
+                    @ApiResponse(responseCode = "500", description = "서버 오류로 인해 대기열 체크에 실패했습니다.",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
+                    )
             }
     )
     public ResponseEntity<?> checkQueue(@RequestParam String token) {
         try {
             TokenStatus status = tokenFacade.checkTokenStatus(token);
-            switch (status) {
-                case ACTIVE:
-                    HttpHeaders headers = new HttpHeaders();
-                    headers.setLocation(URI.create("/reservation-page"));
-                    return new ResponseEntity<>(headers, HttpStatus.SEE_OTHER);
-                case WAITING:
-                    TokenData tokenData = new TokenData(token, 1, "2024-07-04T12:00:00");
-                    TokenResponse response = new TokenResponse("100", "계속 대기 중입니다.", tokenData);
-                    return ResponseEntity.status(HttpStatus.CONTINUE).body(response);
-                default:
-                    ErrorResponse errorResponse = new ErrorResponse("400", "잘못된 토큰 상태입니다.");
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+            if (status == TokenStatus.ACTIVE) {
+                HttpHeaders headers = new HttpHeaders();
+                headers.setLocation(URI.create("/reservation-page"));
+                return new ResponseEntity<>(headers, HttpStatus.SEE_OTHER);
+            } else if (status == TokenStatus.WAITING) {
+                TokenData tokenData = new TokenData(token, 1, "2024-07-04T12:00:00");
+                TokenResponse response = new TokenResponse("100", "계속 대기 중입니다.", tokenData);
+                return ResponseEntity.status(HttpStatus.CONTINUE).body(response);
+            } else {
+                ErrorResponse errorResponse = new ErrorResponse("400", "잘못된 토큰 상태입니다.");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
             }
         } catch (Exception e) {
             ErrorResponse errorResponse = new ErrorResponse("500", "서버에서 오류가 발생했습니다.");

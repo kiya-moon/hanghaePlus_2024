@@ -1,10 +1,10 @@
 package com.hhplus.concert_ticketing.application;
 
 import com.hhplus.concert_ticketing.domain.queue.QueueService;
-import com.hhplus.concert_ticketing.domain.queue.TokenEntity;
 import com.hhplus.concert_ticketing.domain.queue.TokenStatus;
 import com.hhplus.concert_ticketing.domain.user.UserEntity;
 import com.hhplus.concert_ticketing.domain.user.UserRepository;
+import com.hhplus.concert_ticketing.presentation.queue.TokenResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,17 @@ public class TokenFacade {
     }
 
     public TokenStatus checkTokenStatus(String token) {
-        return queueService.checkToken(token);
+        TokenResponse tokenResponse = queueService.checkToken(token).getBody();
+        if (tokenResponse != null) {
+            switch (tokenResponse.getResult()) {
+                case "100":
+                    return TokenStatus.WAITING;
+                case "200":
+                    return TokenStatus.ACTIVE;
+                default:
+                    throw new RuntimeException("잘못된 토큰 상태");
+            }
+        }
+        throw new RuntimeException("토큰 상태 확인 오류");
     }
 }
-
