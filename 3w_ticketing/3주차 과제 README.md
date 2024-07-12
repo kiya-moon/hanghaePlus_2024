@@ -4,6 +4,7 @@
 3. [시퀀스 다이어그램](#-시퀀스-다이어그램)
 4. [ERD 다이어그램](#-erd-다이어그램)
 5. [API 명세서](#-api-명세서)
+6. [Swagger](#-swagger)
 
 <br />
 
@@ -707,5 +708,16 @@
       ```
       Authorization: Bearer randomUUID
       ```
+</details>
+<br />
+<br />   
+
+## 📌 Swagger
+<details>
+  <summary>
+    자세히
+  </summary>
+  <br />
+
 </details>
 <br />
