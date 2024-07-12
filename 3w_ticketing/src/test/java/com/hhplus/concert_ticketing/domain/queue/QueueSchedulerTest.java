@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.hhplus.concert_ticketing.domain.queue.TokenStatus.WAITING;
 import static org.mockito.Mockito.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,7 +30,7 @@ class QueueSchedulerTest {
 
         TokenEntity expiredToken = new TokenEntity();
         expiredToken.setExpiresAt(new Timestamp(now.getTime() - 10000));  // 현재 시간보다 이전
-        expiredToken.setStatus("WAITING");
+        expiredToken.setStatus(WAITING);
 
         List<TokenEntity> expiredTokens = new ArrayList<>();
         expiredTokens.add(expiredToken);
@@ -47,17 +48,17 @@ class QueueSchedulerTest {
         Timestamp now = new Timestamp(System.currentTimeMillis());
 
         TokenEntity waitingToken1 = new TokenEntity();
-        waitingToken1.setStatus("WAITING");
+        waitingToken1.setStatus(WAITING);
 
         TokenEntity waitingToken2 = new TokenEntity();
-        waitingToken2.setStatus("WAITING");
+        waitingToken2.setStatus(WAITING);
 
         List<TokenEntity> waitingTokens = new ArrayList<>();
         waitingTokens.add(waitingToken1);
         waitingTokens.add(waitingToken2);
 
         when(queueRepository.findByStatus("WAITING")).thenReturn(waitingTokens);
-        when(queueRepository.countByStatus("ACTIVATE")).thenReturn(29L);  // 현재 ACTIVATE 상태의 토큰이 29개
+        when(queueRepository.countByStatus("ACTIVE")).thenReturn(29L);  // 현재 ACTIVATE 상태의 토큰이 29개
 
         queueScheduler.manageTokens();
 

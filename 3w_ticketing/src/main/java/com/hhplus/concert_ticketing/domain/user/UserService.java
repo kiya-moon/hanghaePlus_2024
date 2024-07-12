@@ -14,7 +14,7 @@ public class UserService {
     // 사용자 잔액 조회
     // 유저 아이디가 유효하지 않으면 NoSuchElementException 발생
     public Double getBalance(Long userId) {
-        return userRepository.getBalance(userId)
+        return userRepository.findBalanceByUserId(userId)
                 .orElseThrow(() -> new NoSuchElementException("접근이 유효하지 않습니다."));
     }
 

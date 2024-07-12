@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 import java.sql.Timestamp;
 import java.util.List;
 
+import static com.hhplus.concert_ticketing.domain.queue.TokenStatus.ACTIVE;
+import static com.hhplus.concert_ticketing.domain.queue.TokenStatus.EXPIRED;
+
 @Component
 @RequiredArgsConstructor
 public class QueueScheduler {
@@ -20,7 +23,7 @@ public class QueueScheduler {
         // 만료된 토큰 상태를 EXPIRED로 변경
         List<TokenEntity> expiredTokens = queueRepository.findByExpiresAtBeforeAndStatus(now, "WAITING");
         for (TokenEntity token : expiredTokens) {
-            token.setStatus("EXPIRED");
+            token.setStatus(EXPIRED);
             queueRepository.save(token);
         }
 
@@ -32,7 +35,7 @@ public class QueueScheduler {
 
             for (int i = 0; i < tokensToActivate && i < waitingTokens.size(); i++) {
                 TokenEntity token = waitingTokens.get(i);
-                token.setStatus("ACTIVATE");
+                token.setStatus(ACTIVE);
                 queueRepository.save(token);
             }
         }

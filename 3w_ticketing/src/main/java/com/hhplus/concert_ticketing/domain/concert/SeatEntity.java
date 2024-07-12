@@ -18,5 +18,5 @@ public class SeatEntity {
 
     private Long concertOptionId;
     private String seatNumber;
-    private String status;
+    private SeatStatus status;
 }

@@ -10,6 +10,8 @@ import org.mockito.Mockito;
 
 import java.sql.Timestamp;
 
+import static com.hhplus.concert_ticketing.domain.concert.SeatStatus.LOCKED;
+import static com.hhplus.concert_ticketing.domain.concert.SeatStatus.UNLOCKED;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
@@ -37,7 +39,7 @@ class ReservationServiceTest {
         user.setId(1L);
         SeatEntity seat = new SeatEntity();
         seat.setId(1L);
-        seat.setStatus("UNLOCKED");
+        seat.setStatus(UNLOCKED);
 
         when(userRepository.findById(1L)).thenReturn(java.util.Optional.of(user));
         when(seatRepository.findById(1L)).thenReturn(java.util.Optional.of(seat));
@@ -48,7 +50,7 @@ class ReservationServiceTest {
         // then
         verify(seatRepository, times(1)).save(seat);
         verify(reservationRepository, times(1)).save(any(ReservationEntity.class));
-        assertEquals("LOCKED", seat.getStatus());
+        assertEquals(LOCKED, seat.getStatus());
     }
 
     @Test
@@ -58,7 +60,7 @@ class ReservationServiceTest {
         user.setId(1L);
         SeatEntity seat = new SeatEntity();
         seat.setId(1L);
-        seat.setStatus("LOCKED");
+        seat.setStatus(LOCKED);
 
         when(userRepository.findById(1L)).thenReturn(java.util.Optional.of(user));
         when(seatRepository.findById(1L)).thenReturn(java.util.Optional.of(seat));

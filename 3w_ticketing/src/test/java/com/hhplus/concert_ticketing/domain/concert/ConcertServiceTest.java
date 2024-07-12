@@ -4,11 +4,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.hhplus.concert_ticketing.domain.concert.SeatStatus.LOCKED;
+import static com.hhplus.concert_ticketing.domain.concert.SeatStatus.UNLOCKED;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ConcertServiceTest {
@@ -57,15 +58,14 @@ class ConcertServiceTest {
     @Test
     void 좌석_조회_성공() {
         Long concertOptionId = 1L;
-        Timestamp concertDate = Timestamp.valueOf("2024-07-15 00:00:00");
         List<SeatEntity> seats = new ArrayList<>();
-        seats.add(new SeatEntity(1L, concertOptionId, "1", "UNLOCKED"));
-        seats.add(new SeatEntity(2L, concertOptionId, "2", "LOCKED"));
+        seats.add(new SeatEntity(1L, concertOptionId, "1", UNLOCKED));
+        seats.add(new SeatEntity(2L, concertOptionId, "2", LOCKED));
 
-        Mockito.when(seatRepository.findByConcertOptionIdAndConcertDate(concertOptionId, concertDate))
+        Mockito.when(seatRepository.findByConcertOptionId(concertOptionId))
                 .thenReturn(Optional.of(seats));
 
-        List<SeatEntity> result = concertService.getAvailableSeats(concertOptionId, concertDate);
+        List<SeatEntity> result = concertService.getAvailableSeats(concertOptionId);
         assertNotNull(result);
         assertEquals(2, result.size());
     }
@@ -73,13 +73,11 @@ class ConcertServiceTest {
     @Test
     void 좌석_조회_실패() {
         Long concertOptionId = 1L;
-        Timestamp concertDate = Timestamp.valueOf("2024-07-15 00:00:00");
-
-        Mockito.when(seatRepository.findByConcertOptionIdAndConcertDate(concertOptionId, concertDate))
+        Mockito.when(seatRepository.findByConcertOptionId(concertOptionId))
                 .thenReturn(Optional.empty());
 
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
-            concertService.getAvailableSeats(concertOptionId, concertDate);
+            concertService.getAvailableSeats(concertOptionId);
         });
 
         assertEquals("콘서트 옵션이 유효하지 않습니다.", thrown.getMessage());

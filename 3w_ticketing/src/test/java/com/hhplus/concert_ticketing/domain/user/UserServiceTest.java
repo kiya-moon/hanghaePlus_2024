@@ -29,9 +29,9 @@ class UserServiceTest {
         UserEntity userEntity = new UserEntity(userId, initialBalance, 1);  // ID, Balance, Version
 
         Mockito.when(userRepository.findById(userId)).thenReturn(Optional.of(userEntity));
-        Mockito.when(userRepository.getBalance(userId)).thenReturn(Optional.of(initialBalance));
+        Mockito.when(userRepository.findBalanceByUserId(userId)).thenReturn(Optional.of(initialBalance));
         Mockito.when(userRepository.chargePoint(userId, newBalance, 1)).thenReturn(1);  // Mock successful chargePoint operation
-        Mockito.when(userRepository.getBalance(userId)).thenReturn(Optional.of(newBalance));  // Simulate new balance
+        Mockito.when(userRepository.findBalanceByUserId(userId)).thenReturn(Optional.of(newBalance));  // Simulate new balance
 
         Double result = userService.chargePoint(userId, chargeAmount);
 
@@ -46,7 +46,7 @@ class UserServiceTest {
         UserEntity userEntity = new UserEntity(userId, initialBalance, 1);  // ID, Balance, Version
 
         Mockito.when(userRepository.findById(userId)).thenReturn(Optional.of(userEntity));
-        Mockito.when(userRepository.getBalance(userId)).thenReturn(Optional.of(initialBalance));
+        Mockito.when(userRepository.findBalanceByUserId(userId)).thenReturn(Optional.of(initialBalance));
         Mockito.when(userRepository.chargePoint(userId, initialBalance + chargeAmount, 1)).thenReturn(0);  // Simulate optimistic lock failure
 
         RuntimeException thrown = assertThrows(RuntimeException.class, () -> {
@@ -66,9 +66,9 @@ class UserServiceTest {
         UserEntity userEntity = new UserEntity(userId, initialBalance, 1);  // ID, Balance, Version
 
         Mockito.when(userRepository.findById(userId)).thenReturn(Optional.of(userEntity));
-        Mockito.when(userRepository.getBalance(userId)).thenReturn(Optional.of(initialBalance));
+        Mockito.when(userRepository.findBalanceByUserId(userId)).thenReturn(Optional.of(initialBalance));
         Mockito.when(userRepository.chargePoint(userId, initialBalance + chargeAmount, 1)).thenReturn(1);  // Mock successful chargePoint operation
-        Mockito.when(userRepository.getBalance(userId)).thenReturn(Optional.of(incorrectBalance));  // Simulate balance mismatch
+        Mockito.when(userRepository.findBalanceByUserId(userId)).thenReturn(Optional.of(incorrectBalance));  // Simulate balance mismatch
 
         RuntimeException thrown = assertThrows(RuntimeException.class, () -> {
             userService.chargePoint(userId, chargeAmount);
@@ -82,7 +82,7 @@ class UserServiceTest {
         Long userId = 1L;
         Double balance = 100.0;
 
-        Mockito.when(userRepository.getBalance(userId)).thenReturn(Optional.of(balance));
+        Mockito.when(userRepository.findBalanceByUserId(userId)).thenReturn(Optional.of(balance));
 
         Double result = userService.getBalance(userId);
         assertNotNull(result);
@@ -93,7 +93,7 @@ class UserServiceTest {
     void 사용자_잔액_조회_실패_테스트() {
         Long userId = 1L;
 
-        Mockito.when(userRepository.getBalance(userId)).thenReturn(Optional.empty());
+        Mockito.when(userRepository.findBalanceByUserId(userId)).thenReturn(Optional.empty());
 
         NoSuchElementException thrown = assertThrows(NoSuchElementException.class, () -> {
             userService.getBalance(userId);

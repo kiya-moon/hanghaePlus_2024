@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.util.NoSuchElementException;
 
+import static com.hhplus.concert_ticketing.domain.concert.SeatStatus.LOCKED;
+
 @Service
 @RequiredArgsConstructor
 public class ReservationService {
@@ -37,18 +39,24 @@ public class ReservationService {
         }
 
         // 좌석 상태를 LOCKED로 변경
-        seat.setStatus("LOCKED");
+        seat.setStatus(LOCKED);
         seatRepository.save(seat);
+
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+        Timestamp expiresAt = new Timestamp(now.getTime() + 5 * 60 * 1000);
 
         // 예약 정보 저장
         ReservationEntity reservation = new ReservationEntity();
         reservation.setUserId(userId);
         reservation.setSeatId(seatId);
+        reservation.setCreatedAt(now);
+        reservation.setExpiredAt(expiresAt);
         reservationRepository.save(reservation);
     }
 
 
     // 결제 요청 메서드
+    // 여기서 userRepsitory를 호출하는 것은 옳지 않은 것 같아서 리팩토링 예정
     @Transactional
     public void requestPayment(Long reservationId) {
         ReservationEntity reservation = reservationRepository.findById(reservationId)
@@ -62,16 +70,29 @@ public class ReservationService {
                 .orElseThrow(() -> new NoSuchElementException("유저가 존재하지 않습니다."));
 
         double price = reservation.getPrice();  // 예약 가격을 가져오는 메서드
-        double userBalance = user.getBalance();
+        double balance = user.getBalance();
 
-        if (userBalance < price) {
+        if (balance < price) {
             throw new IllegalStateException("잔액이 부족합니다.");
         }
 
-        user.setBalance(userBalance - price);
+        user.setBalance(balance - price);
         userRepository.save(user);
 
         reservation.setStatus("CONFIRMED");
         reservationRepository.save(reservation);
+    }
+
+    // 예약 만료 여부 조회
+    public boolean isReservationExpired(Long reservationId) {
+        ReservationEntity reservation = reservationRepository.findById(reservationId)
+                .orElseThrow(() -> new NoSuchElementException("Reservation does not exist."));
+        return reservation.getExpiredAt().before(new Timestamp(System.currentTimeMillis()));
+    }
+
+    // 예약 정보 조회
+    public ReservationEntity getReservation(Long reservationId) {
+        return reservationRepository.findById(reservationId)
+                .orElseThrow(() -> new NoSuchElementException("Reservation does not exist."));
     }
 }
