@@ -10,7 +10,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Seat {
-    private Long seatId;
+    private Long id;
+    private Long concertOptionId;
     private String seatNumber;
     private String status;
 }
