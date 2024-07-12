@@ -28,7 +28,7 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ConcertControllerIntegrationTest {
+public class ConcertIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
