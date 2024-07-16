@@ -1,4 +1,4 @@
-package com.hhplus.concert_ticketing.presentation.queue;
+package com.hhplus.concert_ticketing.presentation;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TokenResponse {
+public class SuccessResponse {
     private String result;
     private String message;
-    private TokenData data;
-
 }
