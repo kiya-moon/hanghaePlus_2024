@@ -1,4 +1,4 @@
-package com.hhplus.concert_ticketing.presentation.reservation;
+package com.hhplus.concert_ticketing.presentation.payment;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

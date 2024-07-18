@@ -8,6 +8,9 @@ import lombok.*;
 
 import java.sql.Timestamp;
 
+import static com.hhplus.concert_ticketing.domain.concert.SeatStatus.UNLOCKED;
+import static com.hhplus.concert_ticketing.domain.queue.TokenStatus.*;
+
 @Entity
 @Getter
 @Setter
@@ -23,13 +26,21 @@ public class TokenEntity {
     private Timestamp createdAt;
     private Timestamp expiresAt;
 
-    @Builder
-    public TokenEntity(Long id, Long userId, String token, TokenStatus status, Timestamp createdAt, Timestamp expiresAt) {
-        this.id = id;
-        this.userId = userId;
+    public TokenEntity(String token, Long userId, Timestamp createdAt, Timestamp expiresAt) {
         this.token = token;
-        this.status = status;
+        this.userId = userId;
+        this.status = WAITING;
         this.createdAt = createdAt;
         this.expiresAt = expiresAt;
+    }
+
+    public void activeToken() {
+        this.setStatus(ACTIVE);
+    }
+    public void waitingToken() {
+        this.setStatus(WAITING);
+    }
+    public void expiredToken() {
+        this.setStatus(EXPIRED);
     }
 }

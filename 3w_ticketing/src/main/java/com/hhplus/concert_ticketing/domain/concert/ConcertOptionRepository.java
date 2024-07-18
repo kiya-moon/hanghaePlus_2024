@@ -7,7 +7,6 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-public interface ConcertOptionRepository extends JpaRepository<ConcertOptionEntity, Long> {
+public interface ConcertOptionRepository {
     Optional<List<ConcertOptionEntity>> findByConcertId(Long concertId);
 }

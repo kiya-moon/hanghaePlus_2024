@@ -1,8 +1,6 @@
 package com.hhplus.concert_ticketing.presentation.concert;
 
 import com.hhplus.concert_ticketing.application.ConcertFacade;
-import com.hhplus.concert_ticketing.domain.concert.ConcertOptionEntity;
-import com.hhplus.concert_ticketing.domain.concert.SeatEntity;
 import com.hhplus.concert_ticketing.presentation.ErrorResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -15,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -24,6 +21,29 @@ import java.util.stream.Collectors;
 public class ConcertController {
 
     private final ConcertFacade concertFacade;
+
+    @GetMapping("/get-concerts")
+    @Operation(
+            summary = "콘서트 목록 조회",
+            description = "콘서트 목록을 조회합니다.",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "성공적으로 콘서트 목록을 조회했습니다.",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = AvailableDatesResponse.class))
+                    ),
+                    @ApiResponse(responseCode = "401", description = "접근이 유효하지 않습니다.",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
+                    )
+            }
+    )
+    public ResponseEntity<?> getConcerts() {
+        try {
+            List<Concert> concertDTOs = concertFacade.getConcerts();
+            ConcertListResponse response = new ConcertListResponse(concertDTOs);
+            return ResponseEntity.ok(response);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(new ErrorResponse("401", "접근이 유효하지 않습니다."), HttpStatus.UNAUTHORIZED);
+        }
+    }
 
     @GetMapping("/{concertId}/available-dates")
     @Operation(
@@ -46,17 +66,7 @@ public class ConcertController {
             @RequestParam String token) {
 
         try {
-            List<ConcertOptionEntity> concertOptions = concertFacade.getAvailableDates(concertId, token);
-
-            List<ConcertOption> concertOptionDTOs = concertOptions.stream()
-                    .map(entity -> new ConcertOption(
-                            entity.getId(),
-                            entity.getConcertId(),
-                            entity.getConcertDate(),
-                            entity.getPrice()
-                    ))
-                    .collect(Collectors.toList());
-
+            List<ConcertOption> concertOptionDTOs = concertFacade.getAvailableDates(concertId, token);
             AvailableDatesResponse response = new AvailableDatesResponse(concertOptionDTOs);
             return ResponseEntity.ok(response);
         } catch (IllegalArgumentException e) {

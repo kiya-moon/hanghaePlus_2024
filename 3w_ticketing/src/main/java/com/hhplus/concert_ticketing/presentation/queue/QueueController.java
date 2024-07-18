@@ -1,7 +1,7 @@
 package com.hhplus.concert_ticketing.presentation.queue;
 
-import com.hhplus.concert_ticketing.application.TokenFacade;
-import com.hhplus.concert_ticketing.domain.queue.TokenStatus;
+import com.hhplus.concert_ticketing.application.QueueFacade;
+import com.hhplus.concert_ticketing.domain.queue.QueueMapper;
 import com.hhplus.concert_ticketing.presentation.ErrorResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -22,7 +22,7 @@ import java.net.URI;
 @Tag(name = "queue", description = "대기열 관련 API")
 public class QueueController {
 
-    private final TokenFacade tokenFacade;
+    private final QueueFacade queueFacade;
 
     @PostMapping("/issue-token")
     @Operation(
@@ -42,12 +42,12 @@ public class QueueController {
     )
     public ResponseEntity<?> issueToken(@RequestBody TokenRequest request) {
         try {
-            String token = tokenFacade.requestToken(request.getUserId());
-            TokenData tokenData = new TokenData(token, 1, "2024-07-04T12:00:00");
+            String token = queueFacade.requestToken(request.getUserId());
+            TokenData tokenData = new TokenData(token, 1, "2024-07-04T12:00:00", 0);
             TokenResponse response = new TokenResponse("200", "Success", tokenData);
             return ResponseEntity.ok(response);
         } catch (RuntimeException e) {
-            ErrorResponse errorResponse = new ErrorResponse("401", "존재하지 않는 유저입니다.");
+            ErrorResponse errorResponse = new ErrorResponse("401", "접근이 유효하지 않습니다.");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
         } catch (Exception e) {
             ErrorResponse errorResponse = new ErrorResponse("500", "서버에서 오류가 발생했습니다.");
@@ -85,22 +85,21 @@ public class QueueController {
     )
     public ResponseEntity<?> checkQueue(@RequestParam String token) {
         try {
-            TokenStatus status = tokenFacade.checkTokenStatus(token);
-            if (status == TokenStatus.ACTIVE) {
+            TokenResponse response = queueFacade.checkTokenStatus(token);
+
+            if (response.getResult().equals("200")) {
                 HttpHeaders headers = new HttpHeaders();
                 headers.setLocation(URI.create("/reservation-page"));
                 return new ResponseEntity<>(headers, HttpStatus.SEE_OTHER);
-            } else if (status == TokenStatus.WAITING) {
-                TokenData tokenData = new TokenData(token, 1, "2024-07-04T12:00:00");
-                TokenResponse response = new TokenResponse("100", "계속 대기 중입니다.", tokenData);
+            } else if (response.getResult().equals("100")) {
                 return ResponseEntity.status(HttpStatus.CONTINUE).body(response);
             } else {
-                ErrorResponse errorResponse = new ErrorResponse("400", "잘못된 토큰 상태입니다.");
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(QueueMapper.toErrorResponseDTO(response.getResult(), response.getMessage()));
             }
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(QueueMapper.toErrorResponseDTO("400", e.getMessage()));
         } catch (Exception e) {
-            ErrorResponse errorResponse = new ErrorResponse("500", "서버에서 오류가 발생했습니다.");
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(QueueMapper.toErrorResponseDTO("500", "서버에서 오류가 발생했습니다."));
         }
     }
 }

@@ -12,7 +12,7 @@ public class UserFacade {
 
     // 사용자 잔액 조회
     public Double getBalance(Long userId) {
-        return userService.getBalance(userId);
+        return userService.getUserInfo(userId).getBalance();
     }
 
     // 사용자 포인트 충전
