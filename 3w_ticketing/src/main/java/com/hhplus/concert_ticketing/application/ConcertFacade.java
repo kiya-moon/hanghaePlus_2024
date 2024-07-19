@@ -38,13 +38,6 @@ public class ConcertFacade {
     public List<ConcertOption> getAvailableDates(Long concertId, String token) {
         logger.info("콘서트 ID {}의 가능한 날짜 조회 시작", concertId);
 
-        // 토큰 유효성 확인
-        boolean isTokenValid = queueService.checkTokenValidity(token);
-        if (!isTokenValid) {
-            logger.warn("유효하지 않은 토큰: 콘서트 ID {}", concertId);
-            throw new IllegalArgumentException("토큰이 만료되었습니다.");
-        }
-
         // 콘서트 날짜 조회
         List<ConcertOptionEntity> concertOptionsEntity = concertService.getAvailableDates(concertId);
         List<ConcertOption> concertOptions = concertOptionsEntity.stream()
@@ -57,13 +50,6 @@ public class ConcertFacade {
     // 콘서트 좌석 조회
     public List<Seat> getAvailableSeats(Long concertOptionId, String token) {
         logger.info("콘서트 옵션 ID {}의 가능한 좌석 조회 시작", concertOptionId);
-
-        // 토큰 유효성 확인
-        boolean isTokenValid = queueService.checkTokenValidity(token);
-        if (!isTokenValid) {
-            logger.warn("유효하지 않은 토큰: 콘서트 옵션 ID {}", concertOptionId);
-            throw new IllegalArgumentException("토큰이 만료되었습니다.");
-        }
 
         // 콘서트 좌석 조회
         List<SeatEntity> seatEntities = concertService.getAvailableSeats(concertOptionId);

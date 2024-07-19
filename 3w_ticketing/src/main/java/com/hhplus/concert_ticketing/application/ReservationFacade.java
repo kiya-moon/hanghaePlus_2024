@@ -37,14 +37,6 @@ public class ReservationFacade {
     public void reserveSeat(String token, Long seatId, Long userId) {
         logger.info("좌석 예약 시작: 토큰={}, 좌석ID={}, 사용자ID={}", token, seatId, userId);
 
-        // 토큰 유효성 확인
-        boolean isTokenValid = queueService.checkToken(token).getStatus() == TokenStatus.ACTIVE;
-        if (!isTokenValid) {
-            logger.warn("토큰이 만료되었습니다: 토큰={}", token);
-            throw new IllegalArgumentException("토큰이 만료되었습니다.");
-        }
-        logger.info("토큰 유효성 확인 완료: 토큰={}", token);
-
         // 사용자 조회
         UserEntity user;
         try {

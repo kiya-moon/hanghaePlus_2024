@@ -40,7 +40,7 @@ public class LoggingFilterTest {
         when(concertFacade.getConcerts()).thenReturn(mockConcerts);
 
         // API 호출 및 검증
-        mockMvc.perform(get("/api/get-concerts"))
+        mockMvc.perform(get("/api/concert/get-concerts"))
                 .andExpect(status().isOk());
     }
 

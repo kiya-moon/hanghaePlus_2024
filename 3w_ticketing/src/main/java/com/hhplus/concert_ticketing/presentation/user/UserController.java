@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/user")
 @Tag(name = "user", description = "사용자 관련 API")
 @RequiredArgsConstructor
 public class UserController {
