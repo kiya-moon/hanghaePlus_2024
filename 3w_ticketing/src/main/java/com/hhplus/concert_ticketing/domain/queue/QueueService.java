@@ -3,6 +3,8 @@ package com.hhplus.concert_ticketing.domain.queue;
 import com.hhplus.concert_ticketing.presentation.queue.TokenData;
 import com.hhplus.concert_ticketing.presentation.queue.TokenResponse;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -85,7 +87,16 @@ public class QueueService {
     public void activateTokens() {
         long activeCount = queueRepository.countByStatus(TokenStatus.ACTIVE);
         if (activeCount < 30) {
-            List<TokenEntity> tokensToActivate = queueRepository.findTokensToActivate(30 - activeCount);
+            // 필요한 토큰 수를 계산
+            int tokensNeeded = 30 - (int) activeCount;
+
+            // Pageable 객체를 생성하여 토큰의 수를 제한
+            Pageable pageable = PageRequest.of(0, tokensNeeded);
+
+            // 토큰을 조회
+            List<TokenEntity> tokensToActivate = queueRepository.findTokensToActivate(pageable, TokenStatus.WAITING);
+
+            // 토큰을 활성화하고 저장
             for (TokenEntity token : tokensToActivate) {
                 token.activeToken();
                 queueRepository.save(token);

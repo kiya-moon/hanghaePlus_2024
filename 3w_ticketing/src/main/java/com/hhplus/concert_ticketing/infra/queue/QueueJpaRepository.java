@@ -2,6 +2,7 @@ package com.hhplus.concert_ticketing.infra.queue;
 
 import com.hhplus.concert_ticketing.domain.queue.TokenEntity;
 import com.hhplus.concert_ticketing.domain.queue.TokenStatus;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -23,8 +24,9 @@ public interface QueueJpaRepository extends JpaRepository<TokenEntity, Long> {
     List<TokenEntity> findTokensToExpire(@Param("status") TokenStatus status, @Param("currentTime") Timestamp currentTime);
 
 
-    @Query(value = "SELECT t FROM TokenEntity t WHERE t.status = 'WAITING' ORDER BY t.createdAt ASC LIMIT :limit", nativeQuery = true)
-    List<TokenEntity> findTokensToActivate(@Param("limit") long limit);
+    @Query("SELECT t FROM TokenEntity t WHERE t.status = :status ORDER BY t.createdAt ASC")
+    List<TokenEntity> findTokensToActivate(Pageable pageable, @Param("status") TokenStatus status);
+
 
     @Query("SELECT COUNT(t) FROM TokenEntity t WHERE t.status = :status")
     long countByStatus(@Param("status") TokenStatus status);

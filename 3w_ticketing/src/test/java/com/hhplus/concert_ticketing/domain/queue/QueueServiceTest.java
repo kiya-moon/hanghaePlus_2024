@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Pageable;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -156,7 +157,7 @@ class QueueServiceTest {
         List<TokenEntity> waitingTokens = List.of(waitingToken1, waitingToken2);
 
         when(queueRepository.countByStatus(ACTIVE)).thenReturn(25L);  // 현재 활성화된 토큰이 25개
-        when(queueRepository.findTokensToActivate(5)).thenReturn(waitingTokens);
+        when(queueRepository.findTokensToActivate(any(Pageable.class), WAITING)).thenReturn(waitingTokens);
 
         // when
         queueService.activateTokens();

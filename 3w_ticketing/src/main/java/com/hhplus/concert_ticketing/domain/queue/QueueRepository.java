@@ -1,12 +1,8 @@
 package com.hhplus.concert_ticketing.domain.queue;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.domain.Pageable;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +15,7 @@ public interface QueueRepository {
 
     List<TokenEntity> findTokensToExpire(TokenStatus status, Timestamp currentTime);
 
-    List<TokenEntity> findTokensToActivate(long limit);
+    List<TokenEntity> findTokensToActivate(Pageable pageable, TokenStatus status);
 
     long countByStatus(TokenStatus status);
 

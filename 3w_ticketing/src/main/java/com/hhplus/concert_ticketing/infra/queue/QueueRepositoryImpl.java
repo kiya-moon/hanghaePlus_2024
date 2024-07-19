@@ -4,6 +4,7 @@ import com.hhplus.concert_ticketing.domain.queue.QueueRepository;
 import com.hhplus.concert_ticketing.domain.queue.TokenEntity;
 import com.hhplus.concert_ticketing.domain.queue.TokenStatus;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
@@ -36,8 +37,8 @@ public class QueueRepositoryImpl implements QueueRepository {
     }
 
     @Override
-    public List<TokenEntity> findTokensToActivate(long limit) {
-        return queueJpaRepository.findTokensToActivate(limit);
+    public List<TokenEntity> findTokensToActivate(Pageable pageable, TokenStatus status) {
+        return queueJpaRepository.findTokensToActivate(pageable, status);
     }
 
     @Override
