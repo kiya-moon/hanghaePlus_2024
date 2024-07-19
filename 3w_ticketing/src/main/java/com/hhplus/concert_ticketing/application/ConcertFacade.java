@@ -7,6 +7,8 @@ import com.hhplus.concert_ticketing.presentation.concert.Concert;
 import com.hhplus.concert_ticketing.presentation.concert.ConcertOption;
 import com.hhplus.concert_ticketing.presentation.concert.Seat;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,53 +18,59 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ConcertFacade {
 
+    private static final Logger logger = LoggerFactory.getLogger(ConcertFacade.class);
+
     private final QueueService queueService;
     private final ConcertService concertService;
-    private final UserService userService;
 
     // 콘서트 조회
     public List<Concert> getConcerts() {
+        logger.info("콘서트 목록 조회 시작");
         List<ConcertEntity> concertEntities = concertService.getConcerts();
-        return concertEntities.stream()
+        List<Concert> concerts = concertEntities.stream()
                 .map(ConcertMapper::toDTO)
                 .collect(Collectors.toList());
+        logger.info("콘서트 {}개 조회 완료", concerts.size());
+        return concerts;
     }
 
     // 콘서트 날짜 조회
     public List<ConcertOption> getAvailableDates(Long concertId, String token) {
-
-        // 토큰 조회 > 유효x
-        // 토큰 조회 > 콘서트 날짜 조회
+        logger.info("콘서트 ID {}의 가능한 날짜 조회 시작", concertId);
 
         // 토큰 유효성 확인
         boolean isTokenValid = queueService.checkTokenValidity(token);
         if (!isTokenValid) {
+            logger.warn("유효하지 않은 토큰: 콘서트 ID {}", concertId);
             throw new IllegalArgumentException("토큰이 만료되었습니다.");
         }
 
         // 콘서트 날짜 조회
         List<ConcertOptionEntity> concertOptionsEntity = concertService.getAvailableDates(concertId);
-        return concertOptionsEntity.stream()
+        List<ConcertOption> concertOptions = concertOptionsEntity.stream()
                 .map(ConcertMapper::toDTO)
                 .collect(Collectors.toList());
+        logger.info("콘서트 ID {}의 가능한 날짜 {}개 조회 완료", concertId, concertOptions.size());
+        return concertOptions;
     }
 
     // 콘서트 좌석 조회
     public List<Seat> getAvailableSeats(Long concertOptionId, String token) {
-
-        // 토큰 조회 > 유효x
-        // 토큰 조회 > 콘서트 좌석 조회
+        logger.info("콘서트 옵션 ID {}의 가능한 좌석 조회 시작", concertOptionId);
 
         // 토큰 유효성 확인
         boolean isTokenValid = queueService.checkTokenValidity(token);
         if (!isTokenValid) {
+            logger.warn("유효하지 않은 토큰: 콘서트 옵션 ID {}", concertOptionId);
             throw new IllegalArgumentException("토큰이 만료되었습니다.");
         }
 
         // 콘서트 좌석 조회
         List<SeatEntity> seatEntities = concertService.getAvailableSeats(concertOptionId);
-        return seatEntities.stream()
+        List<Seat> seats = seatEntities.stream()
                 .map(ConcertMapper::toDTO)
                 .collect(Collectors.toList());
+        logger.info("콘서트 옵션 ID {}의 가능한 좌석 {}개 조회 완료", concertOptionId, seats.size());
+        return seats;
     }
 }

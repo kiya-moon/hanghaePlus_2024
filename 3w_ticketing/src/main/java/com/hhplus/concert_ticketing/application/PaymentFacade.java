@@ -7,39 +7,65 @@ import com.hhplus.concert_ticketing.domain.user.UserEntity;
 import com.hhplus.concert_ticketing.domain.user.UserService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class PaymentFacade {
-    UserService userService;
-    ReservationService reservationService;
 
-    ReservationRepository reservationRepository;
+    private static final Logger logger = LoggerFactory.getLogger(PaymentFacade.class);
+
+    private final UserService userService;
+    private final ReservationService reservationService;
+    private final ReservationRepository reservationRepository;
 
     // 결제
     @Transactional
     public void payInPoint(Long userId, Long reservationId) {
-        // 사용자 조회
-        // 사용자 조회 > 유효x
-        // 사용자 조회 > 예약 조회
-        // 사용자 조회 > 예약 조회 > 유효x
-        // 사용자 조회 > 예약 조회 > 잔액조회
-        // 사용자 조회 > 예약 조회 > 잔액조회 > 포인트 부족
-        // 사용자 조회 > 예약 조회 > 잔액조회 > 결제 > 예약 완료
+        logger.info("사용자 ID {}의 포인트 결제 시작. 예약 ID {}", userId, reservationId);
 
         // 사용자 조회
-        UserEntity user = userService.getUserInfo(userId);
+        UserEntity user;
+        try {
+            user = userService.getUserInfo(userId);
+            logger.info("사용자 ID {} 조회 성공", userId);
+        } catch (Exception e) {
+            logger.error("사용자 ID {} 조회 실패: {}", userId, e.getMessage());
+            throw e;
+        }
 
         // 예약 조회
-        ReservationEntity reservation = reservationService.getReservationInfo(reservationId);
+        ReservationEntity reservation;
+        try {
+            reservation = reservationService.getReservationInfo(reservationId);
+            logger.info("예약 ID {} 조회 성공", reservationId);
+        } catch (Exception e) {
+            logger.error("예약 ID {} 조회 실패: {}", reservationId, e.getMessage());
+            throw e;
+        }
+
         double price = reservation.getPrice();
+        logger.info("예약 ID {}의 금액: {}", reservationId, price);
 
         // 포인트 사용
-        userService.usePoint(userId, price);
+        try {
+            userService.usePoint(userId, price);
+            logger.info("사용자 ID {} 포인트 {} 사용 성공", userId, price);
+        } catch (Exception e) {
+            logger.error("사용자 ID {} 포인트 사용 실패: {}", userId, e.getMessage());
+            throw e;
+        }
 
         // 예약 완료 처리
-        reservation.completeReservation();
-        reservationRepository.save(reservation);
+        try {
+            reservation.completeReservation();
+            reservationRepository.save(reservation);
+            logger.info("예약 ID {} 완료 처리 성공", reservationId);
+        } catch (Exception e) {
+            logger.error("예약 ID {} 완료 처리 실패: {}", reservationId, e.getMessage());
+            throw e;
+        }
     }
 }

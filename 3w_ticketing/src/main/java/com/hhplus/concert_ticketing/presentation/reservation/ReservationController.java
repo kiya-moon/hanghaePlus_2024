@@ -7,6 +7,9 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import lombok.RequiredArgsConstructor;
 
 import java.net.URI;
 
@@ -25,6 +26,7 @@ import java.net.URI;
 @RequiredArgsConstructor
 public class ReservationController {
 
+    private static final Logger logger = LoggerFactory.getLogger(ReservationController.class);
     private final ReservationFacade reservationFacade;
 
     @PostMapping("/reserve")
@@ -50,13 +52,16 @@ public class ReservationController {
             }
     )
     public ResponseEntity<?> reserveSeat(@RequestBody ReserveRequest request) {
+        logger.info("좌석 예약 요청을 받았습니다. 요청 데이터: 토큰={}, 좌석 ID={}, 사용자 ID={}", request.getToken(), request.getSeatId(), request.getUserId());
         try {
             reservationFacade.reserveSeat(request.getToken(), request.getSeatId(), request.getUserId());
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(URI.create("/payment-page"));
+            logger.info("좌석 예약 성공. 리다이렉션: /payment-page");
             return new ResponseEntity<>(headers, HttpStatus.SEE_OTHER);
         } catch (IllegalArgumentException e) {
             String message = e.getMessage();
+            logger.error("좌석 예약 중 오류 발생. 요청 데이터: 토큰={}, 좌석 ID={}, 사용자 ID={}, 오류 메시지: {}", request.getToken(), request.getSeatId(), request.getUserId(), message);
             if (message.equals("토큰이 만료되었습니다.")) {
                 return new ResponseEntity<>(new ErrorResponse("401", message), HttpStatus.UNAUTHORIZED);
             } else if (message.equals("이미 선택한 좌석입니다.")) {
@@ -64,6 +69,9 @@ public class ReservationController {
             } else {
                 return new ResponseEntity<>(new ErrorResponse("400", message), HttpStatus.BAD_REQUEST);
             }
+        } catch (Exception e) {
+            logger.error("서버 오류로 인한 좌석 예약 실패. 요청 데이터: 토큰={}, 좌석 ID={}, 사용자 ID={}, 오류 메시지: {}", request.getToken(), request.getSeatId(), request.getUserId(), e.getMessage());
+            return new ResponseEntity<>(new ErrorResponse("500", "서버에서 오류가 발생했습니다."), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
