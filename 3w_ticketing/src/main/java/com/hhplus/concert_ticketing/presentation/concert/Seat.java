@@ -14,6 +14,7 @@ public class Seat {
     private Long concertOptionId;
     private String seatNumber;
     private String status;
+    private Double price;
 }
 
 

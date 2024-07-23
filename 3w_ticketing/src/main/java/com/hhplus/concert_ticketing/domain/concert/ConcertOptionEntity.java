@@ -17,7 +17,6 @@ public class ConcertOptionEntity {
 
     private Long concertId;
     private Timestamp concertDate;
-    private Double price;
 
     public ConcertOptionEntity(long l, Long concertId, String date, double v) {
     }

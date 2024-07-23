@@ -6,10 +6,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
 
+import static com.hhplus.concert_ticketing.domain.concert.SeatStatus.LOCKED;
+import static com.hhplus.concert_ticketing.domain.concert.SeatStatus.UNLOCKED;
+
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class SeatEntity {
     @Id
@@ -19,4 +22,15 @@ public class SeatEntity {
     private Long concertOptionId;
     private String seatNumber;
     private SeatStatus status;
+    private Double price;
+
+    public SeatEntity(long l, Long concertOptionId, String number, SeatStatus seatStatus) {
+    }
+
+    public void unlockSeat() {
+        this.setStatus(UNLOCKED);
+    }
+    public void lockSeat() {
+        this.setStatus(LOCKED);
+    }
 }

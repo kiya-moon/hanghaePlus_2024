@@ -17,5 +17,12 @@ public class UserEntity {
 
     @Version
     private int version;  // 낙관적 락을 위한 버전 필드 추가
+
+    public void decreaseBalance(Double price) {
+        if (balance < price) {
+            throw new IllegalStateException("잔액이 부족합니다.");
+        }
+        balance -= price;
+    }
 }
 

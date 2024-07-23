@@ -15,6 +15,4 @@ public class ConcertOption {
     private Long id;
     private Long concertId;
     private Timestamp concertDate;
-    private Double price;
-
 }

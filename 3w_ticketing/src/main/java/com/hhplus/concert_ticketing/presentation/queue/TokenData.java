@@ -5,12 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Timestamp;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class TokenData {
     private String token;
-    private Integer queuePosition;  // 서비스에서 계산 필요
+    private int position;
     private String expiresAt;
+    private int waitingCount;
 }

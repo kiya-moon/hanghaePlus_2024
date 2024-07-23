@@ -1,104 +1,139 @@
 package com.hhplus.concert_ticketing;
 
-import com.hhplus.concert_ticketing.application.TokenFacade;
-import com.hhplus.concert_ticketing.domain.queue.TokenStatus;
-import com.hhplus.concert_ticketing.domain.queue.QueueService;
-import com.hhplus.concert_ticketing.domain.queue.QueueRepository;
+import com.hhplus.concert_ticketing.application.QueueFacade;
+import com.hhplus.concert_ticketing.presentation.ErrorResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.hhplus.concert_ticketing.presentation.queue.QueueController;
 import com.hhplus.concert_ticketing.presentation.queue.TokenData;
+import com.hhplus.concert_ticketing.presentation.queue.TokenRequest;
 import com.hhplus.concert_ticketing.presentation.queue.TokenResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
-@AutoConfigureMockMvc
-public class QueueIntegrationTest {
+class QueueControllerIntegrationTest {
 
     @Autowired
-    private MockMvc mockMvc;
-
-    @Mock
-    private TokenFacade tokenFacade;
-
-    @InjectMocks
     private QueueController queueController;
 
-    @Mock
-    private QueueService queueService;
+    @Autowired
+    private QueueFacade queueFacade;
 
-    @Mock
-    private QueueRepository queueRepository;
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @BeforeEach
-    public void setup() {
-        mockMvc = MockMvcBuilders.standaloneSetup(queueController).build();
+    void setUp() {
+        objectMapper.registerModule(new JavaTimeModule());
     }
 
     @Test
-    public void testCheckQueue_whenTokenStatusIsWaiting() throws Exception {
-        String token = "dummyToken";
-        TokenResponse tokenResponse = new TokenResponse("100", "계속 대기 중입니다.", new TokenData(token, 1, "2024-07-04T12:00:00"));
-        when(tokenFacade.checkTokenStatus(anyString())).thenReturn(TokenStatus.WAITING);
+    void issueToken_성공() throws Exception {
+        // given
+        TokenRequest request = new TokenRequest(123L); // userId를 long 타입으로 설정
+        String token = "some-unique-token";
+        TokenData tokenData = new TokenData(token, 1, "2024-07-04T12:00:00", 0);
+        TokenResponse expectedResponse = new TokenResponse("200", "Success", tokenData);
 
-        mockMvc.perform(get("/queue/check-queue")
-                        .param("token", token)
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isContinue())
-                .andExpect(jsonPath("$.result").value("100"))
-                .andExpect(jsonPath("$.message").value("계속 대기 중입니다."))
-                .andExpect(jsonPath("$.data.token").value(token));
+        when(queueFacade.requestToken(anyLong())).thenReturn(token);
+
+        // when
+        ResponseEntity<?> result = queueController.issueToken(request);
+
+        // then
+        assertEquals(HttpStatus.OK, result.getStatusCode());
+        assertEquals(objectMapper.writeValueAsString(expectedResponse), result.getBody());
     }
 
     @Test
-    public void testCheckQueue_whenTokenStatusIsActive() throws Exception {
-        String token = "dummyToken";
-        when(tokenFacade.checkTokenStatus(anyString())).thenReturn(TokenStatus.ACTIVE);
+    void issueToken_실패() throws Exception {
+        // given
+        TokenRequest request = new TokenRequest(123L); // userId를 long 타입으로 설정
 
-        mockMvc.perform(get("/queue/check-queue")
-                        .param("token", token)
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isSeeOther())
-                .andExpect(header().string(HttpHeaders.LOCATION, "/reservation-page"));
+        when(queueFacade.requestToken(anyLong())).thenThrow(new RuntimeException("접근이 유효하지 않습니다."));
+
+        // when
+        ResponseEntity<?> result = queueController.issueToken(request);
+
+        // then
+        assertEquals(HttpStatus.UNAUTHORIZED, result.getStatusCode());
+        ErrorResponse errorResponse = new ErrorResponse("401", "접근이 유효하지 않습니다.");
+        assertEquals(objectMapper.writeValueAsString(errorResponse), result.getBody());
     }
 
     @Test
-    public void testCheckQueue_whenTokenStatusIsInvalid() throws Exception {
-        String token = "dummyToken";
-        when(tokenFacade.checkTokenStatus(anyString())).thenThrow(new RuntimeException("잘못된 토큰 상태"));
+    void checkQueue_성공_리다이렉션() throws Exception {
+        // given
+        String token = "valid-token";
+        TokenResponse tokenResponse = new TokenResponse("200", "Success", null);
 
-        mockMvc.perform(get("/queue/check-queue")
-                        .param("token", token)
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.errorCode").value("400"))
-                .andExpect(jsonPath("$.errorMessage").value("잘못된 토큰 상태입니다."));
+        when(queueFacade.checkTokenStatus(token)).thenReturn(tokenResponse);
+
+        // when
+        ResponseEntity<?> result = queueController.checkQueue(token);
+
+        // then
+        assertEquals(HttpStatus.SEE_OTHER, result.getStatusCode());
+        assertEquals("/reservation-page", result.getHeaders().getLocation().toString());
     }
 
     @Test
-    public void testCheckQueue_whenTokenStatusThrowsException() throws Exception {
-        String token = "dummyToken";
-        when(tokenFacade.checkTokenStatus(anyString())).thenThrow(new RuntimeException("서버 오류"));
+    void checkQueue_성공_대기() throws Exception {
+        // given
+        String token = "waiting-token";
+        TokenResponse tokenResponse = new TokenResponse("100", "Waiting", null);
 
-        mockMvc.perform(get("/queue/check-queue")
-                        .param("token", token)
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isInternalServerError())
-                .andExpect(jsonPath("$.errorCode").value("500"))
-                .andExpect(jsonPath("$.errorMessage").value("서버에서 오류가 발생했습니다."));
+        when(queueFacade.checkTokenStatus(token)).thenReturn(tokenResponse);
+
+        // when
+        ResponseEntity<?> result = queueController.checkQueue(token);
+
+        // then
+        assertEquals(HttpStatus.CONTINUE, result.getStatusCode());
+        assertEquals(objectMapper.writeValueAsString(tokenResponse), result.getBody());
+    }
+
+    @Test
+    void checkQueue_실패_잘못된_토큰() throws Exception {
+        // given
+        String token = "invalid-token";
+
+        when(queueFacade.checkTokenStatus(token)).thenThrow(new IllegalArgumentException("잘못된 토큰 상태입니다."));
+
+        // when
+        ResponseEntity<?> result = queueController.checkQueue(token);
+
+        // then
+        assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
+        ErrorResponse errorResponse = new ErrorResponse("400", "잘못된 토큰 상태입니다.");
+        assertEquals(objectMapper.writeValueAsString(errorResponse), result.getBody());
+    }
+
+    @Test
+    void checkQueue_실패_서버_오류() throws Exception {
+        // given
+        String token = "some-token";
+
+        when(queueFacade.checkTokenStatus(token)).thenThrow(new RuntimeException("서버에서 오류가 발생했습니다."));
+
+        // when
+        ResponseEntity<?> result = queueController.checkQueue(token);
+
+        // then
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, result.getStatusCode());
+        ErrorResponse errorResponse = new ErrorResponse("500", "서버에서 오류가 발생했습니다.");
+        assertEquals(objectMapper.writeValueAsString(errorResponse), result.getBody());
     }
 }

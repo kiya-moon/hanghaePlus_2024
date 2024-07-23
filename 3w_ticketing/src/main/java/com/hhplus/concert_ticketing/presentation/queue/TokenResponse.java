@@ -13,5 +13,4 @@ public class TokenResponse {
     private String result;
     private String message;
     private TokenData data;
-
 }

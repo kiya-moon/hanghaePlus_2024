@@ -7,11 +7,10 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-public interface ReservationRepository extends JpaRepository<ReservationEntity, Long> {
-    ReservationEntity save(ReservationEntity reservation);
+public interface ReservationRepository {
+    List<ReservationEntity> findByExpiresAtBeforeAndStatus(Timestamp now, String active);
+
+    void save(ReservationEntity reservation);
 
     Optional<ReservationEntity> findById(Long reservationId);
-
-    List<ReservationEntity> findByExpiresAtBeforeAndStatus(Timestamp now, String active);
 }

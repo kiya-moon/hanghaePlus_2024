@@ -1,11 +1,14 @@
 package com.hhplus.concert_ticketing.application;
 
-import com.hhplus.concert_ticketing.domain.concert.SeatEntity;
+import com.hhplus.concert_ticketing.domain.concert.*;
 import com.hhplus.concert_ticketing.domain.queue.QueueService;
-import com.hhplus.concert_ticketing.domain.concert.ConcertOptionEntity;
-import com.hhplus.concert_ticketing.domain.concert.ConcertService;
+import com.hhplus.concert_ticketing.domain.user.UserService;
+import com.hhplus.concert_ticketing.presentation.concert.Concert;
+import com.hhplus.concert_ticketing.presentation.concert.ConcertOption;
 import com.hhplus.concert_ticketing.presentation.concert.Seat;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,31 +18,45 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ConcertFacade {
 
+    private static final Logger logger = LoggerFactory.getLogger(ConcertFacade.class);
+
     private final QueueService queueService;
     private final ConcertService concertService;
 
-    public List<ConcertOptionEntity> getAvailableDates(Long concertId, String token) {
-        if (!queueService.checkTokenValidity(token)) {
-            throw new IllegalArgumentException("유효하지 않은 접근입니다.");
-        }
-        return concertService.getAvailableDates(concertId);
+    // 콘서트 조회
+    public List<Concert> getConcerts() {
+        logger.info("콘서트 목록 조회 시작");
+        List<ConcertEntity> concertEntities = concertService.getConcerts();
+        List<Concert> concerts = concertEntities.stream()
+                .map(ConcertMapper::toDTO)
+                .collect(Collectors.toList());
+        logger.info("콘서트 {}개 조회 완료", concerts.size());
+        return concerts;
     }
 
-    public List<Seat> getAvailableSeats(Long concertOptionId, String token) {
-        if (!queueService.checkTokenValidity(token)) {
-            throw new IllegalArgumentException("유효하지 않은 접근입니다.");
-        }
+    // 콘서트 날짜 조회
+    public List<ConcertOption> getAvailableDates(Long concertId, String token) {
+        logger.info("콘서트 ID {}의 가능한 날짜 조회 시작", concertId);
 
-        List<SeatEntity> seatEntities = concertService.getAvailableSeats(concertOptionId);
-
-        // SeatEntity를 Seat로 변환
-        return seatEntities.stream()
-                .map(entity -> new Seat(
-                        entity.getId(),
-                        entity.getConcertOptionId(),
-                        entity.getSeatNumber(),
-                        entity.getStatus().toString()  // 여기에 .toString() 호출
-                ))
+        // 콘서트 날짜 조회
+        List<ConcertOptionEntity> concertOptionsEntity = concertService.getAvailableDates(concertId);
+        List<ConcertOption> concertOptions = concertOptionsEntity.stream()
+                .map(ConcertMapper::toDTO)
                 .collect(Collectors.toList());
+        logger.info("콘서트 ID {}의 가능한 날짜 {}개 조회 완료", concertId, concertOptions.size());
+        return concertOptions;
+    }
+
+    // 콘서트 좌석 조회
+    public List<Seat> getAvailableSeats(Long concertOptionId, String token) {
+        logger.info("콘서트 옵션 ID {}의 가능한 좌석 조회 시작", concertOptionId);
+
+        // 콘서트 좌석 조회
+        List<SeatEntity> seatEntities = concertService.getAvailableSeats(concertOptionId);
+        List<Seat> seats = seatEntities.stream()
+                .map(ConcertMapper::toDTO)
+                .collect(Collectors.toList());
+        logger.info("콘서트 옵션 ID {}의 가능한 좌석 {}개 조회 완료", concertOptionId, seats.size());
+        return seats;
     }
 }
