@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class PaymentController {
 
+    private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);
     private final PaymentFacade paymentFacade;
 
     @PostMapping("/pay")
@@ -51,6 +52,7 @@ public class PaymentController {
 
         } catch (IllegalArgumentException e) {
             String message = e.getMessage();
+            logger.error("결제 처리 중 오류 발생. 사용자 ID: {}, 예약 ID: {}, 오류 메시지: {}", request.getUserId(), request.getReservationId(), message);
 
             if (message.equals("유효하지 않은 토큰입니다.")) {
                 return new ResponseEntity<>(new ErrorResponse("401", message), HttpStatus.UNAUTHORIZED);

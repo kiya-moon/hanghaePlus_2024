@@ -42,5 +42,15 @@ public class LoggingFilterTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void 콘서트_목록이_빈경우_예외처리_테스트() throws Exception {
+        // ConcertFacade의 getConcerts() 메서드가 IllegalArgumentException을 발생시키도록 설정
+        when(concertFacade.getConcerts()).thenThrow(new IllegalArgumentException("콘서트 목록이 존재하지 않습니다."));
+
+        // API 호출 및 검증
+        mockMvc.perform(get("/api/concert/get-concerts"))
+                .andExpect(status().isNotFound());  // IllegalArgumentException 발생 시 404 상태 코드 기대
+    }
+
 }
 

@@ -24,6 +24,7 @@ import java.net.URI;
 @Tag(name = "queue", description = "대기열 관련 API")
 public class QueueController {
 
+    private static final Logger logger = LoggerFactory.getLogger(QueueController.class);
     private final QueueFacade queueFacade;
 
     @PostMapping("/issue-token")
@@ -49,9 +50,11 @@ public class QueueController {
             TokenResponse response = new TokenResponse("200", "Success", tokenDto);
             return ResponseEntity.ok(response);
         } catch (RuntimeException e) {
+            logger.error("토큰 발급 중 오류 발생. 사용자 ID: {}, 오류 메시지: {}", request.getUserId(), e.getMessage());
             ErrorResponse errorResponse = new ErrorResponse("401", "접근이 유효하지 않습니다.");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
         } catch (Exception e) {
+            logger.error("서버 오류로 인해 토큰 발급에 실패했습니다. 사용자 ID: {}, 오류 메시지: {}", request.getUserId(), e.getMessage());
             ErrorResponse errorResponse = new ErrorResponse("500", "서버에서 오류가 발생했습니다.");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
@@ -92,15 +95,20 @@ public class QueueController {
             if (response.getResult().equals("200")) {
                 HttpHeaders headers = new HttpHeaders();
                 headers.setLocation(URI.create("/reservation-page"));
+                logger.info("토큰 상태가 'ACTIVE'입니다. 리다이렉션: /reservation-page");
                 return new ResponseEntity<>(headers, HttpStatus.SEE_OTHER);
             } else if (response.getResult().equals("100")) {
+                logger.info("계속 대기 상태입니다. 토큰: {}", token);
                 return ResponseEntity.status(HttpStatus.CONTINUE).body(response);
             } else {
+                logger.warn("잘못된 토큰 상태입니다. 상태: {}, 메시지: {}", response.getResult(), response.getMessage());
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(QueueMapper.toErrorResponseDTO(response.getResult(), response.getMessage()));
             }
         } catch (IllegalArgumentException e) {
+            logger.error("잘못된 요청으로 대기열 체크 실패. 토큰: {}, 오류 메시지: {}", token, e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(QueueMapper.toErrorResponseDTO("400", e.getMessage()));
         } catch (Exception e) {
+            logger.error("서버 오류로 대기열 체크 실패. 토큰: {}, 오류 메시지: {}", token, e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(QueueMapper.toErrorResponseDTO("500", "서버에서 오류가 발생했습니다."));
         }
     }

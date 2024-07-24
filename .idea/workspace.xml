@@ -5,35 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d9d8606a-99af-4f76-a512-fb2a53087a14" name="변경" comment="feat: 유저 토큰 발급 유즈케이스 파사드 생성 및 통합테스트 진행">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/3주차 과제 README.md" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/3주차 과제 README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/ConcertFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/ConcertFacade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/concert/ConcertMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/concert/ConcertMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/queue/QueueMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/queue/QueueMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/queue/QueueService.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/queue/QueueService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/TicketingMockApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/TicketingMockApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/AvailableDatesResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/AvailableDatesResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/AvailableSeatsResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/AvailableSeatsResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/Concert.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/ConcertDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/PaymentFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/PaymentFacade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/QueueFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/QueueFacade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/ReservationFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/ReservationFacade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/UserFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/UserFacade.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/ConcertController.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/ConcertController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/ConcertListResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/ConcertListResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/ConcertOption.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/ConcertOptionDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/Seat.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/SeatDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/config/SpringDocConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/config/SpringDocConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/payment/PayData.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/payment/PayDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/payment/PayResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/payment/PayResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/payment/PaymentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/payment/PaymentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/queue/QueueController.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/queue/QueueController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/queue/TokenData.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/queue/TokenDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/queue/TokenResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/queue/TokenResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/reservation/ReserveData.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/reservation/ReserveDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/reservation/ReserveResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/reservation/ReserveResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/apiTest.http" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/apiTest.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/ConcertEntityTicketingApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/ConcertDtoEntityTicketingApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/ConcertIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/ConcertDtoIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/reservation/ReservationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/reservation/ReservationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/ConcertDtoEntityTicketingApplicationTests.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/LoggingFilterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/LoggingFilterTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/QueueIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/QueueIntegrationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/domain/concert/ConcertServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/domain/concert/ConcertDtoServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,6 +159,8 @@
     "Gradle.LectureServiceTest.testIsAppliedLecture_NotFound.executor": "Run",
     "Gradle.LectureServiceTest.testIsAppliedLecture_SUCCESS.executor": "Run",
     "Gradle.LectureServiceTest.testIsAppliedLecture_Success.executor": "Run",
+    "Gradle.LoggingFilterTest.로깅_필터_테스트.executor": "Run",
+    "Gradle.LoggingFilterTest.콘서트_목록이_빈경우_예외처리_테스트.executor": "Run",
     "Gradle.PointControllerTest.testGetUserPoint.executor": "Run",
     "Gradle.PointManagementTest.isChargePointSuccess.executor": "Run",
     "Gradle.PointServiceConcurrencyTest.executor": "Run",
@@ -238,7 +223,7 @@
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "run.configurations.included.in.services": "true",
-    "settings.editor.selected.configurable": "editing.templates",
+    "settings.editor.selected.configurable": "preferences.keymap",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -305,7 +290,55 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.ConcertTicketingApplication">
+  <component name="RunManager" selected="Gradle.LoggingFilterTest.콘서트_목록이_빈경우_예외처리_테스트">
+    <configuration name="LoggingFilterTest.로깅_필터_테스트" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/3w_ticketing" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.hhplus.concert_ticketing.LoggingFilterTest.로깅_필터_테스트&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="LoggingFilterTest.콘서트_목록이_빈경우_예외처리_테스트" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/3w_ticketing" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.hhplus.concert_ticketing.LoggingFilterTest.콘서트_목록이_빈경우_예외처리_테스트&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="QueueControllerIntegrationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -320,54 +353,6 @@
             <option value=":test" />
             <option value="--tests" />
             <option value="&quot;com.hhplus.concert_ticketing.QueueControllerIntegrationTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="QueueServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/3w_ticketing" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;com.hhplus.concert_ticketing.domain.queue.QueueServiceTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="QueueServiceTest.expireToken_정상적으로_만료처리_테스트" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/3w_ticketing" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;com.hhplus.concert_ticketing.domain.queue.QueueServiceTest.expireToken_정상적으로_만료처리_테스트&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -461,9 +446,9 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Gradle.LoggingFilterTest.로깅_필터_테스트" />
+      <item itemvalue="Gradle.LoggingFilterTest.콘서트_목록이_빈경우_예외처리_테스트" />
       <item itemvalue="Gradle.QueueControllerIntegrationTest" />
-      <item itemvalue="Gradle.QueueServiceTest" />
-      <item itemvalue="Gradle.QueueServiceTest.expireToken_정상적으로_만료처리_테스트" />
       <item itemvalue="Gradle.ReservationServiceTest" />
       <item itemvalue="Gradle.ReservationServiceTest.결제_시간_만료_테스트" />
       <item itemvalue="Spring Boot.ConcertTicketingApplication" />
@@ -472,11 +457,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.LoggingFilterTest.콘서트_목록이_빈경우_예외처리_테스트" />
+        <item itemvalue="Gradle.LoggingFilterTest.로깅_필터_테스트" />
         <item itemvalue="Gradle.QueueControllerIntegrationTest" />
         <item itemvalue="Gradle.ReservationServiceTest.결제_시간_만료_테스트" />
         <item itemvalue="Gradle.ReservationServiceTest" />
-        <item itemvalue="Gradle.QueueServiceTest.expireToken_정상적으로_만료처리_테스트" />
-        <item itemvalue="Gradle.QueueServiceTest" />
       </list>
     </recent_temporary>
   </component>

@@ -26,6 +26,7 @@ import java.net.URI;
 @RequiredArgsConstructor
 public class ReservationController {
 
+    private static final Logger logger = LoggerFactory.getLogger(ReservationController.class);
     private final ReservationFacade reservationFacade;
 
     @PostMapping("/reserve")
@@ -58,6 +59,7 @@ public class ReservationController {
             return new ResponseEntity<>(headers, HttpStatus.SEE_OTHER);
         } catch (IllegalArgumentException e) {
             String message = e.getMessage();
+            logger.error("좌석 예약 중 오류 발생. 요청 데이터: 토큰={}, 좌석 ID={}, 사용자 ID={}, 오류 메시지: {}", request.getToken(), request.getSeatId(), request.getUserId(), message);
             if (message.equals("토큰이 만료되었습니다.")) {
                 return new ResponseEntity<>(new ErrorResponse("401", message), HttpStatus.UNAUTHORIZED);
             } else if (message.equals("이미 선택한 좌석입니다.")) {
@@ -66,6 +68,7 @@ public class ReservationController {
                 return new ResponseEntity<>(new ErrorResponse("400", message), HttpStatus.BAD_REQUEST);
             }
         } catch (Exception e) {
+            logger.error("서버 오류로 인한 좌석 예약 실패. 요청 데이터: 토큰={}, 좌석 ID={}, 사용자 ID={}, 오류 메시지: {}", request.getToken(), request.getSeatId(), request.getUserId(), e.getMessage());
             return new ResponseEntity<>(new ErrorResponse("500", "서버에서 오류가 발생했습니다."), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

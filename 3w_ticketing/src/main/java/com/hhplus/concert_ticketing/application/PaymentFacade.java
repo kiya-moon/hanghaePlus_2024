@@ -24,13 +24,11 @@ public class PaymentFacade {
     // 결제
     @Transactional
     public void payInPoint(Long userId, Long reservationId) {
-        logger.info("사용자 ID {}의 포인트 결제 시작. 예약 ID {}", userId, reservationId);
 
         // 사용자 조회
         UserEntity user;
         try {
             user = userService.getUserInfo(userId);
-            logger.info("사용자 ID {} 조회 성공", userId);
         } catch (Exception e) {
             logger.error("사용자 ID {} 조회 실패: {}", userId, e.getMessage());
             throw e;
@@ -40,19 +38,16 @@ public class PaymentFacade {
         ReservationEntity reservation;
         try {
             reservation = reservationService.getReservationInfo(reservationId);
-            logger.info("예약 ID {} 조회 성공", reservationId);
         } catch (Exception e) {
             logger.error("예약 ID {} 조회 실패: {}", reservationId, e.getMessage());
             throw e;
         }
 
         double price = reservation.getPrice();
-        logger.info("예약 ID {}의 금액: {}", reservationId, price);
 
         // 포인트 사용
         try {
             userService.usePoint(userId, price);
-            logger.info("사용자 ID {} 포인트 {} 사용 성공", userId, price);
         } catch (Exception e) {
             logger.error("사용자 ID {} 포인트 사용 실패: {}", userId, e.getMessage());
             throw e;
@@ -62,7 +57,6 @@ public class PaymentFacade {
         try {
             reservation.completeReservation();
             reservationRepository.save(reservation);
-            logger.info("예약 ID {} 완료 처리 성공", reservationId);
         } catch (Exception e) {
             logger.error("예약 ID {} 완료 처리 실패: {}", reservationId, e.getMessage());
             throw e;

@@ -24,38 +24,42 @@ public class ConcertFacade {
 
     // 콘서트 조회
     public List<ConcertDto> getConcerts() {
-        logger.info("콘서트 목록 조회 시작");
-        List<ConcertEntity> concertEntities = concertService.getConcerts();
-        List<ConcertDto> concertDtos = concertEntities.stream()
-                .map(ConcertMapper::toDTO)
-                .collect(Collectors.toList());
-        logger.info("콘서트 {}개 조회 완료", concertDtos.size());
-        return concertDtos;
+        try {
+            List<ConcertEntity> concertEntities = concertService.getConcerts();
+            return concertEntities.stream()
+                    .map(ConcertMapper::toDTO)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            logger.error("콘서트 조회 실패: {}", e.getMessage());
+            throw e;
+        }
     }
 
     // 콘서트 날짜 조회
     public List<ConcertOptionDto> getAvailableDates(Long concertId, String token) {
-        logger.info("콘서트 ID {}의 가능한 날짜 조회 시작", concertId);
-
-        // 콘서트 날짜 조회
-        List<ConcertOptionEntity> concertOptionsEntity = concertService.getAvailableDates(concertId);
-        List<ConcertOptionDto> concertOptionDtos = concertOptionsEntity.stream()
-                .map(ConcertMapper::toDTO)
-                .collect(Collectors.toList());
-        logger.info("콘서트 ID {}의 가능한 날짜 {}개 조회 완료", concertId, concertOptionDtos.size());
-        return concertOptionDtos;
+        try {
+            // 콘서트 날짜 조회
+            List<ConcertOptionEntity> concertOptionsEntity = concertService.getAvailableDates(concertId);
+            return concertOptionsEntity.stream()
+                    .map(ConcertMapper::toDTO)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            logger.error("콘서트 날짜 조회 실패: {}", e.getMessage());
+            throw e;
+        }
     }
 
     // 콘서트 좌석 조회
     public List<SeatDto> getAvailableSeats(Long concertOptionId, String token) {
-        logger.info("콘서트 옵션 ID {}의 가능한 좌석 조회 시작", concertOptionId);
-
-        // 콘서트 좌석 조회
-        List<SeatEntity> seatEntities = concertService.getAvailableSeats(concertOptionId);
-        List<SeatDto> seatDtos = seatEntities.stream()
-                .map(ConcertMapper::toDTO)
-                .collect(Collectors.toList());
-        logger.info("콘서트 옵션 ID {}의 가능한 좌석 {}개 조회 완료", concertOptionId, seatDtos.size());
-        return seatDtos;
+        try {
+            // 콘서트 좌석 조회
+            List<SeatEntity> seatEntities = concertService.getAvailableSeats(concertOptionId);
+            return seatEntities.stream()
+                    .map(ConcertMapper::toDTO)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            logger.error("콘서트 좌석 조회 실패: {}", e.getMessage());
+            throw e;
+        }
     }
 }

@@ -22,6 +22,7 @@ import java.util.List;
 @Tag(name = "concert", description = "콘서트 관련 API")
 public class ConcertController {
 
+    private static final Logger logger = LoggerFactory.getLogger(ConcertController.class);
     private final ConcertFacade concertFacade;
 
     @GetMapping("/get-concerts")
@@ -32,7 +33,7 @@ public class ConcertController {
                     @ApiResponse(responseCode = "200", description = "성공적으로 콘서트 목록을 조회했습니다.",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = AvailableDatesResponse.class))
                     ),
-                    @ApiResponse(responseCode = "401", description = "접근이 유효하지 않습니다.",
+                    @ApiResponse(responseCode = "404", description = "콘서트 목록을 찾지 못했습니다.",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
                     )
             }
@@ -43,7 +44,8 @@ public class ConcertController {
             ConcertListResponse response = new ConcertListResponse(concertDtoDTOS);
             return ResponseEntity.ok(response);
         } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(new ErrorResponse("401", "접근이 유효하지 않습니다."), HttpStatus.UNAUTHORIZED);
+            logger.error("콘서트 목록 조회 실패: 접근이 유효하지 않습니다.", e);
+            return new ResponseEntity<>(new ErrorResponse("404", "콘서트 목록을 찾지 못했습니다."), HttpStatus.NOT_FOUND);
         }
     }
 
@@ -72,8 +74,10 @@ public class ConcertController {
             AvailableDatesResponse response = new AvailableDatesResponse(concertOptionDtoDTOS);
             return ResponseEntity.ok(response);
         } catch (IllegalArgumentException e) {
+            logger.error("콘서트ID={}의 날짜 조회 실패: 접근이 유효하지 않습니다.", concertId, e);
             return new ResponseEntity<>(new ErrorResponse("401", "접근이 유효하지 않습니다."), HttpStatus.UNAUTHORIZED);
         } catch (Exception e) {
+            logger.error("콘서트ID={}의 날짜 조회 실패: 대기시간이 만료되었습니다.", concertId, e);
             return new ResponseEntity<>(new ErrorResponse("403", "대기시간이 만료되었습니다."), HttpStatus.FORBIDDEN);
         }
     }
@@ -103,8 +107,10 @@ public class ConcertController {
             AvailableSeatsResponse response = new AvailableSeatsResponse(availableSeatDtos);
             return ResponseEntity.ok(response);
         } catch (IllegalArgumentException e) {
+            logger.error("콘서트옵션ID={}의 좌석 조회 실패: 접근이 유효하지 않습니다.", concertOptionId, e);
             return new ResponseEntity<>(new ErrorResponse("401", "접근이 유효하지 않습니다."), HttpStatus.UNAUTHORIZED);
         } catch (Exception e) {
+            logger.error("콘서트옵션ID={}의 좌석 조회 실패: 대기시간이 만료되었습니다.", concertOptionId, e);
             return new ResponseEntity<>(new ErrorResponse("403", "대기시간이 만료되었습니다."), HttpStatus.FORBIDDEN);
         }
     }
