@@ -1,4 +1,4 @@
-package com.hhplus.concert_ticketing.presentation.reservation;
+package com.hhplus.concert_ticketing.presentation.concert;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReserveData {
-    private Long reservationId;
+public class ConcertDto {
+    private Long id;
+    private String name;
 }

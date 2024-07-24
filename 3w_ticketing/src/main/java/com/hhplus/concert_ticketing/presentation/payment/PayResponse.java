@@ -12,5 +12,5 @@ import lombok.Setter;
 public class PayResponse {
     private String result;
     private String message;
-    private PayData data;
+    private PayDto payDto;
 }

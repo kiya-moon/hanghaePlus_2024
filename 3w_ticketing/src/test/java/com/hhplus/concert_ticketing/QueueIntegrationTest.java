@@ -5,25 +5,21 @@ import com.hhplus.concert_ticketing.presentation.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.hhplus.concert_ticketing.presentation.queue.QueueController;
-import com.hhplus.concert_ticketing.presentation.queue.TokenData;
+import com.hhplus.concert_ticketing.presentation.queue.TokenDto;
 import com.hhplus.concert_ticketing.presentation.queue.TokenRequest;
 import com.hhplus.concert_ticketing.presentation.queue.TokenResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-class QueueControllerIntegrationTest {
+class QueueIntegrationTest {
 
     @Autowired
     private QueueController queueController;
@@ -44,8 +40,8 @@ class QueueControllerIntegrationTest {
         // given
         TokenRequest request = new TokenRequest(123L); // userId를 long 타입으로 설정
         String token = "some-unique-token";
-        TokenData tokenData = new TokenData(token, 1, "2024-07-04T12:00:00", 0);
-        TokenResponse expectedResponse = new TokenResponse("200", "Success", tokenData);
+        TokenDto tokenDto = new TokenDto(token, 1, "2024-07-04T12:00:00", 0);
+        TokenResponse expectedResponse = new TokenResponse("200", "Success", tokenDto);
 
         when(queueFacade.requestToken(anyLong())).thenReturn(token);
 

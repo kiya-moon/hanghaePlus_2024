@@ -21,7 +21,6 @@ import java.util.NoSuchElementException;
 @Tag(name = "user", description = "사용자 관련 API")
 @RequiredArgsConstructor
 public class UserController {
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     private final UserFacade userFacade;
 
     @GetMapping("/balance")
@@ -38,14 +37,11 @@ public class UserController {
             }
     )
     public ResponseEntity<?> getBalance(@RequestParam Long userId) {
-        logger.info("잔액 조회 요청: 사용자 ID={}", userId);
         try {
             Double balance = userFacade.getBalance(userId);
             BalanceResponse response = new BalanceResponse(balance);
-            logger.info("잔액 조회 성공: 사용자 ID={}, 잔액={}", userId, balance);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (NoSuchElementException e) {
-            logger.error("잔액 조회 실패: 사용자 ID={}, 오류 메시지={}", userId, e.getMessage());
             return new ResponseEntity<>(new ErrorResponse("401", "접근이 유효하지 않습니다."), HttpStatus.NOT_FOUND);
         }
     }
@@ -70,23 +66,18 @@ public class UserController {
             }
     )
     public ResponseEntity<?> chargeBalance(@RequestBody ChargeRequest request) {
-        logger.info("잔액 충전 요청: 사용자 ID={}, 충전 금액={}", request.getUserId(), request.getAmount());
 
         if (request.getAmount() == null || request.getAmount() <= 0) {
-            logger.error("잔액 충전 실패: 사용자 ID={}, 유효하지 않은 금액={}", request.getUserId(), request.getAmount());
             return new ResponseEntity<>(new ErrorResponse("400", "값이 유효하지 않습니다. 관리자에게 문의해주세요."), HttpStatus.BAD_REQUEST);
         }
 
         try {
             Double newBalance = userFacade.chargePoint(request.getUserId(), request.getAmount());
             ChargeResponse response = new ChargeResponse(newBalance);
-            logger.info("잔액 충전 성공: 사용자 ID={}, 충전 후 잔액={}", request.getUserId(), newBalance);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (NoSuchElementException e) {
-            logger.error("잔액 충전 실패: 사용자 ID={}, 오류 메시지={}", request.getUserId(), e.getMessage());
             return new ResponseEntity<>(new ErrorResponse("401", "접근이 유효하지 않습니다."), HttpStatus.NOT_FOUND);
         } catch (RuntimeException e) {
-            logger.error("서버 오류로 인한 잔액 충전 실패: 사용자 ID={}, 오류 메시지={}", request.getUserId(), e.getMessage());
             return new ResponseEntity<>(new ErrorResponse("500", "서버 오류로 인해 잔액 충전에 실패했습니다."), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

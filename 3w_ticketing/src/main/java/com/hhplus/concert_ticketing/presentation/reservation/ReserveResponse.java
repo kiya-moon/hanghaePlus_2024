@@ -12,5 +12,5 @@ import lombok.Setter;
 public class ReserveResponse {
     private String result;
     private String message;
-    private ReserveData data;
+    private ReserveDto reserveDto;
 }

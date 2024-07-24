@@ -17,7 +17,7 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-class ConcertServiceTest {
+class ConcertDtoServiceTest {
 
     @Mock
     private ConcertRepository concertRepository;

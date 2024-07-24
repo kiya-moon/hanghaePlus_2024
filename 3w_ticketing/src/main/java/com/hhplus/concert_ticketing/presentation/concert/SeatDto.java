@@ -9,7 +9,17 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Concert {
+public class SeatDto {
     private Long id;
-    private String name;
+    private Long concertOptionId;
+    private String seatNumber;
+    private String status;
+    private Double price;
 }
+
+
+
+
+
+
+

@@ -5,21 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Timestamp;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Seat {
+public class ConcertOptionDto {
     private Long id;
-    private Long concertOptionId;
-    private String seatNumber;
-    private String status;
-    private Double price;
+    private Long concertId;
+    private Timestamp concertDate;
 }
-
-
-
-
-
-
-

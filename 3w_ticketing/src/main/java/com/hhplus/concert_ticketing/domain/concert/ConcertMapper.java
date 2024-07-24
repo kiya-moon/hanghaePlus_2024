@@ -1,25 +1,25 @@
 package com.hhplus.concert_ticketing.domain.concert;
 
-import com.hhplus.concert_ticketing.presentation.concert.Concert;
-import com.hhplus.concert_ticketing.presentation.concert.ConcertOption;
-import com.hhplus.concert_ticketing.presentation.concert.Seat;
+import com.hhplus.concert_ticketing.presentation.concert.ConcertDto;
+import com.hhplus.concert_ticketing.presentation.concert.ConcertOptionDto;
+import com.hhplus.concert_ticketing.presentation.concert.SeatDto;
 
 public class ConcertMapper {
-    public static Concert toDTO(ConcertEntity entity) {
-        Concert dto = new Concert();
+    public static ConcertDto toDTO(ConcertEntity entity) {
+        ConcertDto dto = new ConcertDto();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
         return dto;
     }
-    public static ConcertOption toDTO(ConcertOptionEntity entity) {
-        ConcertOption dto = new ConcertOption();
+    public static ConcertOptionDto toDTO(ConcertOptionEntity entity) {
+        ConcertOptionDto dto = new ConcertOptionDto();
         dto.setId(entity.getId());
         dto.setConcertId(entity.getConcertId());
         dto.setConcertDate(entity.getConcertDate());
         return dto;
     }
 
-    public static ConcertOptionEntity toEntity(ConcertOption dto) {
+    public static ConcertOptionEntity toEntity(ConcertOptionDto dto) {
         ConcertOptionEntity entity = new ConcertOptionEntity();
         entity.setId(dto.getId());
         entity.setConcertId(dto.getConcertId());
@@ -27,8 +27,8 @@ public class ConcertMapper {
         return entity;
     }
 
-    public static Seat toDTO(SeatEntity entity) {
-        Seat dto = new Seat();
+    public static SeatDto toDTO(SeatEntity entity) {
+        SeatDto dto = new SeatDto();
         dto.setId(entity.getId());
         dto.setConcertOptionId(entity.getConcertOptionId());
         dto.setSeatNumber(entity.getSeatNumber());
@@ -36,7 +36,7 @@ public class ConcertMapper {
         return dto;
     }
 
-    public static SeatEntity toEntity(Seat dto) {
+    public static SeatEntity toEntity(SeatDto dto) {
         SeatEntity entity = new SeatEntity();
         entity.setId(dto.getId());
         entity.setConcertOptionId(dto.getConcertOptionId());

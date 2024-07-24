@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-class ConcertIntegrationTest {
+class ConcertDtoIntegrationTest {
 
     @Autowired
     private ConcertController concertController;
@@ -38,14 +38,14 @@ class ConcertIntegrationTest {
     @Test
     void getConcerts_성공() throws Exception {
         // given
-        List<Concert> concerts = List.of(
-                new Concert(1L, "아이유 콘서트"),
-                new Concert(2L, "비투비 콘서트")
+        List<ConcertDto> concertDtos = List.of(
+                new ConcertDto(1L, "아이유 콘서트"),
+                new ConcertDto(2L, "비투비 콘서트")
         );
-        ConcertListResponse response = new ConcertListResponse(concerts);
+        ConcertListResponse response = new ConcertListResponse(concertDtos);
 
         // Mock the ConcertFacade to return predefined values
-        when(concertFacade.getConcerts()).thenReturn(concerts);
+        when(concertFacade.getConcerts()).thenReturn(concertDtos);
 
         // when
         ResponseEntity<?> result = concertController.getConcerts();
@@ -73,9 +73,9 @@ class ConcertIntegrationTest {
         // given
         Long concertId = 1L;
         String token = "valid-token";
-        List<ConcertOption> options = List.of(
-                new ConcertOption(1L, concertId, Timestamp.valueOf("2024-07-15 00:00:00")),
-                new ConcertOption(2L, concertId, Timestamp.valueOf("2024-07-16 00:00:00"))
+        List<ConcertOptionDto> options = List.of(
+                new ConcertOptionDto(1L, concertId, Timestamp.valueOf("2024-07-15 00:00:00")),
+                new ConcertOptionDto(2L, concertId, Timestamp.valueOf("2024-07-16 00:00:00"))
         );
         AvailableDatesResponse response = new AvailableDatesResponse(options);
 
@@ -113,14 +113,14 @@ class ConcertIntegrationTest {
         // given
         Long concertOptionId = 1L;
         String token = "valid-token";
-        List<Seat> seats = List.of(
-                new Seat(1L, concertOptionId, "1", "UNLOCKED", 150000D),
-                new Seat(2L, concertOptionId, "2", "LOCKED", 120000D)
+        List<SeatDto> seatDtos = List.of(
+                new SeatDto(1L, concertOptionId, "1", "UNLOCKED", 150000D),
+                new SeatDto(2L, concertOptionId, "2", "LOCKED", 120000D)
         );
-        AvailableSeatsResponse response = new AvailableSeatsResponse(seats);
+        AvailableSeatsResponse response = new AvailableSeatsResponse(seatDtos);
 
         // Mock the ConcertFacade to return predefined values
-        when(concertFacade.getAvailableSeats(concertOptionId, token)).thenReturn(seats);
+        when(concertFacade.getAvailableSeats(concertOptionId, token)).thenReturn(seatDtos);
 
         // when
         ResponseEntity<?> result = concertController.getAvailableSeats(concertOptionId, token);

@@ -12,5 +12,5 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AvailableDatesResponse {
-    private List<ConcertOption> concertOptions;
+    private List<ConcertOptionDto> concertOptionDtoList;
 }

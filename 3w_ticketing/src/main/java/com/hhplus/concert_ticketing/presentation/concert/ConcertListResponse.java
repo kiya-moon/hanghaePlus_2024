@@ -12,5 +12,5 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ConcertListResponse {
-    private List<Concert> concerts;
+    private List<ConcertDto> concertDtoList;
 }

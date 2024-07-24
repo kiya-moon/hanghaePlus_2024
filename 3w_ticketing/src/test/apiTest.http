@@ -16,7 +16,7 @@ Accept: application/json
 ###
 
 ### 예약 가능 좌석 조회 API 테스트
-GET http://localhost:8080/api/1/available-seats?token=validToken
+GET http://localhost:8080/api/1/available-seatDtos?token=validToken
 Accept: application/json
 
 ###

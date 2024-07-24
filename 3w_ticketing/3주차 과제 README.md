@@ -286,9 +286,9 @@
 
       | 항목           | Type           | 설명                         | 비고 |
       | -------------- | -------------- | ---------------------------- | ---- |
-      | concertOptions | List\<Object\> | 예약 가능 콘서트 옵션 리스트 |      |
+      | concertOptionDtos | List\<Object\> | 예약 가능 콘서트 옵션 리스트 |      |
 
-    - **concertOptions 정보 파라미터**
+    - **concertOptionDtos 정보 파라미터**
 
       | 항목            | Type   | 설명           | 비고 |
       | --------------- | ------ | -------------- | ---- |
@@ -299,7 +299,7 @@
 
       ```json
       {
-          "concertOptions": [
+          "concertOptionDtos": [
               {
                   "concertOptionId": 1,
                   "concertDate": "2024-07-04"
@@ -342,7 +342,7 @@
 - **예약 가능 좌석 조회**
 
   - **Endpoint**
-    - **URL**: `/api/{concertOptionId}/available-seats`
+    - **URL**: `/api/{concertOptionId}/available-seatDtos`
     - **Method**: `GET`
     - **설명**: 특정 날짜에 예약 가능한 좌석을 조회합니다.
 
@@ -364,9 +364,9 @@
 
       | 항목  | Type           | 설명                  | 비고 |
       | ----- | -------------- | --------------------- | ---- |
-      | seats | List\<Object\> | 예약 가능 좌석 리스트 |      |
+      | seatDtos | List\<Object\> | 예약 가능 좌석 리스트 |      |
 
-    - **seats 정보 파라미터**
+    - **seatDtos 정보 파라미터**
 
       | 항목       | Type   | 설명      | 비고 |
       | ---------- | ------ | --------- | ---- |
@@ -378,7 +378,7 @@
 
       ```json
       {
-          "seats": [
+          "seatDtos": [
               {
                   "seatId": 1,
                   "seatNumber": "A1",

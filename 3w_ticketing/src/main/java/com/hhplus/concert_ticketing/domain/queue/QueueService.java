@@ -1,17 +1,11 @@
 package com.hhplus.concert_ticketing.domain.queue;
 
-import com.hhplus.concert_ticketing.presentation.queue.TokenData;
-import com.hhplus.concert_ticketing.presentation.queue.TokenResponse;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 

@@ -2,12 +2,12 @@
 //
 //import com.hhplus.concert_ticketing.presentation.concert.AvailableDatesResponse;
 //import com.hhplus.concert_ticketing.presentation.concert.AvailableSeatsResponse;
-//import com.hhplus.concert_ticketing.presentation.concert.ConcertOption;
-//import com.hhplus.concert_ticketing.presentation.concert.Seat;
+//import com.hhplus.concert_ticketing.presentation.concert.ConcertOptionDto;
+//import com.hhplus.concert_ticketing.presentation.concert.SeatDto;
 //import com.hhplus.concert_ticketing.presentation.reservation.*;
 //import com.hhplus.concert_ticketing.presentation.user.BalanceResponse;
 //import com.hhplus.concert_ticketing.presentation.user.ChargeRequest;
-//import com.hhplus.concert_ticketing.presentation.queue.TokenData;
+//import com.hhplus.concert_ticketing.presentation.queue.TokenDto;
 //import com.hhplus.concert_ticketing.presentation.queue.TokenRequest;
 //import com.hhplus.concert_ticketing.presentation.queue.TokenResponse;
 //import com.hhplus.concert_ticketing.presentation.user.ChargeResponse;
@@ -32,7 +32,7 @@
 //        // token 새로 생성
 //        String token = UUID.randomUUID().toString();
 //
-//        TokenResponse response = new TokenResponse("200", "Success", new TokenData(token, 1, "2024-07-04T12:00:00"));
+//        TokenResponse response = new TokenResponse("200", "Success", new TokenDto(token, 1, "2024-07-04T12:00:00"));
 //        return new ResponseEntity<>(response, HttpStatus.OK);
 //    }
 //
@@ -46,8 +46,8 @@
 //        }
 //
 //        AvailableDatesResponse response = new AvailableDatesResponse(List.of(
-//                new ConcertOption(1L, "2024-07-04"),
-//                new ConcertOption(2L, "2024-07-05")
+//                new ConcertOptionDto(1L, "2024-07-04"),
+//                new ConcertOptionDto(2L, "2024-07-05")
 //        ));
 //        return new ResponseEntity<>(response, HttpStatus.OK);
 //    }
@@ -62,8 +62,8 @@
 //        }
 //
 //        AvailableSeatsResponse response = new AvailableSeatsResponse(List.of(
-//                new Seat(1L, "A1", "열림"),
-//                new Seat(2L, "A2", "열림")
+//                new SeatDto(1L, "A1", "열림"),
+//                new SeatDto(2L, "A2", "열림")
 //        ));
 //        return new ResponseEntity<>(response, HttpStatus.OK);
 //    }
@@ -78,7 +78,7 @@
 //            return new ResponseEntity<>(new ErrorResponse("400", "값이 유효하지 않습니다. 관리자에게 문의해주세요."), HttpStatus.BAD_REQUEST);
 //        }
 //
-//        ReserveResponse response = new ReserveResponse("200", "Success", new ReserveData(123L));
+//        ReserveResponse response = new ReserveResponse("200", "Success", new ReserveDto(123L));
 //        return new ResponseEntity<>(response, HttpStatus.OK);
 //    }
 //
@@ -110,7 +110,7 @@
 //            return new ResponseEntity<>(new ErrorResponse("400", "값이 유효하지 않습니다. 관리자에게 문의해주세요."), HttpStatus.BAD_REQUEST);
 //        }
 //
-//        PayResponse response = new PayResponse("200", "Success", new PayData(456L));
+//        PayResponse response = new PayResponse("200", "Success", new PayDto(456L));
 //        return new ResponseEntity<>(response, HttpStatus.OK);
 //    }
 //}
