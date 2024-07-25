@@ -1,9 +1,6 @@
 package com.hhplus.concert_ticketing.domain.concert;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import static com.hhplus.concert_ticketing.domain.concert.SeatStatus.LOCKED;
@@ -21,10 +18,20 @@ public class SeatEntity {
 
     private Long concertOptionId;
     private String seatNumber;
-    private SeatStatus status;
+    private SeatStatus status = UNLOCKED;
     private Double price;
 
+    @Version
+    private Long version;
+
     public SeatEntity(long l, Long concertOptionId, String number, SeatStatus seatStatus) {
+    }
+
+    public SeatEntity(Long id, Long concertOptionId, String seatNumber, SeatStatus status, Double price) {
+    }
+
+    public static SeatEntity createSeat(Long id, Long concertOptionId, String seatNumber, SeatStatus status, Double price) {
+        return new SeatEntity(id, concertOptionId, seatNumber, status, price);
     }
 
     public void unlockSeat() {

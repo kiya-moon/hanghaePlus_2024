@@ -34,6 +34,13 @@ public class TokenEntity {
         this.expiresAt = expiresAt;
     }
 
+    public TokenEntity(String token, Long userId, TokenStatus status, Timestamp createdAt, Timestamp expiresAt) {
+    }
+
+    public static TokenEntity createToken(String token, Long userId, TokenStatus status, Timestamp createdAt, Timestamp expiresAt) {
+        return new TokenEntity(token, userId, status, createdAt, expiresAt);
+    }
+
     public void activeToken() {
         this.setStatus(ACTIVE);
     }
