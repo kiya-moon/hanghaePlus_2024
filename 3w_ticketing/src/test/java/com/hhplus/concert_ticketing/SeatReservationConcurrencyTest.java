@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
-public class SeatServiceConcurrencyTest {
+public class SeatReservationConcurrencyTest {
 
     private static final Logger logger = LoggerFactory.getLogger(ReservationFacade.class);
 
