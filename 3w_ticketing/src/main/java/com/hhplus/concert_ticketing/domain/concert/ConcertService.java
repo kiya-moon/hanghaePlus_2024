@@ -2,6 +2,7 @@ package com.hhplus.concert_ticketing.domain.concert;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -37,8 +38,9 @@ public class ConcertService {
     }
 
     // 선택한 좌석 조회
+    @Transactional
     public SeatEntity getSeatStatus(Long seatId) {
-        SeatEntity seat = seatRepository.findById(seatId)
+        SeatEntity seat = seatRepository.findByIdWithLock(seatId)
                 .orElseThrow(() -> new IllegalArgumentException("좌석이 유효하지 않습니다."));
         if (seat.getStatus() == SeatStatus.LOCKED) {
             throw new IllegalArgumentException("이미 선택된 좌석입니다.");

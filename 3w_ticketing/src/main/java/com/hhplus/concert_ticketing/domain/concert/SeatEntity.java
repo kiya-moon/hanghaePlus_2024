@@ -27,6 +27,10 @@ public class SeatEntity {
     public SeatEntity(long l, Long concertOptionId, String number, SeatStatus seatStatus) {
     }
 
+    public static SeatEntity createSeat(Long id, Long concertOptionId, String seatNumber, SeatStatus status, Double price) {
+        return new SeatEntity(id, concertOptionId, seatNumber, status, price);
+    }
+
     public void unlockSeat() {
         this.setStatus(UNLOCKED);
     }

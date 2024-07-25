@@ -28,4 +28,9 @@ public class SeatRepositoryImpl implements SeatRepository {
         seatJpaRepository.save(seat);
     }
 
+    @Override
+    public Optional<SeatEntity> findByIdWithLock(Long seatId) {
+        return seatJpaRepository.findByIdWithLock(seatId);
+    }
+
 }
