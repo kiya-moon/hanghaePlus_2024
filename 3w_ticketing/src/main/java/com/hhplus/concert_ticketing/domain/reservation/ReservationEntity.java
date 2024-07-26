@@ -29,6 +29,11 @@ public class ReservationEntity {
     private Double price;
 
     public ReservationEntity(Long userId, Long seatId, Timestamp createdAt, Timestamp expiresAt, Double price) {
+        this.userId = userId;
+        this.seatId = seatId;
+        this.createdAt = createdAt;
+        this.expiresAt = expiresAt;
+        this.price = price;
     }
 
     public static ReservationEntity createReservation(Long userId, Long seatId, Timestamp createdAt, Timestamp expiresAt, Double price) {

@@ -36,8 +36,7 @@ public class ReservationService {
         Timestamp expiresAt = new Timestamp(now.getTime() + 5 * 60 * 1000);
 
         // 서비스단에서 ReservationEntity의 비즈니스 로직 호출
-        ReservationEntity reservation = new ReservationEntity();
-        reservation.createReservation(userId, seatId, now, expiresAt, price);
+        ReservationEntity reservation = ReservationEntity.createReservation(userId, seatId, now, expiresAt, price);
         reservationRepository.save(reservation);
     }
 }
