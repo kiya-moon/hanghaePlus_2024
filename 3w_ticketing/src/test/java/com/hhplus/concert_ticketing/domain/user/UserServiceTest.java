@@ -127,7 +127,7 @@ class UserServiceTest {
         UserEntity userEntity = new UserEntity(userId, initialBalance, 1);  // ID, Balance, Version
 
         when(userRepository.findById(userId)).thenReturn(Optional.of(userEntity));
-        when(userRepository.updateBalanceAndIncrementVersion(userId, newBalance, 1)).thenReturn(1);  // Mock successful usePoint operation
+        when(userRepository.usePoint(userId, newBalance, 1)).thenReturn(1);  // Mock successful usePoint operation
         when(userRepository.findById(userId)).thenReturn(Optional.of(new UserEntity(userId, newBalance, 2)));  // Simulate new balance
 
         // when
@@ -146,7 +146,7 @@ class UserServiceTest {
         UserEntity userEntity = new UserEntity(userId, initialBalance, 1);  // ID, Balance, Version
 
         when(userRepository.findById(userId)).thenReturn(Optional.of(userEntity));
-        when(userRepository.updateBalanceAndIncrementVersion(userId, initialBalance - useAmount, 1)).thenReturn(0);  // Simulate optimistic lock failure
+        when(userRepository.usePoint(userId, initialBalance - useAmount, 1)).thenReturn(0);  // Simulate optimistic lock failure
 
         // when / then
         RuntimeException thrown = assertThrows(RuntimeException.class, () -> {

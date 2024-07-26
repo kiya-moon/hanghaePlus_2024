@@ -28,6 +28,11 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public Optional<UserEntity> findByIdForUpdate(Long userId) {
+        return userJpaRepository.findByIdForUpdate(userId);
+    }
+
+    @Override
     public int chargePoint(Long userId, double amount, int version) {
         logger.info("사용자ID={}에 포인트 충전 요청: 충전액={}, 버전={}", userId, amount, version);
         try {
@@ -51,14 +56,14 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public int updateBalanceAndIncrementVersion(Long userId, Double balance, int version) {
-        logger.info("사용자ID={}의 잔액을 업데이트하고 버전을 증가시킵니다: 새 잔액={}, 새 버전={}", userId, balance, version);
+    public int usePoint(Long userId, Double balance, int version) {
+        logger.info("사용자ID={}의 잔액을 업데이트 요청: 새 잔액={}, 버전={}", userId, balance, version);
         try {
             int updatedRows = userJpaRepository.updateBalanceAndIncrementVersion(userId, balance, version);
-            logger.info("사용자ID={}의 잔액 업데이트 및 버전 증가 완료: 새 잔액={}, 새 버전={}, 업데이트된 행 수={}", userId, balance, version, updatedRows);
+            logger.info("사용자ID={}의 잔액 업데이트 완료: 새 잔액={}, 버전={}, 업데이트된 행 수={}", userId, balance, version, updatedRows);
             return updatedRows;
         } catch (Exception e) {
-            logger.error("사용자ID={}의 잔액 업데이트 및 버전 증가 실패: 새 잔액={}, 새 버전={}, 에러={}", userId, balance, version, e.getMessage());
+            logger.error("사용자ID={}의 잔액 업데이트 실패: 새 잔액={}, 버전={}, 에러={}", userId, balance, version, e.getMessage());
             throw e;
         }
     }

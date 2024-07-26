@@ -61,12 +61,48 @@ public class PaymentIntegrationTest {
     }
 
     @Test
-    public void 결제_포인트_테스트_성공() {
-        Long userId = testUser.getId();
+    public void 결제_포인트_테스트_성공_동시성테스트_추가() {
+        // Long userId = testUser.getId();
+        // Long reservationId = testReservation.getId();
+
+        // // Perform payment
+        // paymentFacade.payInPoint(userId, reservationId);
+
+        // // Verify points deduction
+        // UserEntity updatedUser = userService.getUserInfo(userId);
+        // assertEquals(50.0, updatedUser.getBalance());
+
+        // // Verify reservation completion
+        // ReservationEntity updatedReservation = reservationService.getReservationInfo(reservationId);
+        // assertTrue(updatedReservation.getStatus().equals("COMPLETE"));
+                Long userId = testUser.getId();
         Long reservationId = testReservation.getId();
 
-        // Perform payment
-        paymentFacade.payInPoint(userId, reservationId);
+        ExecutorService executor = Executors.newFixedThreadPool(5);
+        Callable<Void> paymentTask = () -> {
+            try {
+                paymentFacade.payInPoint(userId, reservationId);
+            } catch (Exception e) {
+                logger.error("Payment failed", e);
+            }
+            return null;
+        };
+
+        // 동시에 5개의 결제 요청을 실행
+        Future<Void> future1 = executor.submit(paymentTask);
+        Future<Void> future2 = executor.submit(paymentTask);
+        Future<Void> future3 = executor.submit(paymentTask);
+        Future<Void> future4 = executor.submit(paymentTask);
+        Future<Void> future5 = executor.submit(paymentTask);
+
+        // Wait for all tasks to complete
+        future1.get();
+        future2.get();
+        future3.get();
+        future4.get();
+        future5.get();
+
+        executor.shutdown();
 
         // Verify points deduction
         UserEntity updatedUser = userService.getUserInfo(userId);

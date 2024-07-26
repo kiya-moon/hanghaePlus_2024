@@ -62,20 +62,41 @@ class UserIntegrationTest {
     }
 
     @Test
-    void chargeBalance_성공() {
+    void chargeBalance_비관적락테스트_추가() {
         // given
-        ChargeRequest request = new ChargeRequest(1L, 50.0);
-        Double newBalance = 150.0;
-        ChargeResponse response = new ChargeResponse(newBalance);
+        int numberOfRequests = 5; // 보내는 요청의 수
+        double chargeAmount = 10.0; // 각 요청에서 충전할 포인트 양
+        double finalBalance = testUser.getBalance() + (chargeAmount * numberOfRequests); // 예상 최종 잔액
 
-        when(userFacade.chargePoint(request.getUserId(), request.getAmount())).thenReturn(newBalance);
+        // CountDownLatch를 사용하여 모든 요청이 완료될 때까지 대기
+        CountDownLatch latch = new CountDownLatch(numberOfRequests);
+
+        // ExecutorService를 사용하여 요청을 병렬로 실행
+        ExecutorService executorService = Executors.newFixedThreadPool(numberOfRequests);
 
         // when
-        ResponseEntity<?> result = userController.chargeBalance(request);
+        for (int i = 0; i < numberOfRequests; i++) {
+            executorService.submit(() -> {
+                try {
+                    ChargeRequest request = new ChargeRequest(testUser.getId(), chargeAmount);
+                    userController.chargeBalance(request);
+                } finally {
+                    latch.countDown(); // 요청 완료 시 카운트다운
+                }
+            });
+        }
+
+        // 모든 요청이 완료될 때까지 10초 동안 대기
+        latch.await(10, TimeUnit.SECONDS);
 
         // then
-        assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(result.getBody()).isEqualTo(response);
+        // 최종 잔액이 예상한 값과 일치하는지 검증
+        UserEntity updatedUser = userRepository.findById(testUser.getId())
+                .orElseThrow(() -> new IllegalStateException("사용자 정보가 없습니다."));
+        assertThat(updatedUser.getBalance()).isEqualTo(finalBalance);
+
+        // ExecutorService 종료
+        executorService.shutdown();
     }
 
     @Test
