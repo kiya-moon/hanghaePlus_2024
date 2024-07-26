@@ -1,6 +1,8 @@
 package com.hhplus.concert_ticketing;
 
 import com.hhplus.concert_ticketing.application.UserFacade;
+import com.hhplus.concert_ticketing.domain.user.UserEntity;
+import com.hhplus.concert_ticketing.domain.user.UserRepository;
 import com.hhplus.concert_ticketing.presentation.ErrorResponse;
 import com.hhplus.concert_ticketing.presentation.user.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.NoSuchElementException;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -24,9 +30,16 @@ class UserIntegrationTest {
     @Autowired
     private UserFacade userFacade;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    private UserEntity testUser;
+
     @BeforeEach
     void setUp() {
-        // Initialize necessary configurations or objects if needed
+        // 유저 생성
+        testUser = UserEntity.createUser(1L, 100.0);
+        userRepository.save(testUser);
     }
 
     @Test
@@ -62,7 +75,7 @@ class UserIntegrationTest {
     }
 
     @Test
-    void chargeBalance_비관적락테스트_추가() {
+    void chargeBalance_비관적락테스트_추가() throws InterruptedException {
         // given
         int numberOfRequests = 5; // 보내는 요청의 수
         double chargeAmount = 10.0; // 각 요청에서 충전할 포인트 양

@@ -59,12 +59,12 @@ public class UserService {
 
         return getUserInfo(userId).getBalance();
     }
-    }
+
 
     // 포인트 사용
     @Transactional
     public Double usePoint(Long userId, Double price) {
-        UserEntity userEntity = getUserInfo(userId);
+        UserEntity userEntity = userRepository.getUserInfo(userId);
         userEntity.decreaseBalance(price);
 
         int updatedRows = userRepository.usePoint(userId, userEntity.getBalance(), userEntity.getVersion());
@@ -74,5 +74,4 @@ public class UserService {
 
         return getUserInfo(userId).getBalance();
     }
-
 }

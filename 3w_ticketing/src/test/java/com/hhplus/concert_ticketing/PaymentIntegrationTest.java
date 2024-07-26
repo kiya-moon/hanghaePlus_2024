@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.sql.Timestamp;
+import java.util.concurrent.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -61,7 +62,7 @@ public class PaymentIntegrationTest {
     }
 
     @Test
-    public void 결제_포인트_테스트_성공_동시성테스트_추가() {
+    public void 결제_포인트_테스트_성공_동시성테스트_추가() throws ExecutionException, InterruptedException {
         // Long userId = testUser.getId();
         // Long reservationId = testReservation.getId();
 

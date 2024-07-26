@@ -33,14 +33,14 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public int chargePoint(Long userId, double amount, int version) {
-        logger.info("사용자ID={}에 포인트 충전 요청: 충전액={}, 버전={}", userId, amount, version);
+    public int chargePoint(Long userId, double amount) {
+        logger.info("사용자ID={}에 포인트 충전 요청: 충전액={}", userId, amount);
         try {
-            int updatedRows = userJpaRepository.chargePoint(userId, amount, version);
+            int updatedRows = userJpaRepository.chargePoint(userId, amount);
             logger.info("사용자ID={}에 포인트 충전 완료: 충전액={}, 업데이트된 행 수={}", userId, amount, updatedRows);
             return updatedRows;
         } catch (Exception e) {
-            logger.error("사용자ID={}에 포인트 충전 실패: 충전액={}, 버전={}, 에러={}", userId, amount, version, e.getMessage());
+            logger.error("사용자ID={}에 포인트 충전 실패: 충전액={}, 에러={}", userId, amount, e.getMessage());
             throw e;
         }
     }
@@ -59,7 +59,7 @@ public class UserRepositoryImpl implements UserRepository {
     public int usePoint(Long userId, Double balance, int version) {
         logger.info("사용자ID={}의 잔액을 업데이트 요청: 새 잔액={}, 버전={}", userId, balance, version);
         try {
-            int updatedRows = userJpaRepository.updateBalanceAndIncrementVersion(userId, balance, version);
+            int updatedRows = userJpaRepository.usePoint(userId, balance, version);
             logger.info("사용자ID={}의 잔액 업데이트 완료: 새 잔액={}, 버전={}, 업데이트된 행 수={}", userId, balance, version, updatedRows);
             return updatedRows;
         } catch (Exception e) {
@@ -67,4 +67,11 @@ public class UserRepositoryImpl implements UserRepository {
             throw e;
         }
     }
+
+    @Override
+    public UserEntity getUserInfo(Long userId) {
+        return userJpaRepository.findById(userId)
+                .orElseThrow(() -> new IllegalStateException("사용자 정보가 없습니다."));
+    }
+
 }
