@@ -126,3 +126,4 @@
 /1w-tdd/build/classes/java/main/io/hhplus/tdd/point/dto/UserPointDTO.class
 /1w-tdd/build/classes/java/main/io/hhplus/tdd/database/UserPointTable.class
 /1w-tdd/.gradle/buildOutputCleanup/buildOutputCleanup.lock
+**/workspace.xml
