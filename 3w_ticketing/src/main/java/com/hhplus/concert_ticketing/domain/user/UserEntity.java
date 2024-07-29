@@ -6,7 +6,7 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class UserEntity {
     @Id
@@ -17,6 +17,15 @@ public class UserEntity {
 
     @Version
     private int version;  // 낙관적 락을 위한 버전 필드 추가
+
+    public UserEntity(Long id, Double balance) {
+        this.id = id;
+        this.balance = balance;
+    }
+
+    public static UserEntity createUser(Long id, Double balance) {
+        return new UserEntity(id, balance);
+    }
 
     public void decreaseBalance(Double price) {
         if (balance < price) {

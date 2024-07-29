@@ -28,12 +28,16 @@ public class ReservationEntity {
     private Timestamp expiresAt;
     private Double price;
 
-    public void createReservation(Long userId, Long seatId, Timestamp createdAt, Timestamp expiresAt, Double price) {
-        this.setUserId(userId);
-        this.setSeatId(seatId);
-        this.setCreatedAt(createdAt);
-        this.setExpiresAt(expiresAt);
-        this.setPrice(price);
+    public ReservationEntity(Long userId, Long seatId, Timestamp createdAt, Timestamp expiresAt, Double price) {
+        this.userId = userId;
+        this.seatId = seatId;
+        this.createdAt = createdAt;
+        this.expiresAt = expiresAt;
+        this.price = price;
+    }
+
+    public static ReservationEntity createReservation(Long userId, Long seatId, Timestamp createdAt, Timestamp expiresAt, Double price) {
+        return new ReservationEntity(userId, seatId, createdAt, expiresAt, price);
     }
 
     public void expireReservation() {

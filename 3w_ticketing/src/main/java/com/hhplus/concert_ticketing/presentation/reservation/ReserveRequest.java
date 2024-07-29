@@ -14,7 +14,4 @@ public class ReserveRequest {
     private Long concertOptionId;
     private Long seatId;
     private Long userId;
-
-    public ReserveRequest(String token, long concertOptionId, long seatId, long userId) {
-    }
 }
