@@ -47,7 +47,7 @@ public class PaymentIntegrationTest {
     @BeforeEach
     public void setUp() {
         // 유저 생성
-        testUser = UserEntity.createUser(1L, 100.0);
+        testUser = UserEntity.createUser(1L, 100000);
         userRepository.save(testUser);
 
         // 예약 생성
@@ -56,7 +56,7 @@ public class PaymentIntegrationTest {
         logger.info("userId : {} ", testUser.getId());
         logger.info("now : {} ", now);
         logger.info("expiresAt : {} ", expiresAt);
-        testReservation = ReservationEntity.createReservation(testUser.getId(), seatId, now, expiresAt, 50.0);
+        testReservation = ReservationEntity.createReservation(testUser.getId(), seatId, now, expiresAt, 50000);
         reservationRepository.save(testReservation);
         logger.info("testReservation: {}, {}, {}", testReservation.getId(), testReservation.getCreatedAt(), testReservation.getExpiresAt());
     }
@@ -71,7 +71,7 @@ public class PaymentIntegrationTest {
 
         // // Verify points deduction
         // UserEntity updatedUser = userService.getUserInfo(userId);
-        // assertEquals(50.0, updatedUser.getBalance());
+        // assertEquals(50000, updatedUser.getBalance());
 
         // // Verify reservation completion
         // ReservationEntity updatedReservation = reservationService.getReservationInfo(reservationId);
@@ -107,7 +107,7 @@ public class PaymentIntegrationTest {
 
         // Verify points deduction
         UserEntity updatedUser = userService.getUserInfo(userId);
-        assertEquals(50.0, updatedUser.getBalance());
+        assertEquals(50000, updatedUser.getBalance());
 
         // Verify reservation completion
         ReservationEntity updatedReservation = reservationService.getReservationInfo(reservationId);

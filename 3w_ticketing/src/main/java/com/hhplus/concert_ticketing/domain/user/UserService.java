@@ -26,11 +26,11 @@ public class UserService {
     // 두 개의 환경에서 접속하거나 사용자의 실수, 서버 문제 등의 경우를 대비해 낙관적락 적용
     // 또한 충전 결과를 검증하기 위해 새로운 balance 값을 다시 조회하여 검증
     @Transactional
-    public Double chargePoint(Long userId, Double point) {
+    public int chargePoint(Long userId, int point) {
         // 낙관적락(기존 구현)
         // UserEntity userEntity = getUserInfo(userId);
-        // double balance = userEntity.getBalance();
-        // double chargeResult = balance + point;
+        // int balance = userEntity.getBalance();
+        // int chargeResult = balance + point;
 
         // // chargePoint 메서드 호출 시 낙관적 락을 위해 version 필드를 사용
         // int updatedRows = userRepository.chargePoint(userId, chargeResult, userEntity.getVersion());
@@ -39,7 +39,7 @@ public class UserService {
         // }
 
         // // 새로운 balance 값을 다시 조회하여 검증
-        // Double newBalance = getUserInfo(userId).getBalance();
+        // int newBalance = getUserInfo(userId).getBalance();
         // if (Math.abs(chargeResult - newBalance) > 0.01) {   // 소수점 오차 고려
         //     throw new RuntimeException("충전 결과 불일치. 예상 잔액: " + chargeResult + ", 실제 잔액: " + newBalance);
         // }
@@ -50,7 +50,7 @@ public class UserService {
         UserEntity userEntity = userRepository.findByIdForUpdate(userId)
         .orElseThrow(() -> new IllegalStateException("사용자 정보가 없습니다."));
 
-        double chargeResult = userEntity.getBalance() + point;
+        int chargeResult = userEntity.getBalance() + point;
 
         int updatedRows = userRepository.chargePoint(userId, chargeResult);
         if (updatedRows == 0) {
@@ -63,7 +63,7 @@ public class UserService {
 
     // 포인트 사용
     @Transactional
-    public Double usePoint(Long userId, Double price) {
+    public int usePoint(Long userId, int price) {
         UserEntity userEntity = userRepository.getUserInfo(userId);
         userEntity.decreaseBalance(price);
 

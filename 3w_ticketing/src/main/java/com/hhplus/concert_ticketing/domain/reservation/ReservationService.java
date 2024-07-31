@@ -31,7 +31,7 @@ public class ReservationService {
     }
 
     // 예약 저장
-    public void saveReservation(Long userId, Long seatId, Double price) {
+    public void saveReservation(Long userId, Long seatId, int price) {
         Timestamp now = new Timestamp(System.currentTimeMillis());
         Timestamp expiresAt = new Timestamp(now.getTime() + 5 * 60 * 1000);
 

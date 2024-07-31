@@ -40,7 +40,7 @@ public class UserController {
     )
     public ResponseEntity<?> getBalance(@RequestParam Long userId) {
         try {
-            Double balance = userFacade.getBalance(userId);
+            int balance = userFacade.getBalance(userId);
             BalanceResponse response = new BalanceResponse(balance);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (NoSuchElementException e) {
@@ -70,13 +70,13 @@ public class UserController {
     )
     public ResponseEntity<?> chargeBalance(@RequestBody ChargeRequest request) {
 
-        if (request.getAmount() == null || request.getAmount() <= 0) {
+        if (request.getAmount() <= 0) {
             logger.error("잔액 충전 실패: 사용자 ID={}, 유효하지 않은 금액={}", request.getUserId(), request.getAmount());
             return new ResponseEntity<>(new ErrorResponse("400", "값이 유효하지 않습니다. 관리자에게 문의해주세요."), HttpStatus.BAD_REQUEST);
         }
 
         try {
-            Double newBalance = userFacade.chargePoint(request.getUserId(), request.getAmount());
+            int newBalance = userFacade.chargePoint(request.getUserId(), request.getAmount());
             ChargeResponse response = new ChargeResponse(newBalance);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (NoSuchElementException e) {

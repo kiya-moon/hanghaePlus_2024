@@ -13,6 +13,11 @@ public class ConcertRepositoryImpl implements ConcertRepository {
     private final ConcertJpaRepository concertJpaRepository;
 
     @Override
+    public void save(ConcertEntity concertEntity) {
+        concertJpaRepository.save(concertEntity);
+    }
+
+    @Override
     public List<ConcertEntity> findAll() {
         return concertJpaRepository.findAll();
     }

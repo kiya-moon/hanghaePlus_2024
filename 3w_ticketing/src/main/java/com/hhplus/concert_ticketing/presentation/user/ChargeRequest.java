@@ -11,5 +11,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ChargeRequest {
     private Long userId;
-    private Double amount;
+    private int amount;
 }

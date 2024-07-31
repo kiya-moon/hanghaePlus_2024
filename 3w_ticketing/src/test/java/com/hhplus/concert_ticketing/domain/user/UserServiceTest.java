@@ -28,9 +28,9 @@ class UserServiceTest {
     void 포인트_충전_성공_테스트() {
         // given
         Long userId = 1L;
-        Double initialBalance = 100.0;
-        Double chargeAmount = 50.0;
-        Double newBalance = initialBalance + chargeAmount;
+        int initialBalance = 100;
+        int chargeAmount = 50;
+        int newBalance = initialBalance + chargeAmount;
         UserEntity userEntity = new UserEntity(userId, initialBalance, 1);  // ID, Balance, Version
 
         when(userRepository.findById(userId)).thenReturn(Optional.of(userEntity));
@@ -38,7 +38,7 @@ class UserServiceTest {
         when(userRepository.findById(userId)).thenReturn(Optional.of(new UserEntity(userId, newBalance, 2)));  // Simulate new balance
 
         // when
-        Double result = userService.chargePoint(userId, chargeAmount);
+        int result = userService.chargePoint(userId, chargeAmount);
 
         // then
         assertEquals(newBalance, result);  // Check the charge result
@@ -48,8 +48,8 @@ class UserServiceTest {
     void 포인트_충전_실패_테스트_낙관적_락_실패() {
         // given
         Long userId = 1L;
-        Double initialBalance = 100.0;
-        Double chargeAmount = 50.0;
+        int initialBalance = 100;
+        int chargeAmount = 50;
         UserEntity userEntity = new UserEntity(userId, initialBalance, 1);  // ID, Balance, Version
 
         when(userRepository.findById(userId)).thenReturn(Optional.of(userEntity));
@@ -67,9 +67,9 @@ class UserServiceTest {
     void 포인트_충전_실패_테스트_잔액_불일치() {
         // given
         Long userId = 1L;
-        Double initialBalance = 100.0;
-        Double chargeAmount = 50.0;
-        Double incorrectBalance = 100.0;  // Incorrect balance to simulate failure
+        int initialBalance = 100;
+        int chargeAmount = 50;
+        int incorrectBalance = 100;  // Incorrect balance to simulate failure
         UserEntity userEntity = new UserEntity(userId, initialBalance, 1);  // ID, Balance, Version
 
         when(userRepository.findById(userId)).thenReturn(Optional.of(userEntity));
@@ -81,14 +81,14 @@ class UserServiceTest {
             userService.chargePoint(userId, chargeAmount);
         });
 
-        assertEquals("충전 결과 불일치. 예상 잔액: 150.0, 실제 잔액: 100.0", thrown.getMessage());
+        assertEquals("충전 결과 불일치. 예상 잔액: 150, 실제 잔액: 100", thrown.getMessage());
     }
 
     @Test
     void 사용자_정보_조회_성공_테스트() {
         // given
         Long userId = 1L;
-        Double balance = 100.0;
+        int balance = 100;
         UserEntity userEntity = new UserEntity(userId, balance, 1);  // ID, Balance, Version
 
         when(userRepository.findById(userId)).thenReturn(Optional.of(userEntity));
@@ -121,9 +121,9 @@ class UserServiceTest {
     void 포인트_사용_성공_테스트() {
         // given
         Long userId = 1L;
-        Double initialBalance = 100.0;
-        Double useAmount = 50.0;
-        Double newBalance = initialBalance - useAmount;
+        int initialBalance = 100;
+        int useAmount = 50;
+        int newBalance = initialBalance - useAmount;
         UserEntity userEntity = new UserEntity(userId, initialBalance, 1);  // ID, Balance, Version
 
         when(userRepository.findById(userId)).thenReturn(Optional.of(userEntity));
@@ -131,7 +131,7 @@ class UserServiceTest {
         when(userRepository.findById(userId)).thenReturn(Optional.of(new UserEntity(userId, newBalance, 2)));  // Simulate new balance
 
         // when
-        Double result = userService.usePoint(userId, useAmount);
+        int result = userService.usePoint(userId, useAmount);
 
         // then
         assertEquals(newBalance, result);  // Check the used point result
@@ -141,8 +141,8 @@ class UserServiceTest {
     void 포인트_사용_실패_테스트_낙관적_락_실패() {
         // given
         Long userId = 1L;
-        Double initialBalance = 100.0;
-        Double useAmount = 50.0;
+        int initialBalance = 100;
+        int useAmount = 50;
         UserEntity userEntity = new UserEntity(userId, initialBalance, 1);  // ID, Balance, Version
 
         when(userRepository.findById(userId)).thenReturn(Optional.of(userEntity));

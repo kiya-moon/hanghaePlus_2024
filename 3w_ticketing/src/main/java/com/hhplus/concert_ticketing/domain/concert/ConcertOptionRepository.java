@@ -9,4 +9,6 @@ import java.util.Optional;
 
 public interface ConcertOptionRepository {
     Optional<List<ConcertOptionEntity>> findByConcertId(Long concertId);
+
+    void save(ConcertOptionEntity concertOptionEntity);
 }

@@ -26,9 +26,9 @@ public class ReservationEntity {
     private String status;
     private Timestamp createdAt;
     private Timestamp expiresAt;
-    private Double price;
+    private int price;
 
-    public ReservationEntity(Long userId, Long seatId, Timestamp createdAt, Timestamp expiresAt, Double price) {
+    public ReservationEntity(Long userId, Long seatId, Timestamp createdAt, Timestamp expiresAt, int price) {
         this.userId = userId;
         this.seatId = seatId;
         this.createdAt = createdAt;
@@ -36,7 +36,7 @@ public class ReservationEntity {
         this.price = price;
     }
 
-    public static ReservationEntity createReservation(Long userId, Long seatId, Timestamp createdAt, Timestamp expiresAt, Double price) {
+    public static ReservationEntity createReservation(Long userId, Long seatId, Timestamp createdAt, Timestamp expiresAt, int price) {
         return new ReservationEntity(userId, seatId, createdAt, expiresAt, price);
     }
 

@@ -38,7 +38,7 @@ class UserIntegrationTest {
     @BeforeEach
     void setUp() {
         // 유저 생성
-        testUser = UserEntity.createUser(1L, 100.0);
+        testUser = UserEntity.createUser(1L, 200000);
         userRepository.save(testUser);
     }
 
@@ -46,7 +46,7 @@ class UserIntegrationTest {
     void getBalance_성공() {
         // given
         Long userId = 1L;
-        Double balance = 100.0;
+        int balance = 100;
         BalanceResponse response = new BalanceResponse(balance);
 
         when(userFacade.getBalance(userId)).thenReturn(balance);
@@ -78,8 +78,8 @@ class UserIntegrationTest {
     void chargeBalance_비관적락테스트_추가() throws InterruptedException {
         // given
         int numberOfRequests = 5; // 보내는 요청의 수
-        double chargeAmount = 10.0; // 각 요청에서 충전할 포인트 양
-        double finalBalance = testUser.getBalance() + (chargeAmount * numberOfRequests); // 예상 최종 잔액
+        int chargeAmount = 10; // 각 요청에서 충전할 포인트 양
+        int finalBalance = testUser.getBalance() + (chargeAmount * numberOfRequests); // 예상 최종 잔액
 
         // CountDownLatch를 사용하여 모든 요청이 완료될 때까지 대기
         CountDownLatch latch = new CountDownLatch(numberOfRequests);
@@ -115,7 +115,7 @@ class UserIntegrationTest {
     @Test
     void chargeBalance_유효하지않은값() {
         // given
-        ChargeRequest request = new ChargeRequest(1L, -50.0);
+        ChargeRequest request = new ChargeRequest(1L, -5000);
 
         // when
         ResponseEntity<?> result = userController.chargeBalance(request);
@@ -128,7 +128,7 @@ class UserIntegrationTest {
     @Test
     void chargeBalance_실패() {
         // given
-        ChargeRequest request = new ChargeRequest(1L, 50.0);
+        ChargeRequest request = new ChargeRequest(1L, 50000);
 
         when(userFacade.chargePoint(request.getUserId(), request.getAmount()))
                 .thenThrow(new NoSuchElementException("유저가 존재하지 않습니다."));
@@ -144,7 +144,7 @@ class UserIntegrationTest {
     @Test
     void chargeBalance_서버오류() {
         // given
-        ChargeRequest request = new ChargeRequest(1L, 50.0);
+        ChargeRequest request = new ChargeRequest(1L, 50000);
 
         when(userFacade.chargePoint(request.getUserId(), request.getAmount()))
                 .thenThrow(new RuntimeException("서버 오류"));

@@ -43,7 +43,7 @@ public class PaymentFacade {
             throw e;
         }
 
-        double price = reservation.getPrice();
+        int price = reservation.getPrice();
 
         // 포인트 사용
         try {

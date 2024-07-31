@@ -20,11 +20,11 @@ public class UserServiceConcurrencyTest {
     @Test
     public void testUsePointConcurrency() throws InterruptedException {
         Long userId = 1L;
-        userRepository.save(new UserEntity(userId, 100.0));
+        userRepository.save(new UserEntity(userId, 10000));
 
         ExecutorService executorService = Executors.newFixedThreadPool(2);
-        executorService.submit(() -> userService.usePoint(userId, 50.0));
-        executorService.submit(() -> userService.usePoint(userId, 50.0));
+        executorService.submit(() -> userService.usePoint(userId, 5000));
+        executorService.submit(() -> userService.usePoint(userId, 5000));
 
         executorService.shutdown();
         executorService.awaitTermination(1, TimeUnit.MINUTES);
