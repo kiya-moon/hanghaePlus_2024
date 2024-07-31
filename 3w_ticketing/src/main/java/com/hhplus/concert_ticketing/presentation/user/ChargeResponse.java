@@ -10,5 +10,5 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChargeResponse {
-    private Double balance;
+    private int balance;
 }

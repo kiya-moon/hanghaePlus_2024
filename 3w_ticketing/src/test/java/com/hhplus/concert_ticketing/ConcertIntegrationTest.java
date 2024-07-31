@@ -114,8 +114,8 @@ class ConcertIntegrationTest {
         Long concertOptionId = 1L;
         String token = "valid-token";
         List<SeatDto> seatDtos = List.of(
-                new SeatDto(1L, concertOptionId, "1", "UNLOCKED", 150000D),
-                new SeatDto(2L, concertOptionId, "2", "LOCKED", 120000D)
+                new SeatDto(1L, concertOptionId, "1", "UNLOCKED", 150000),
+                new SeatDto(2L, concertOptionId, "2", "LOCKED", 120000)
         );
         AvailableSeatsResponse response = new AvailableSeatsResponse(seatDtos);
 

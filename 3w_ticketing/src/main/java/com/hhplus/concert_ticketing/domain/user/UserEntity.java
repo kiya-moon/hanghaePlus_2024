@@ -13,21 +13,21 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Double balance;
+    private int balance;
 
     @Version
     private int version;  // 낙관적 락을 위한 버전 필드 추가
 
-    public UserEntity(Long id, Double balance) {
+    public UserEntity(Long id, int balance) {
         this.id = id;
         this.balance = balance;
     }
 
-    public static UserEntity createUser(Long id, Double balance) {
+    public static UserEntity createUser(Long id, int balance) {
         return new UserEntity(id, balance);
     }
 
-    public void decreaseBalance(Double price) {
+    public void decreaseBalance(int price) {
         if (balance < price) {
             throw new IllegalStateException("잔액이 부족합니다.");
         }

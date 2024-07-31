@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 public interface ConcertRepository {
+    void save(ConcertEntity concertEntity);
     List<ConcertEntity> findAll();
 }

@@ -521,10 +521,10 @@
     - **Request**
       - **Body**:
   
-        | 항목   | Type   | 설명      | 비고 |
-        | ------ | ------ | --------- | ---- |
-        | userId | Long   | 유저 ID   |      |
-        | amount | Double | 충전 금액 |      |
+        | 항목   | Type | 설명      | 비고 |
+        | ------ |  | --------- | ---- |
+        | userId | Long | 유저 ID   |      |
+        | amount | int | 충전 금액 |      |
   
     - **Response**
       - **HTTP Status Codes**: 
@@ -534,15 +534,15 @@
   
       - **Body**:
   
-        | 항목    | Type   | 설명      | 비고 |
-        | ------- | ------ | --------- | ---- |
-        | balance | Double | 현재 잔액 |      |
+        | 항목    | Type | 설명      | 비고 |
+        | ------- |  | --------- | ---- |
+        | balance | int | 현재 잔액 |      |
   
       - **응답 예시**
   
         ```json
         {
-            "balance": 5000.00
+            "balance": 5000
         }
         ```
   
@@ -590,15 +590,15 @@
   
       - **Body**:
   
-        | 항목    | Type   | 설명      | 비고 |
-        | ------- | ------ | --------- | ---- |
-        | balance | Double | 현재 잔액 |      |
+        | 항목    | Type | 설명      | 비고 |
+        | ------- |  | --------- | ---- |
+        | balance | int | 현재 잔액 |      |
   
       - **응답 예시**
   
         ```json
         {
-            "balance": 5000.00
+            "balance": 5000
         }
         ```
   
@@ -634,11 +634,11 @@
   - **Request**
     - **Body**:
   
-      | 항목          | Type   | 설명      | 비고 |
-      | ------------- | ------ | --------- | ---- |
+      | 항목          | Type | 설명      | 비고 |
+      | ------------- |  | --------- | ---- |
       | token         | String | 유저 토큰 |      |
-      | reservationId | Long   | 예약 ID   |      |
-      | amount        | Double | 결제 금액 |      |
+      | reservationId | Long | 예약 ID   |      |
+      | amount        | int | 결제 금액 |      |
   
   - **Response**
     - **HTTP Status Codes**: 

@@ -17,4 +17,9 @@ public class ConcertOptionRepositoryImpl implements ConcertOptionRepository {
     public Optional<List<ConcertOptionEntity>> findByConcertId(Long concertId) {
         return concertOptionJpaRepository.findByConcertId(concertId);
     }
+
+    @Override
+    public void save(ConcertOptionEntity concertOptionEntity) {
+        concertOptionJpaRepository.save(concertOptionEntity);
+    }
 }

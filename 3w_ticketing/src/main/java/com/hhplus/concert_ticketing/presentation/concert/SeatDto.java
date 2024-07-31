@@ -14,7 +14,7 @@ public class SeatDto {
     private Long concertOptionId;
     private String seatNumber;
     private String status;
-    private Double price;
+    private int price;
 }
 
 

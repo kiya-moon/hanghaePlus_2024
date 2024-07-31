@@ -16,7 +16,7 @@ public class UserEntityTest {
     public void testVersionIncrement() {
         // Create a new user
         UserEntity user = new UserEntity();
-        user.setBalance(100.0);
+        user.setBalance(10000);
         userRepository.save(user);
 
         // Fetch the user and check the version
@@ -24,7 +24,7 @@ public class UserEntityTest {
         assertEquals(0, fetchedUser.getVersion());
 
         // Update the user
-        fetchedUser.setBalance(200.0);
+        fetchedUser.setBalance(20000);
         userRepository.save(fetchedUser);
 
         // Fetch the user again and check the version
