@@ -66,7 +66,7 @@ class ReservationIntegrationTest {
         transactionTemplate.execute(status -> {
             // 유저 10명 생성
             for (int i = 0; i < 10; i++) {
-                UserEntity user = UserEntity.createUser((long) (i + 1), 100.0);
+                UserEntity user = UserEntity.createUser((long) (i + 1), 100000);
                 userRepository.save(user);
                 userIds.add(user.getId());
             }
@@ -79,10 +79,10 @@ class ReservationIntegrationTest {
                 queueRepository.save(token);
             }
 
-            // 좌석 생성
-            SeatEntity seat = SeatEntity.createSeat(1L, 1L, "A1", SeatStatus.UNLOCKED, 50.0);
-            seatRepository.save(seat);
-            seatId = seat.getId();
+//            // 좌석 생성
+//            SeatEntity seat = SeatEntity.createSeat(1L, 1L, "A1", SeatStatus.UNLOCKED, 50.0);
+//            seatRepository.save(seat);
+//            seatId = seat.getId();
             return null;
         });
     }

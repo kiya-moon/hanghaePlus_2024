@@ -64,6 +64,14 @@ public class ReservationFacade {
             // 변경된 좌석 상태 저장 시 버전 증가
             seatRepository.save(seatEntity);
             reservationService.saveReservation(userId, seatId, seatEntity.getPrice());
+
+            // 좌석 예약 성공하면 토큰 만료 처리
+            try {
+                queueService.expireToken(token);
+            } catch (Exception e) {
+                logger.error("토큰 만료 처리 실패: 토큰={}, 에러={}", token, e.getMessage());
+                throw e;
+            }
         // 버전이 다른 사람들은 에러로 처리
         } catch (OptimisticLockingFailureException e) {
             logger.error("좌석 예약 실패: 좌석ID={}, 에러={}", seatId, e.getMessage());
@@ -73,13 +81,6 @@ public class ReservationFacade {
             throw e;
         }
 
-        // 토큰 만료
-        try {
-            queueService.expireToken(token);
-        } catch (Exception e) {
-            logger.error("토큰 만료 처리 실패: 토큰={}, 에러={}", token, e.getMessage());
-            throw e;
-        }
     }
 
     // 예약 상태 관리

@@ -16,7 +16,7 @@ public class UserFacade {
     private final UserService userService;
 
     // 사용자 잔액 조회
-    public Double getBalance(Long userId) {
+    public int getBalance(Long userId) {
         try {
             UserEntity user = userService.getUserInfo(userId);
             return user.getBalance();
@@ -27,7 +27,7 @@ public class UserFacade {
     }
 
     // 사용자 포인트 충전
-    public Double chargePoint(Long userId, Double amount) {
+    public int chargePoint(Long userId, int amount) {
         try {
             return userService.chargePoint(userId, amount);
         } catch (Exception e) {

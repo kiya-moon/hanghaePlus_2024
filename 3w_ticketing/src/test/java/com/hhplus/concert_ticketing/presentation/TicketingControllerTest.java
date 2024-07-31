@@ -63,14 +63,14 @@
 //
 //    @Test
 //    public void testChargeBalance() throws Exception {
-//        ChargeRequest chargeRequest = new ChargeRequest(1L, 5000.00);
+//        ChargeRequest chargeRequest = new ChargeRequest(1L, 5000);
 //
 //        mockMvc.perform(MockMvcRequestBuilders.patch("/api/balance/charge")
 //                        .contentType(MediaType.APPLICATION_JSON)
 //                        .content("{ \"userId\": 1, \"amount\": 5000 }"))
 //                .andDo(print())
 //                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.balance").value(5000.00));
+//                .andExpect(jsonPath("$.balance").value(5000));
 //    }
 //
 //    @Test

@@ -16,9 +16,9 @@ public class UserRepositoryImpl implements UserRepository {
     private final UserJpaRepository userJpaRepository;
 
     @Override
-    public Optional<Double> findBalanceByUserId(Long userId) {
+    public Optional<Integer> findBalanceByUserId(Long userId) {
         logger.info("사용자ID={}의 잔액을 조회합니다.", userId);
-        Optional<Double> balance = userJpaRepository.findBalanceByUserId(userId);
+        Optional<Integer> balance = userJpaRepository.findBalanceByUserId(userId);
         if (balance.isPresent()) {
             logger.info("사용자ID={}의 잔액 조회 결과: {}", userId, balance.get());
         } else {
@@ -33,7 +33,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public int chargePoint(Long userId, double amount) {
+    public int chargePoint(Long userId, int amount) {
         logger.info("사용자ID={}에 포인트 충전 요청: 충전액={}", userId, amount);
         try {
             int updatedRows = userJpaRepository.chargePoint(userId, amount);
@@ -56,7 +56,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public int usePoint(Long userId, Double balance, int version) {
+    public int usePoint(Long userId, int balance, int version) {
         logger.info("사용자ID={}의 잔액을 업데이트 요청: 새 잔액={}, 버전={}", userId, balance, version);
         try {
             int updatedRows = userJpaRepository.usePoint(userId, balance, version);

@@ -50,11 +50,11 @@ public class SeatReservationConcurrencyTest {
 
         transactionTemplate.execute(status -> {
             // 테스트용 사용자, 좌석 생성
-            UserEntity user = UserEntity.createUser(1L, 100.0);
+            UserEntity user = UserEntity.createUser(1L, 100000);
             userRepository.save(user);
             userId = user.getId();
 
-            SeatEntity seat = SeatEntity.createSeat(1L, 1L, "A1", SeatStatus.UNLOCKED, 50.0);
+            SeatEntity seat = new SeatEntity(1L, "A1", SeatStatus.UNLOCKED, 50000);
             seatRepository.save(seat);
             seatId = seat.getId();
             return null;

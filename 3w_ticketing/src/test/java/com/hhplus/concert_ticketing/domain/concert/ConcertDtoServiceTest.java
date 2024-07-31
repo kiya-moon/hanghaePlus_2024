@@ -64,8 +64,8 @@ class ConcertDtoServiceTest {
     void 예약_가능한_날짜_조회_성공() {
         Long concertId = 1L;
         List<ConcertOptionEntity> concertOptions = new ArrayList<>();
-        concertOptions.add(new ConcertOptionEntity(1L, concertId, "2024-07-15", 100.0));
-        concertOptions.add(new ConcertOptionEntity(2L, concertId, "2024-07-16", 150.0));
+        concertOptions.add(new ConcertOptionEntity(concertId, "2024-07-15"));
+        concertOptions.add(new ConcertOptionEntity(concertId, "2024-07-16"));
 
         when(concertOptionRepository.findByConcertId(concertId))
                 .thenReturn(Optional.of(concertOptions));
@@ -93,8 +93,8 @@ class ConcertDtoServiceTest {
     void 좌석_조회_성공() {
         Long concertOptionId = 1L;
         List<SeatEntity> seats = new ArrayList<>();
-        seats.add(new SeatEntity(1L, concertOptionId, "1", UNLOCKED));
-        seats.add(new SeatEntity(2L, concertOptionId, "2", LOCKED));
+        seats.add(new SeatEntity(concertOptionId, "1", UNLOCKED, 120000));
+        seats.add(new SeatEntity(concertOptionId, "2", LOCKED, 120000));
 
         when(seatRepository.findByConcertOptionId(concertOptionId))
                 .thenReturn(Optional.of(seats));
@@ -120,8 +120,8 @@ class ConcertDtoServiceTest {
 
     @Test
     void 선택한_좌석_조회_성공() {
+        SeatEntity seat = new SeatEntity(1L, "1", UNLOCKED, 120000);
         Long seatId = 1L;
-        SeatEntity seat = new SeatEntity(seatId, 1L, "1", UNLOCKED);
 
         when(seatRepository.findById(seatId))
                 .thenReturn(Optional.of(seat));
@@ -147,8 +147,8 @@ class ConcertDtoServiceTest {
 
     @Test
     void 선택한_좌석_조회_실패_좌석_잠금() {
+        SeatEntity seat = new SeatEntity(1L, "1", LOCKED, 120000);
         Long seatId = 1L;
-        SeatEntity seat = new SeatEntity(seatId, 1L, "1", LOCKED);
 
         when(seatRepository.findById(seatId))
                 .thenReturn(Optional.of(seat));

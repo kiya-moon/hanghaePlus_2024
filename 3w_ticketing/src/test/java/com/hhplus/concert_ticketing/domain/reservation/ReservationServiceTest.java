@@ -49,7 +49,7 @@ class ReservationServiceTest {
         when(seat.getStatus()).thenReturn(UNLOCKED);
 
         // when
-        reservationService.saveReservation(1L, 1L, 100.0);
+        reservationService.saveReservation(1L, 1L, 100000);
 
         // then
         verify(seatRepository, times(1)).save(seat);
@@ -69,7 +69,7 @@ class ReservationServiceTest {
 
         // when / then
         IllegalStateException thrown = assertThrows(IllegalStateException.class, () -> {
-            reservationService.saveReservation(1L, 1L, 100.0);
+            reservationService.saveReservation(1L, 1L, 100000);
         });
         assertEquals("이미 선택된 좌석입니다.", thrown.getMessage());
     }
@@ -81,7 +81,7 @@ class ReservationServiceTest {
 
         // when / then
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
-            reservationService.saveReservation(1L, 1L, 100.0);
+            reservationService.saveReservation(1L, 1L, 100000);
         });
         assertEquals("사용자가 존재하지 않습니다.", thrown.getMessage());
     }
@@ -95,7 +95,7 @@ class ReservationServiceTest {
 
         // when / then
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
-            reservationService.saveReservation(1L, 1L, 100.0);
+            reservationService.saveReservation(1L, 1L, 100000);
         });
         assertEquals("좌석이 존재하지 않습니다.", thrown.getMessage());
     }

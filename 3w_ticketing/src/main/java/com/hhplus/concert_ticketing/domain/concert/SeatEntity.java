@@ -11,6 +11,7 @@ import static com.hhplus.concert_ticketing.domain.concert.SeatStatus.UNLOCKED;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@Builder
 public class SeatEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,19 +20,12 @@ public class SeatEntity {
     private Long concertOptionId;
     private String seatNumber;
     private SeatStatus status = UNLOCKED;
-    private Double price;
+    private int price;
 
     @Version
     private Long version;
 
-    public SeatEntity(long l, Long concertOptionId, String number, SeatStatus seatStatus) {
-    }
-
-    public SeatEntity(Long id, Long concertOptionId, String seatNumber, SeatStatus status, Double price) {
-    }
-
-    public static SeatEntity createSeat(Long id, Long concertOptionId, String seatNumber, SeatStatus status, Double price) {
-        return new SeatEntity(id, concertOptionId, seatNumber, status, price);
+    public SeatEntity(Long concertOptionId, String number, SeatStatus seatStatus, int price) {
     }
 
     public void unlockSeat() {
