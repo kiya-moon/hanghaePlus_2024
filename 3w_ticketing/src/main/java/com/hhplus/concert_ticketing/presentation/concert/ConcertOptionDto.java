@@ -15,4 +15,9 @@ public class ConcertOptionDto {
     private Long id;
     private Long concertId;
     private Timestamp concertDate;
+
+    public ConcertOptionDto(Long concertId, Timestamp concertDate) {
+        this.concertId = concertId;
+        this.concertDate = concertDate;
+    }
 }

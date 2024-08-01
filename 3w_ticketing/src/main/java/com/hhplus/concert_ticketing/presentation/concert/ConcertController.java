@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.util.Assert;
 
 import java.util.List;
 
@@ -49,6 +50,40 @@ public class ConcertController {
         }
     }
 
+    @PostMapping("/save-concert")
+    @Operation(
+            summary = "콘서트 정보 저장",
+            description = "새로운 콘서트 정보를 저장합니다.",
+            responses = {
+                    @ApiResponse(responseCode = "201", description = "성공적으로 콘서트가 저장되었습니다.",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ConcertDto.class))
+                    ),
+                    @ApiResponse(responseCode = "400", description = "잘못된 요청입니다.",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
+                    )
+            }
+    )
+    public ResponseEntity<?> saveConcert(@RequestBody ConcertRequest request) {
+        // 입력값 검증
+        Assert.notNull(request, "콘서트 정보가 비어있습니다.");
+        Assert.hasText(request.getName(), "콘서트 이름은 필수입니다.");
+
+        try {
+            // ConcertRequest를 ConcertDto로 변환
+            ConcertDto concertDto = new ConcertDto(request.getName());
+
+            // 변환된 DTO를 Facade에 전달하여 비즈니스 로직 처리
+            concertFacade.saveConcert(concertDto);
+            return new ResponseEntity<>(HttpStatus.CREATED); // 201 Created
+        } catch (IllegalArgumentException e) {
+            logger.error("콘서트 저장 실패: 잘못된 요청입니다.", e);
+            return new ResponseEntity<>(new ErrorResponse("400", "잘못된 요청입니다."), HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            logger.error("콘서트 저장 실패: 서버 오류", e);
+            return new ResponseEntity<>(new ErrorResponse("500", "서버 오류"), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping("/{concertId}/available-dates")
     @Operation(
             summary = "콘서트 날짜 조회",
@@ -79,6 +114,41 @@ public class ConcertController {
         } catch (Exception e) {
             logger.error("콘서트ID={}의 날짜 조회 실패: 대기시간이 만료되었습니다.", concertId, e);
             return new ResponseEntity<>(new ErrorResponse("403", "대기시간이 만료되었습니다."), HttpStatus.FORBIDDEN);
+        }
+    }
+
+    @PostMapping("/save-concert-option")
+    @Operation(
+            summary = "콘서트 정보 저장",
+            description = "새로운 콘서트 정보를 저장합니다.",
+            responses = {
+                    @ApiResponse(responseCode = "201", description = "성공적으로 콘서트 옵션이 저장되었습니다.",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ConcertDto.class))
+                    ),
+                    @ApiResponse(responseCode = "400", description = "ㅜ잘못된 요청입니다.",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
+                    )
+            }
+    )
+    public ResponseEntity<?> saveConcertOption(@RequestBody ConcertOptionRequest request) {
+        // 입력값 검증
+        Assert.notNull(request, "콘서트 옵션 정보가 비어있습니다.");
+        Assert.notNull(request.getConcertId(), "콘서트 선택은 필수입니다.");
+        Assert.notNull(request.getConcertDate(), "콘서트 날짜 정보는 필수입니다.");
+
+        try {
+            // ConcertRequest를 ConcertDto로 변환
+            ConcertOptionDto concertOptionDto = new ConcertOptionDto(request.getConcertId(), request.getConcertDate());
+
+            // 변환된 DTO를 Facade에 전달하여 비즈니스 로직 처리
+            concertFacade.saveConcertOption(concertOptionDto);
+            return new ResponseEntity<>(HttpStatus.CREATED); // 201 Created
+        } catch (IllegalArgumentException e) {
+            logger.error("콘서트 옵션 저장 실패: 잘못된 요청입니다.", e);
+            return new ResponseEntity<>(new ErrorResponse("400", "잘못된 요청입니다."), HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            logger.error("콘서트 옵션 저장 실패: 서버 오류", e);
+            return new ResponseEntity<>(new ErrorResponse("500", "서버 오류"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

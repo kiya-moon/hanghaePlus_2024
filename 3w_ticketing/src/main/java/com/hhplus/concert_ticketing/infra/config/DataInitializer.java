@@ -1,9 +1,12 @@
 package com.hhplus.concert_ticketing.infra.config;
 
 import com.hhplus.concert_ticketing.domain.concert.*;
+import com.hhplus.concert_ticketing.domain.queue.TokenEntity;
+import com.hhplus.concert_ticketing.domain.queue.TokenStatus;
 import com.hhplus.concert_ticketing.infra.concert.ConcertOptionRepositoryImpl;
 import com.hhplus.concert_ticketing.infra.concert.ConcertRepositoryImpl;
 import com.hhplus.concert_ticketing.infra.concert.SeatRepositoryImpl;
+import com.hhplus.concert_ticketing.infra.queue.QueueRepositoryImpl;
 import net.datafaker.Faker;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +16,7 @@ import java.sql.Timestamp;
 import java.time.*;
 import java.util.Locale;
 import java.util.Random;
+import java.util.UUID;
 
 @Configuration
 public class DataInitializer {
@@ -20,12 +24,14 @@ public class DataInitializer {
     private final ConcertRepositoryImpl concertRepositoryImpl;
     private final ConcertOptionRepositoryImpl concertOptionRepositoryImpl;
     private final SeatRepositoryImpl seatRepositoryImpl;
+    private final QueueRepositoryImpl queueRepositoryImpl;
 
 
-    public DataInitializer(ConcertRepositoryImpl concertRepositoryImpl, ConcertOptionRepositoryImpl concertOptionRepositoryImpl, SeatRepositoryImpl seatRepositoryImpl) {
+    public DataInitializer(ConcertRepositoryImpl concertRepositoryImpl, ConcertOptionRepositoryImpl concertOptionRepositoryImpl, SeatRepositoryImpl seatRepositoryImpl, QueueRepositoryImpl queueRepositoryImpl) {
         this.concertRepositoryImpl = concertRepositoryImpl;
         this.concertOptionRepositoryImpl = concertOptionRepositoryImpl;
         this.seatRepositoryImpl = seatRepositoryImpl;
+        this.queueRepositoryImpl = queueRepositoryImpl;
     }
 
     @Bean
@@ -83,6 +89,25 @@ public class DataInitializer {
                     }
                 }
             }
+        };
+    }
+
+    @Bean
+    public CommandLineRunner validToken() {
+        return (args) -> {
+            String token = UUID.randomUUID().toString();
+            Long userId = 1L; // 임의의 userId 할당, 실제로는 적절한 로직에 따라 결정해야 함
+            Timestamp createdAt = Timestamp.from(Instant.now());
+            Timestamp expiresAt = Timestamp.from(Instant.now().plusSeconds(300)); // 5분 후 만료
+
+            TokenEntity tokenEntity = TokenEntity.builder()
+                    .token(token)
+                    .userId(userId)
+                    .status(TokenStatus.ACTIVE)
+                    .createdAt(createdAt)
+                    .expiresAt(expiresAt)
+                    .build();
+            queueRepositoryImpl.save(tokenEntity);
         };
     }
 }

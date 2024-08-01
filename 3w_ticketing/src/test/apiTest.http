@@ -1,3 +1,19 @@
+### 콘서트 조회
+GET http://localhost:8080/api/concert/get-concerts
+Accept: application/json
+
+###
+
+### 새로운 콘서트 추가
+POST http://localhost:8080/api/concert/save-concert
+Content-Type: application/json
+
+{
+  "name": "BTS 콘서트"
+}
+
+###
+
 ### 토큰 발급 API 테스트
 POST http://localhost:8080/token
 Content-Type: application/json
@@ -10,8 +26,19 @@ Content-Type: application/json
 ###
 
 ### 예약 가능 날짜 조회 API 테스트
-GET http://localhost:8080/api/1/available-dates?token=validToken
+GET http://localhost:8080/api/concert/1/available-dates?token=e6e10516-7dec-47eb-83d2-fa0297b7a6b5
 Accept: application/json
+
+###
+
+### 새로운 콘서트 옵션 추가
+POST http://localhost:8080/api/concert/save-concert-option
+Content-Type: application/json
+
+{
+  "concertId": 1,
+  "concertDate": "2024-08-02T14:30:00.000Z"
+}
 
 ###
 
