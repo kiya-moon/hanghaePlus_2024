@@ -1,100 +1,75 @@
 package com.hhplus.concert_ticketing.domain.queue;
 
-import jakarta.transaction.Transactional;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
-import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class QueueService {
 
-    private final QueueRepository queueRepository;
+    private final RedisTemplate<String, String> redisTemplate;
 
-    public QueueService(QueueRepository queueRepository) {
-        this.queueRepository = queueRepository;
+    // Redis에서 사용하는 키 값들
+    private static final String WAITING_TOKENS_KEY = "waiting_tokens";
+    private static final String ACTIVE_TOKENS_KEY = "active_tokens";
+
+    // 분당 활성화할 토큰 수
+    private static final int TOKENS_TO_ACTIVATE_PER_MINUTE = 420;
+
+    // 토큰 만료 시간 세팅(5분 = 300초)
+    private static final long TOKEN_TTL_SECONDS = 300L;
+
+    public QueueService(RedisTemplate<String, String> redisTemplate) {
+        this.redisTemplate = redisTemplate;
     }
 
-    public boolean isTokenIssued(Long userId) {
-        return queueRepository.existsByUserId(userId);
+    // 토큰을 대기열에 추가
+    public void addTokenToWaitingList(String token) {
+        redisTemplate.opsForZSet().add(WAITING_TOKENS_KEY, token, System.currentTimeMillis());
     }
 
-    // 토큰 생성
-    public TokenEntity generateToken(Long userId) {
-        if (queueRepository.existsByUserId(userId)) {
-            throw new IllegalArgumentException("유효하지 않은 접근입니다.");
-        }
-
-        String token = UUID.randomUUID().toString();
-        Timestamp now = new Timestamp(System.currentTimeMillis());
-        Timestamp expiresAt = new Timestamp(now.getTime() + 5 * 60 * 1000);  // 5분 후
-
-        TokenEntity tokenEntity = new TokenEntity(token, userId, now, expiresAt);
-
-        return queueRepository.save(tokenEntity);
-    }
-
-    // 토큰 조회
-    public TokenEntity checkToken(String token) {
-        return queueRepository.findByToken(token)
-                .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 접근입니다."));
-    }
-
-    // 대기 중인 토큰 수 조회
-    public int getWaitingCount(String token) {
-        // 대기 중인 토큰의 수를 반환하는 로직을 구현합니다.
-        // 예시: 대기열에서 나보다 앞에 있는 토큰의 수를 계산
-        return queueRepository.countWaitingTokensBefore(token, TokenStatus.WAITING);
-    }
-
-    // 토큰 유효성 조회
+    // 토큰이 활성화된 상태인지 확인하는 메서드
     public boolean checkTokenValidity(String token) {
-        TokenEntity tokenEntity = queueRepository.findByToken(token)
-                .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 접근입니다."));
-        return tokenEntity.getStatus() == TokenStatus.ACTIVE;
+        return Boolean.TRUE.equals(redisTemplate.opsForSet().isMember(ACTIVE_TOKENS_KEY, token));   // NullPointException 방지
     }
 
-    // 토큰 만료 처리
-    public void expireToken(String token) {
-        TokenEntity tokenEntity = queueRepository.findByToken(token)
-                .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 접근입니다."));
-
-        tokenEntity.expiredToken();
-        queueRepository.save(tokenEntity);
+    // 대기 중인 토큰 수를 반환
+    public long getWaitingCount() {
+        return Optional.ofNullable(redisTemplate.opsForZSet().size(WAITING_TOKENS_KEY)).orElse(0L);
     }
 
-    // 토큰(s) 만료 처리
-    @Transactional
-    public void expireTokens() {
-        List<TokenEntity> tokensToExpire = queueRepository.findTokensToExpire(TokenStatus.ACTIVE, new Timestamp(System.currentTimeMillis()));
-        for (TokenEntity token : tokensToExpire) {
-            token.expiredToken();
-            queueRepository.save(token);
-        }
+    // 특정 토큰의 대기열 내 순위를 반환
+    public long getTokenRank(String token) {
+        Long rank = redisTemplate.opsForZSet().rank(WAITING_TOKENS_KEY, token);
+        return rank != null ? rank : -1; // -1은 대기열에 토큰이 없음을 나타냄
     }
 
-    // 토큰(s) 활성화 처리
-    @Transactional
-    public void activateTokens() {
-        long activeCount = queueRepository.countByStatus(TokenStatus.ACTIVE);
-        if (activeCount < 30) {
-            // 필요한 토큰 수를 계산
-            int tokensNeeded = 30 - (int) activeCount;
+    // 매 1분마다 실행되어 `waiting` 토큰을 `active` 토큰으로 전환하는 메서드
+    @Scheduled(fixedRate = 60000)
+    public void activateWaitingTokens() {
+        // 대기열에서 앞에 있는 420개의 토큰을 가져옴
+        Set<String> tokensToActivate = redisTemplate.opsForZSet().range(WAITING_TOKENS_KEY, 0, TOKENS_TO_ACTIVATE_PER_MINUTE - 1);
 
-            // Pageable 객체를 생성하여 토큰의 수를 제한
-            Pageable pageable = PageRequest.of(0, tokensNeeded);
-
-            // 토큰을 조회
-            List<TokenEntity> tokensToActivate = queueRepository.findTokensToActivate(pageable, TokenStatus.WAITING);
-
-            // 토큰을 활성화하고 저장
-            for (TokenEntity token : tokensToActivate) {
-                token.activeToken();
-                queueRepository.save(token);
+        if (tokensToActivate != null && !tokensToActivate.isEmpty()) {
+            // 가져온 토큰들을 활성화 목록으로 이동하고, TTL 설정
+            for (String token : tokensToActivate) {
+                redisTemplate.opsForSet().add(ACTIVE_TOKENS_KEY, token);
+                redisTemplate.expire(ACTIVE_TOKENS_KEY, TOKEN_TTL_SECONDS, TimeUnit.SECONDS);
+                redisTemplate.opsForZSet().remove(WAITING_TOKENS_KEY, token);
             }
         }
     }
+
+    // 특정 토큰을 만료 처리
+    public void expireToken(String token) {
+        // 활성화된 토큰 목록에서 제거
+        redisTemplate.opsForSet().remove(ACTIVE_TOKENS_KEY, token);
+        // TTL 설정을 제거하여 즉시 만료 처리
+        redisTemplate.delete(token);
+    }
+
 }
