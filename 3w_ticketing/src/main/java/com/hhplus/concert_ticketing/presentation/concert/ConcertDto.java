@@ -12,4 +12,8 @@ import lombok.Setter;
 public class ConcertDto {
     private Long id;
     private String name;
+
+    public ConcertDto(String name) {
+        this.name = name;
+    }
 }

@@ -4,6 +4,7 @@ import com.hhplus.concert_ticketing.domain.concert.*;
 import com.hhplus.concert_ticketing.domain.queue.QueueService;
 import com.hhplus.concert_ticketing.presentation.concert.ConcertDto;
 import com.hhplus.concert_ticketing.presentation.concert.ConcertOptionDto;
+import com.hhplus.concert_ticketing.presentation.concert.ConcertRequest;
 import com.hhplus.concert_ticketing.presentation.concert.SeatDto;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -33,6 +34,27 @@ public class ConcertFacade {
             logger.error("콘서트 조회 실패: {}", e.getMessage());
             throw e;
         }
+    }
+
+    // 콘서트 정보 저장
+    public void saveConcert(ConcertDto concertDto) {
+        // DTO를 Entity로 변환
+        ConcertEntity concertEntity = ConcertEntity.builder()
+                .name(concertDto.getName()).build();
+
+        // Service로 전달
+        concertService.saveConcert(concertEntity);
+    }
+
+    // 콘서트 옵션 정보 저장
+    public void saveConcertOption(ConcertOptionDto concertOptionDto) {
+        // DTO를 Entity로 변환
+        ConcertOptionEntity concertOptionEntity = ConcertOptionEntity.builder()
+                .concertId(concertOptionDto.getConcertId())
+                .concertDate(concertOptionDto.getConcertDate()).build();
+
+        // Service로 전달
+        concertService.saveConcertOption(concertOptionEntity);
     }
 
     // 콘서트 날짜 조회

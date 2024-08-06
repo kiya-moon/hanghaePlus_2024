@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.redis.core.RedisTemplate;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +29,9 @@ class ConcertDtoServiceTest {
 
     @Mock
     private SeatRepository seatRepository;
+
+    @Mock
+    private RedisTemplate<String, Object> redisTemplate;
 
     @InjectMocks
     private ConcertService concertService;
@@ -158,5 +163,38 @@ class ConcertDtoServiceTest {
         });
 
         assertEquals("이미 선택된 좌석입니다.", thrown.getMessage());
+    }
+
+    @Test
+    void testSaveConcert() {
+        // Given
+        ConcertEntity concertEntity = ConcertEntity.builder()
+                .name("Test Concert")
+                .build();
+
+        // When
+        concertService.saveConcert(concertEntity);
+
+        // Then
+        verify(concertRepository).save(concertEntity);
+        // 캐시가 삭제되었는지 확인
+        verify(redisTemplate).delete("concerts::SimpleKey []");
+    }
+
+    @Test
+    void testSaveConcertOption() {
+        // Given
+        ConcertOptionEntity concertOptionEntity = ConcertOptionEntity.builder()
+                .concertId(1L)
+                .concertDate(Timestamp.valueOf("2024-07-15"))
+                .build();
+
+        // When
+        concertService.saveConcertOption(concertOptionEntity);
+
+        // Then
+        verify(concertOptionRepository).save(concertOptionEntity);
+        // 캐시가 삭제되었는지 확인
+        verify(redisTemplate).delete("concerts::SimpleKey []");
     }
 }

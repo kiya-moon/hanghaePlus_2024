@@ -1,6 +1,10 @@
 package com.hhplus.concert_ticketing.domain.concert;
 
+import com.hhplus.concert_ticketing.presentation.concert.ConcertRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +17,7 @@ public class ConcertService {
     private final SeatRepository seatRepository;
 
     // 콘서트 목록 조회
+    @Cacheable(value = "concerts", cacheManager = "userCacheManager")
     public List <ConcertEntity> getConcerts() {
         List<ConcertEntity> concerts = concertRepository.findAll();
         if (concerts.isEmpty()) {
@@ -21,8 +26,21 @@ public class ConcertService {
         return concerts;
     }
 
+    // 콘서트 정보 저장
+    @CacheEvict(value = "concerts", allEntries = true)
+    public void saveConcert(ConcertEntity concertEntity) {
+        concertRepository.save(concertEntity);
+    }
+
+    // 콘서트 옵션 정보 저장
+    @CacheEvict(value = "concertOption", allEntries = true)
+    public void saveConcertOption(ConcertOptionEntity concertOptionEntity) {
+        concertOptionRepository.save(concertOptionEntity);
+    }
+
     // 예약 가능한 날짜 조회
     // 콘서트 아이디가 유효하지 않으면 IllegalArgumentException 발생
+    @Cacheable(value = "concertOption", cacheManager = "userCacheManager")
     public List<ConcertOptionEntity> getAvailableDates(Long concertId) {
         return concertOptionRepository.findByConcertId(concertId)
                 .orElseThrow(() -> new IllegalArgumentException("선택하신 콘서트가 존재하지 않습니다."));

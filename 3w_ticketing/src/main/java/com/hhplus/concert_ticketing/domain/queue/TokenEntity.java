@@ -15,6 +15,8 @@ import static com.hhplus.concert_ticketing.domain.queue.TokenStatus.*;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
 public class TokenEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
