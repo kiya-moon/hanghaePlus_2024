@@ -1,15 +1,13 @@
 package com.hhplus.concert_ticketing.application;
 
 import com.hhplus.concert_ticketing.domain.concert.ConcertService;
-import com.hhplus.concert_ticketing.domain.concert.SeatEntity;
+import com.hhplus.concert_ticketing.domain.concert.Seat;
 import com.hhplus.concert_ticketing.domain.concert.SeatRepository;
-import com.hhplus.concert_ticketing.domain.concert.SeatStatus;
 import com.hhplus.concert_ticketing.domain.queue.QueueService;
-import com.hhplus.concert_ticketing.domain.queue.TokenStatus;
-import com.hhplus.concert_ticketing.domain.reservation.ReservationEntity;
+import com.hhplus.concert_ticketing.domain.reservation.Reservation;
 import com.hhplus.concert_ticketing.domain.reservation.ReservationRepository;
 import com.hhplus.concert_ticketing.domain.reservation.ReservationService;
-import com.hhplus.concert_ticketing.domain.user.UserEntity;
+import com.hhplus.concert_ticketing.domain.user.User;
 import com.hhplus.concert_ticketing.domain.user.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -41,7 +39,7 @@ public class ReservationFacade {
     public void reserveSeat(String token, Long seatId, Long userId) {
 
         // 사용자 조회
-        UserEntity user;
+        User user;
         try {
             user = userService.getUserInfo(userId);
         } catch (Exception e) {
@@ -50,7 +48,7 @@ public class ReservationFacade {
         }
 
         // 좌석 상태 확인
-        SeatEntity seatEntity;
+        Seat seatEntity;
         try {
             seatEntity = concertService.getSeatStatus(seatId);
         } catch (Exception e) {
@@ -88,12 +86,12 @@ public class ReservationFacade {
         Timestamp now = new Timestamp(System.currentTimeMillis());
 
         try {
-            List<ReservationEntity> expiredReservations = reservationRepository.findByExpiresAtBeforeAndStatus(now, "ACTIVE");
-            for (ReservationEntity reservation : expiredReservations) {
+            List<Reservation> expiredReservations = reservationRepository.findByExpiresAtBeforeAndStatus(now, "ACTIVE");
+            for (Reservation reservation : expiredReservations) {
                 reservation.expireReservation();
                 reservationRepository.save(reservation);
 
-                SeatEntity seat = seatRepository.findById(reservation.getSeatId()).orElse(null);
+                Seat seat = seatRepository.findById(reservation.getSeatId()).orElse(null);
                 if (seat != null) {
                     seat.unlockSeat();
                     seatRepository.save(seat);

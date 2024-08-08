@@ -20,7 +20,7 @@ public class UserServiceConcurrencyTest {
     @Test
     public void testUsePointConcurrency() throws InterruptedException {
         Long userId = 1L;
-        userRepository.save(new UserEntity(userId, 10000));
+        userRepository.save(new User(userId, 10000));
 
         ExecutorService executorService = Executors.newFixedThreadPool(2);
         executorService.submit(() -> userService.usePoint(userId, 5000));
@@ -29,7 +29,7 @@ public class UserServiceConcurrencyTest {
         executorService.shutdown();
         executorService.awaitTermination(1, TimeUnit.MINUTES);
 
-        UserEntity user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         System.out.println("Final balance: " + user.getBalance());
     }
 }

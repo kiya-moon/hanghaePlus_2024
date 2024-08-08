@@ -17,8 +17,8 @@ public class ReservationService {
 
     // 예약 조회
     // 가져온 예약 정보를 통해 만료 여부도 알 수 있음
-    public ReservationEntity getReservationInfo(Long reservationId) {
-        ReservationEntity reservation = reservationRepository.findById(reservationId)
+    public Reservation getReservationInfo(Long reservationId) {
+        Reservation reservation = reservationRepository.findById(reservationId)
                 .orElseThrow(() -> new NoSuchElementException("예약이 존재하지 않습니다."));
 
         Timestamp now = new Timestamp(System.currentTimeMillis());
@@ -36,7 +36,7 @@ public class ReservationService {
         Timestamp expiresAt = new Timestamp(now.getTime() + 5 * 60 * 1000);
 
         // 서비스단에서 ReservationEntity의 비즈니스 로직 호출
-        ReservationEntity reservation = ReservationEntity.createReservation(userId, seatId, now, expiresAt, price);
+        Reservation reservation = Reservation.createReservation(userId, seatId, now, expiresAt, price);
         reservationRepository.save(reservation);
     }
 }

@@ -1,13 +1,11 @@
 package com.hhplus.concert_ticketing;
 
 import com.hhplus.concert_ticketing.application.ReservationFacade;
-import com.hhplus.concert_ticketing.domain.concert.SeatEntity;
 import com.hhplus.concert_ticketing.domain.concert.SeatRepository;
-import com.hhplus.concert_ticketing.domain.concert.SeatStatus;
 import com.hhplus.concert_ticketing.domain.queue.QueueRepository;
-import com.hhplus.concert_ticketing.domain.queue.TokenEntity;
+import com.hhplus.concert_ticketing.domain.queue.Token;
 import com.hhplus.concert_ticketing.domain.queue.TokenStatus;
-import com.hhplus.concert_ticketing.domain.user.UserEntity;
+import com.hhplus.concert_ticketing.domain.user.User;
 import com.hhplus.concert_ticketing.domain.user.UserRepository;
 import com.hhplus.concert_ticketing.presentation.ErrorResponse;
 import com.hhplus.concert_ticketing.presentation.reservation.ReserveRequest;
@@ -66,7 +64,7 @@ class ReservationIntegrationTest {
         transactionTemplate.execute(status -> {
             // 유저 10명 생성
             for (int i = 0; i < 10; i++) {
-                UserEntity user = UserEntity.createUser((long) (i + 1), 100000);
+                User user = User.createUser((long) (i + 1), 100000);
                 userRepository.save(user);
                 userIds.add(user.getId());
             }
@@ -75,7 +73,7 @@ class ReservationIntegrationTest {
             for (int i = 0; i < 10; i++) {
                 Timestamp now = new Timestamp(System.currentTimeMillis());
                 Timestamp expiresAt = new Timestamp(System.currentTimeMillis() + 5 * 60 * 1000); // 5분
-                TokenEntity token = TokenEntity.createToken("token-" + (i + 1), userIds.get(i), TokenStatus.ACTIVE, now, expiresAt);
+                Token token = Token.createToken("token-" + (i + 1), userIds.get(i), TokenStatus.ACTIVE, now, expiresAt);
                 queueRepository.save(token);
             }
 

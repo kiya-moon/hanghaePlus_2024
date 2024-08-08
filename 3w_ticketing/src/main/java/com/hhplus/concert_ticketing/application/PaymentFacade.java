@@ -1,9 +1,9 @@
 package com.hhplus.concert_ticketing.application;
 
-import com.hhplus.concert_ticketing.domain.reservation.ReservationEntity;
+import com.hhplus.concert_ticketing.domain.reservation.Reservation;
 import com.hhplus.concert_ticketing.domain.reservation.ReservationRepository;
 import com.hhplus.concert_ticketing.domain.reservation.ReservationService;
-import com.hhplus.concert_ticketing.domain.user.UserEntity;
+import com.hhplus.concert_ticketing.domain.user.User;
 import com.hhplus.concert_ticketing.domain.user.UserService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ public class PaymentFacade {
     public void payInPoint(Long userId, Long reservationId) {
 
         // 사용자 조회
-        UserEntity user;
+        User user;
         try {
             user = userService.getUserInfo(userId);
         } catch (Exception e) {
@@ -35,7 +35,7 @@ public class PaymentFacade {
         }
 
         // 예약 조회
-        ReservationEntity reservation;
+        Reservation reservation;
         try {
             reservation = reservationService.getReservationInfo(reservationId);
         } catch (Exception e) {

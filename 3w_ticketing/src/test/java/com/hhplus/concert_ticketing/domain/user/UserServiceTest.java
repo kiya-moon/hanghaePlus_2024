@@ -31,11 +31,11 @@ class UserServiceTest {
         int initialBalance = 100;
         int chargeAmount = 50;
         int newBalance = initialBalance + chargeAmount;
-        UserEntity userEntity = new UserEntity(userId, initialBalance, 1);  // ID, Balance, Version
+        User user = new User(userId, initialBalance, 1);  // ID, Balance, Version
 
-        when(userRepository.findById(userId)).thenReturn(Optional.of(userEntity));
+        when(userRepository.findById(userId)).thenReturn(Optional.of(user));
         when(userRepository.chargePoint(userId, newBalance)).thenReturn(1);  // Mock successful chargePoint operation
-        when(userRepository.findById(userId)).thenReturn(Optional.of(new UserEntity(userId, newBalance, 2)));  // Simulate new balance
+        when(userRepository.findById(userId)).thenReturn(Optional.of(new User(userId, newBalance, 2)));  // Simulate new balance
 
         // when
         int result = userService.chargePoint(userId, chargeAmount);
@@ -50,9 +50,9 @@ class UserServiceTest {
         Long userId = 1L;
         int initialBalance = 100;
         int chargeAmount = 50;
-        UserEntity userEntity = new UserEntity(userId, initialBalance, 1);  // ID, Balance, Version
+        User user = new User(userId, initialBalance, 1);  // ID, Balance, Version
 
-        when(userRepository.findById(userId)).thenReturn(Optional.of(userEntity));
+        when(userRepository.findById(userId)).thenReturn(Optional.of(user));
         when(userRepository.chargePoint(userId, initialBalance + chargeAmount)).thenReturn(0);  // Simulate optimistic lock failure
 
         // when / then
@@ -70,11 +70,11 @@ class UserServiceTest {
         int initialBalance = 100;
         int chargeAmount = 50;
         int incorrectBalance = 100;  // Incorrect balance to simulate failure
-        UserEntity userEntity = new UserEntity(userId, initialBalance, 1);  // ID, Balance, Version
+        User user = new User(userId, initialBalance, 1);  // ID, Balance, Version
 
-        when(userRepository.findById(userId)).thenReturn(Optional.of(userEntity));
+        when(userRepository.findById(userId)).thenReturn(Optional.of(user));
         when(userRepository.chargePoint(userId, initialBalance + chargeAmount)).thenReturn(1);  // Mock successful chargePoint operation
-        when(userRepository.findById(userId)).thenReturn(Optional.of(new UserEntity(userId, incorrectBalance, 2)));  // Simulate balance mismatch
+        when(userRepository.findById(userId)).thenReturn(Optional.of(new User(userId, incorrectBalance, 2)));  // Simulate balance mismatch
 
         // when / then
         RuntimeException thrown = assertThrows(RuntimeException.class, () -> {
@@ -89,12 +89,12 @@ class UserServiceTest {
         // given
         Long userId = 1L;
         int balance = 100;
-        UserEntity userEntity = new UserEntity(userId, balance, 1);  // ID, Balance, Version
+        User user = new User(userId, balance, 1);  // ID, Balance, Version
 
-        when(userRepository.findById(userId)).thenReturn(Optional.of(userEntity));
+        when(userRepository.findById(userId)).thenReturn(Optional.of(user));
 
         // when
-        UserEntity result = userService.getUserInfo(userId);
+        User result = userService.getUserInfo(userId);
 
         // then
         assertNotNull(result);
@@ -124,11 +124,11 @@ class UserServiceTest {
         int initialBalance = 100;
         int useAmount = 50;
         int newBalance = initialBalance - useAmount;
-        UserEntity userEntity = new UserEntity(userId, initialBalance, 1);  // ID, Balance, Version
+        User user = new User(userId, initialBalance, 1);  // ID, Balance, Version
 
-        when(userRepository.findById(userId)).thenReturn(Optional.of(userEntity));
+        when(userRepository.findById(userId)).thenReturn(Optional.of(user));
         when(userRepository.usePoint(userId, newBalance, 1)).thenReturn(1);  // Mock successful usePoint operation
-        when(userRepository.findById(userId)).thenReturn(Optional.of(new UserEntity(userId, newBalance, 2)));  // Simulate new balance
+        when(userRepository.findById(userId)).thenReturn(Optional.of(new User(userId, newBalance, 2)));  // Simulate new balance
 
         // when
         int result = userService.usePoint(userId, useAmount);
@@ -143,9 +143,9 @@ class UserServiceTest {
         Long userId = 1L;
         int initialBalance = 100;
         int useAmount = 50;
-        UserEntity userEntity = new UserEntity(userId, initialBalance, 1);  // ID, Balance, Version
+        User user = new User(userId, initialBalance, 1);  // ID, Balance, Version
 
-        when(userRepository.findById(userId)).thenReturn(Optional.of(userEntity));
+        when(userRepository.findById(userId)).thenReturn(Optional.of(user));
         when(userRepository.usePoint(userId, initialBalance - useAmount, 1)).thenReturn(0);  // Simulate optimistic lock failure
 
         // when / then

@@ -55,7 +55,7 @@ public class ReservationController {
         try {
             reservationFacade.reserveSeat(request.getToken(), request.getSeatId(), request.getUserId());
             HttpHeaders headers = new HttpHeaders();
-            headers.setLocation(URI.create("/payment-page"));
+//            headers.setLocation(URI.create("/payment-page"));
             return new ResponseEntity<>(headers, HttpStatus.SEE_OTHER);
         } catch (IllegalArgumentException e) {
             String message = e.getMessage();

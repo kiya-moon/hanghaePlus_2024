@@ -11,7 +11,7 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-public class ConcertEntity {
+public class Concert {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

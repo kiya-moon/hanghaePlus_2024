@@ -16,7 +16,7 @@ import static com.hhplus.concert_ticketing.domain.reservation.ReservationStatus.
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class ReservationEntity {
+public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,7 +28,7 @@ public class ReservationEntity {
     private Timestamp expiresAt;
     private int price;
 
-    public ReservationEntity(Long userId, Long seatId, Timestamp createdAt, Timestamp expiresAt, int price) {
+    public Reservation(Long userId, Long seatId, Timestamp createdAt, Timestamp expiresAt, int price) {
         this.userId = userId;
         this.seatId = seatId;
         this.createdAt = createdAt;
@@ -36,8 +36,8 @@ public class ReservationEntity {
         this.price = price;
     }
 
-    public static ReservationEntity createReservation(Long userId, Long seatId, Timestamp createdAt, Timestamp expiresAt, int price) {
-        return new ReservationEntity(userId, seatId, createdAt, expiresAt, price);
+    public static Reservation createReservation(Long userId, Long seatId, Timestamp createdAt, Timestamp expiresAt, int price) {
+        return new Reservation(userId, seatId, createdAt, expiresAt, price);
     }
 
     public void expireReservation() {

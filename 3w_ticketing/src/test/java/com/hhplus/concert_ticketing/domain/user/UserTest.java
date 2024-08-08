@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class UserEntityTest {
+public class UserTest {
 
     @Autowired
     private UserRepository userRepository;
@@ -15,12 +15,12 @@ public class UserEntityTest {
     @Test
     public void testVersionIncrement() {
         // Create a new user
-        UserEntity user = new UserEntity();
+        User user = new User();
         user.setBalance(10000);
         userRepository.save(user);
 
         // Fetch the user and check the version
-        UserEntity fetchedUser = userRepository.findById(user.getId()).orElseThrow();
+        User fetchedUser = userRepository.findById(user.getId()).orElseThrow();
         assertEquals(0, fetchedUser.getVersion());
 
         // Update the user
@@ -28,7 +28,7 @@ public class UserEntityTest {
         userRepository.save(fetchedUser);
 
         // Fetch the user again and check the version
-        UserEntity updatedUser = userRepository.findById(user.getId()).orElseThrow();
+        User updatedUser = userRepository.findById(user.getId()).orElseThrow();
         assertEquals(1, updatedUser.getVersion());
     }
 }

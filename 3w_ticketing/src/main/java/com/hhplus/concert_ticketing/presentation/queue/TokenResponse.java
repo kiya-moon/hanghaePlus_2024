@@ -12,5 +12,6 @@ import lombok.Setter;
 public class TokenResponse {
     private String result;
     private String message;
-    private TokenDto tokenDto;
+    private String token;
+    private int position;
 }

@@ -8,7 +8,6 @@ import lombok.*;
 
 import java.sql.Timestamp;
 
-import static com.hhplus.concert_ticketing.domain.concert.SeatStatus.UNLOCKED;
 import static com.hhplus.concert_ticketing.domain.queue.TokenStatus.*;
 
 @Entity
@@ -17,7 +16,7 @@ import static com.hhplus.concert_ticketing.domain.queue.TokenStatus.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-public class TokenEntity {
+public class Token {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,7 +27,7 @@ public class TokenEntity {
     private Timestamp createdAt;
     private Timestamp expiresAt;
 
-    public TokenEntity(String token, Long userId, Timestamp createdAt, Timestamp expiresAt) {
+    public Token(String token, Long userId, Timestamp createdAt, Timestamp expiresAt) {
         this.token = token;
         this.userId = userId;
         this.status = WAITING;
@@ -36,11 +35,11 @@ public class TokenEntity {
         this.expiresAt = expiresAt;
     }
 
-    public TokenEntity(String token, Long userId, TokenStatus status, Timestamp createdAt, Timestamp expiresAt) {
+    public Token(String token, Long userId, TokenStatus status, Timestamp createdAt, Timestamp expiresAt) {
     }
 
-    public static TokenEntity createToken(String token, Long userId, TokenStatus status, Timestamp createdAt, Timestamp expiresAt) {
-        return new TokenEntity(token, userId, status, createdAt, expiresAt);
+    public static Token createToken(String token, Long userId, TokenStatus status, Timestamp createdAt, Timestamp expiresAt) {
+        return new Token(token, userId, status, createdAt, expiresAt);
     }
 
     public void activeToken() {

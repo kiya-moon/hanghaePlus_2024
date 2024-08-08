@@ -1,7 +1,7 @@
 package com.hhplus.concert_ticketing.application;
 
 import com.hhplus.concert_ticketing.domain.user.UserService;
-import com.hhplus.concert_ticketing.domain.user.UserEntity;
+import com.hhplus.concert_ticketing.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +18,7 @@ public class UserFacade {
     // 사용자 잔액 조회
     public int getBalance(Long userId) {
         try {
-            UserEntity user = userService.getUserInfo(userId);
+            User user = userService.getUserInfo(userId);
             return user.getBalance();
         } catch (Exception e) {
             logger.error("사용자 ID {}의 잔액 조회 실패: {}", userId, e.getMessage());

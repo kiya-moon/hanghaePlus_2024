@@ -1,10 +1,10 @@
 package com.hhplus.concert_ticketing;
 
 import com.hhplus.concert_ticketing.application.PaymentFacade;
-import com.hhplus.concert_ticketing.domain.reservation.ReservationEntity;
+import com.hhplus.concert_ticketing.domain.reservation.Reservation;
 import com.hhplus.concert_ticketing.domain.reservation.ReservationRepository;
 import com.hhplus.concert_ticketing.domain.reservation.ReservationService;
-import com.hhplus.concert_ticketing.domain.user.UserEntity;
+import com.hhplus.concert_ticketing.domain.user.User;
 import com.hhplus.concert_ticketing.domain.user.UserRepository;
 import com.hhplus.concert_ticketing.domain.user.UserService;
 import com.hhplus.concert_ticketing.infra.user.UserRepositoryImpl;
@@ -40,14 +40,14 @@ public class PaymentIntegrationTest {
     @Autowired
     private UserRepository userRepository;
 
-    private UserEntity testUser;
-    private ReservationEntity testReservation;
+    private User testUser;
+    private Reservation testReservation;
     private Long seatId = 1L;
 
     @BeforeEach
     public void setUp() {
         // 유저 생성
-        testUser = UserEntity.createUser(1L, 100000);
+        testUser = User.createUser(1L, 100000);
         userRepository.save(testUser);
 
         // 예약 생성
@@ -56,7 +56,7 @@ public class PaymentIntegrationTest {
         logger.info("userId : {} ", testUser.getId());
         logger.info("now : {} ", now);
         logger.info("expiresAt : {} ", expiresAt);
-        testReservation = ReservationEntity.createReservation(testUser.getId(), seatId, now, expiresAt, 50000);
+        testReservation = Reservation.createReservation(testUser.getId(), seatId, now, expiresAt, 50000);
         reservationRepository.save(testReservation);
         logger.info("testReservation: {}, {}, {}", testReservation.getId(), testReservation.getCreatedAt(), testReservation.getExpiresAt());
     }
@@ -70,11 +70,11 @@ public class PaymentIntegrationTest {
         // paymentFacade.payInPoint(userId, reservationId);
 
         // // Verify points deduction
-        // UserEntity updatedUser = userService.getUserInfo(userId);
+        // User updatedUser = userService.getUserInfo(userId);
         // assertEquals(50000, updatedUser.getBalance());
 
         // // Verify reservation completion
-        // ReservationEntity updatedReservation = reservationService.getReservationInfo(reservationId);
+        // Reservation updatedReservation = reservationService.getReservationInfo(reservationId);
         // assertTrue(updatedReservation.getStatus().equals("COMPLETE"));
                 Long userId = testUser.getId();
         Long reservationId = testReservation.getId();
@@ -106,11 +106,11 @@ public class PaymentIntegrationTest {
         executor.shutdown();
 
         // Verify points deduction
-        UserEntity updatedUser = userService.getUserInfo(userId);
+        User updatedUser = userService.getUserInfo(userId);
         assertEquals(50000, updatedUser.getBalance());
 
         // Verify reservation completion
-        ReservationEntity updatedReservation = reservationService.getReservationInfo(reservationId);
+        Reservation updatedReservation = reservationService.getReservationInfo(reservationId);
         assertTrue(updatedReservation.getStatus().equals("COMPLETE"));
     }
 

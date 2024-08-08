@@ -41,8 +41,8 @@ public class ConcertController {
     )
     public ResponseEntity<?> getConcerts() {
         try {
-            List<ConcertDto> concertDtoDTOS = concertFacade.getConcerts();
-            ConcertListResponse response = new ConcertListResponse(concertDtoDTOS);
+            List<ConcertDto> concertDtoList = concertFacade.getConcerts();
+            ConcertListResponse response = new ConcertListResponse(concertDtoList);
             return ResponseEntity.ok(response);
         } catch (IllegalArgumentException e) {
             logger.error("콘서트 목록 조회 실패: 접근이 유효하지 않습니다.", e);
@@ -84,6 +84,36 @@ public class ConcertController {
         }
     }
 
+    @GetMapping("/{concertId}/available-concert-options")
+    @Operation(
+            summary = "콘서트 옵션 조회",
+            description = "콘서트 옵션을 조회합니다.",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "성공적으로 콘서트 옵션을 조회했습니다.",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = AvailableDatesResponse.class))
+                    ),
+                    @ApiResponse(responseCode = "400", description = "잘못된 요청입니다.",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
+                    ),
+                    @ApiResponse(responseCode = "403", description = "서버 오류. 관리자에게 문의하세요.",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
+                    )
+            }
+    )
+    public ResponseEntity<?> getAvailableConcertOptions(@PathVariable Long concertId) {
+        try {
+            List<ConcertOptionDto> concertOptionDtoList = concertFacade.getAvailableConcertOptions(concertId);
+            AvailableDatesResponse response = new AvailableDatesResponse(concertOptionDtoList);
+            return ResponseEntity.ok(response);
+        } catch (IllegalArgumentException e) {
+            logger.error("콘서트ID={}의 옵션 조회 실패: 잘못된 요청입니다.", concertId, e);
+            return new ResponseEntity<>(new ErrorResponse("400", "잘못된 요청입니다."), HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            logger.error("콘서트ID={}의 옵션 조회 실패: 서버 오류", concertId, e);
+            return new ResponseEntity<>(new ErrorResponse("500", "서버 오류. 관리자에게 문의하세요."), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping("/{concertId}/available-dates")
     @Operation(
             summary = "콘서트 날짜 조회",
@@ -105,8 +135,8 @@ public class ConcertController {
             @RequestParam String token) {
 
         try {
-            List<ConcertOptionDto> concertOptionDtoDTOS = concertFacade.getAvailableDates(concertId, token);
-            AvailableDatesResponse response = new AvailableDatesResponse(concertOptionDtoDTOS);
+            List<ConcertOptionDto> concertOptionDtoList = concertFacade.getAvailableDates(concertId, token);
+            AvailableDatesResponse response = new AvailableDatesResponse(concertOptionDtoList);
             return ResponseEntity.ok(response);
         } catch (IllegalArgumentException e) {
             logger.error("콘서트ID={}의 날짜 조회 실패: 접근이 유효하지 않습니다.", concertId, e);
@@ -125,7 +155,7 @@ public class ConcertController {
                     @ApiResponse(responseCode = "201", description = "성공적으로 콘서트 옵션이 저장되었습니다.",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ConcertDto.class))
                     ),
-                    @ApiResponse(responseCode = "400", description = "ㅜ잘못된 요청입니다.",
+                    @ApiResponse(responseCode = "400", description = "잘못된 요청입니다.",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
                     )
             }

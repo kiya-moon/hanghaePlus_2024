@@ -1,7 +1,7 @@
 package com.hhplus.concert_ticketing.infra.config;
 
 import com.hhplus.concert_ticketing.domain.concert.*;
-import com.hhplus.concert_ticketing.domain.queue.TokenEntity;
+import com.hhplus.concert_ticketing.domain.queue.Token;
 import com.hhplus.concert_ticketing.domain.queue.TokenStatus;
 import com.hhplus.concert_ticketing.infra.concert.ConcertOptionRepositoryImpl;
 import com.hhplus.concert_ticketing.infra.concert.ConcertRepositoryImpl;
@@ -42,7 +42,7 @@ public class DataInitializer {
             for (int i = 1; i <= 100; i++) {
                 // 콘서트 이름 생성
                 String concertName = faker.kpop().girlGroups() + " 콘서트";
-                ConcertEntity concert = ConcertEntity.builder()
+                Concert concert = Concert.builder()
                         .name(concertName)
                         .build();
                 concertRepositoryImpl.save(concert);
@@ -63,12 +63,12 @@ public class DataInitializer {
                     Instant instant = localDateTime.atZone(ZoneId.systemDefault()).toInstant();
                     Timestamp concertDate = Timestamp.from(instant);
 
-                    ConcertOptionEntity concertOptionEntity = ConcertOptionEntity.builder()
+                    ConcertOption concertOption = ConcertOption.builder()
                             .concertId(concert.getId())
                             .concertDate(concertDate)
                             .build();
 
-                    concertOptionRepositoryImpl.save(concertOptionEntity);
+                    concertOptionRepositoryImpl.save(concertOption);
 
                     // 최소 100,000원 이상, 최대 200,000원 이하의 만원 단위 가격 생성
                     int minPrice = 100000;
@@ -76,11 +76,11 @@ public class DataInitializer {
                     int price = minPrice + (random.nextInt((maxPrice - minPrice) / 10000 + 1)) * 10000;
 
                     // 좌석 생성
-                    for (int k = 1; k <= 50; k++) {
+                    for (int k = 1; k <= 200; k++) {
                         String seatNumber = String.format("Seat-%03d", k);
 
-                        SeatEntity seatEntity = SeatEntity.builder()
-                                .concertOptionId(concertOptionEntity.getId())
+                        Seat seatEntity = Seat.builder()
+                                .concertOptionId(concertOption.getId())
                                 .seatNumber(seatNumber)
                                 .status(SeatStatus.UNLOCKED)
                                 .price(price)
@@ -100,7 +100,7 @@ public class DataInitializer {
             Timestamp createdAt = Timestamp.from(Instant.now());
             Timestamp expiresAt = Timestamp.from(Instant.now().plusSeconds(300)); // 5분 후 만료
 
-            TokenEntity tokenEntity = TokenEntity.builder()
+            Token tokenEntity = Token.builder()
                     .token(token)
                     .userId(userId)
                     .status(TokenStatus.ACTIVE)

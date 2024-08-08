@@ -201,7 +201,7 @@
     | ------ | ---- | ------- | ---- |
     | userId | Long | 유저 ID |      |
 
-- **Response**
+- **eResponse**
   - **HTTP Status Codes**: 
     - `200 OK`: 성공
     - `400 Bad Request`: 잘못된 요청

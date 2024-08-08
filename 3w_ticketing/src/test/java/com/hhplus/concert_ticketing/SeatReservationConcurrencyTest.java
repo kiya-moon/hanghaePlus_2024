@@ -1,11 +1,11 @@
 package com.hhplus.concert_ticketing;
 
 import com.hhplus.concert_ticketing.domain.concert.ConcertService;
-import com.hhplus.concert_ticketing.domain.concert.SeatEntity;
+import com.hhplus.concert_ticketing.domain.concert.Seat;
 import com.hhplus.concert_ticketing.domain.concert.SeatRepository;
 import com.hhplus.concert_ticketing.domain.concert.SeatStatus;
 import com.hhplus.concert_ticketing.domain.reservation.ReservationService;
-import com.hhplus.concert_ticketing.domain.user.UserEntity;
+import com.hhplus.concert_ticketing.domain.user.User;
 import com.hhplus.concert_ticketing.domain.user.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -50,11 +50,11 @@ public class SeatReservationConcurrencyTest {
 
         transactionTemplate.execute(status -> {
             // 테스트용 사용자, 좌석 생성
-            UserEntity user = UserEntity.createUser(1L, 100000);
+            User user = User.createUser(1L, 100000);
             userRepository.save(user);
             userId = user.getId();
 
-            SeatEntity seat = new SeatEntity(1L, "A1", SeatStatus.UNLOCKED, 50000);
+            Seat seat = new Seat(1L, "A1", SeatStatus.UNLOCKED, 50000);
             seatRepository.save(seat);
             seatId = seat.getId();
             return null;
@@ -70,7 +70,7 @@ public class SeatReservationConcurrencyTest {
         for (int i = 0; i < threadCount; i++) {
             executorService.submit(() -> {
                 try {
-                    SeatEntity seatEntity = concertService.getSeatStatus(seatId);
+                    Seat seatEntity = concertService.getSeatStatus(seatId);
                     if (seatEntity != null && seatEntity.getStatus() == SeatStatus.UNLOCKED) {
                         try {
                             seatEntity.lockSeat();
@@ -93,7 +93,7 @@ public class SeatReservationConcurrencyTest {
 
         latch.await();
 
-        SeatEntity seat = seatRepository.findById(seatId).orElseThrow();
+        Seat seat = seatRepository.findById(seatId).orElseThrow();
         assertEquals(SeatStatus.LOCKED, seat.getStatus());
     }
 }

@@ -1,7 +1,7 @@
 package com.hhplus.concert_ticketing;
 
 import com.hhplus.concert_ticketing.application.UserFacade;
-import com.hhplus.concert_ticketing.domain.user.UserEntity;
+import com.hhplus.concert_ticketing.domain.user.User;
 import com.hhplus.concert_ticketing.domain.user.UserRepository;
 import com.hhplus.concert_ticketing.presentation.ErrorResponse;
 import com.hhplus.concert_ticketing.presentation.user.*;
@@ -33,12 +33,12 @@ class UserIntegrationTest {
     @Autowired
     private UserRepository userRepository;
 
-    private UserEntity testUser;
+    private User testUser;
 
     @BeforeEach
     void setUp() {
         // 유저 생성
-        testUser = UserEntity.createUser(1L, 200000);
+        testUser = User.createUser(1L, 200000);
         userRepository.save(testUser);
     }
 
@@ -104,7 +104,7 @@ class UserIntegrationTest {
 
         // then
         // 최종 잔액이 예상한 값과 일치하는지 검증
-        UserEntity updatedUser = userRepository.findById(testUser.getId())
+        User updatedUser = userRepository.findById(testUser.getId())
                 .orElseThrow(() -> new IllegalStateException("사용자 정보가 없습니다."));
         assertThat(updatedUser.getBalance()).isEqualTo(finalBalance);
 

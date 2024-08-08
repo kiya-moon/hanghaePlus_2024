@@ -1,7 +1,6 @@
 package com.hhplus.concert_ticketing.presentation.interceptor;
 
 import com.hhplus.concert_ticketing.domain.queue.QueueService;
-import com.hhplus.concert_ticketing.domain.queue.TokenStatus;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -29,13 +28,13 @@ public class TokenInterceptor implements HandlerInterceptor {
             return false;
         }
 
-        boolean isTokenValid = queueService.checkToken(token).getStatus() == TokenStatus.ACTIVE;
-        if (!isTokenValid) {
-            logger.warn("유효하지 않은 토큰: {}", token);
+        if (queueService.checkTokenValidity(token)) {
+            // 토큰이 활성화 상태일 경우 요청을 계속 진행
+            return true;
+        } else {
+            log.warn("유효하지 않은 토큰: {}", token);
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "토큰이 만료되었습니다.");
             return false;
         }
-
-        return true;
     }
 }

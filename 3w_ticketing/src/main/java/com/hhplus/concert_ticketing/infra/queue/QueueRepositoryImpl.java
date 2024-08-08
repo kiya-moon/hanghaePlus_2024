@@ -1,7 +1,7 @@
 package com.hhplus.concert_ticketing.infra.queue;
 
 import com.hhplus.concert_ticketing.domain.queue.QueueRepository;
-import com.hhplus.concert_ticketing.domain.queue.TokenEntity;
+import com.hhplus.concert_ticketing.domain.queue.Token;
 import com.hhplus.concert_ticketing.domain.queue.TokenStatus;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -25,7 +25,7 @@ public class QueueRepositoryImpl implements QueueRepository {
     }
 
     @Override
-    public Optional<TokenEntity> findByToken(String token) {
+    public Optional<Token> findByToken(String token) {
         return queueJpaRepository.findByToken(token);
     }
 
@@ -38,17 +38,17 @@ public class QueueRepositoryImpl implements QueueRepository {
     }
 
     @Override
-    public List<TokenEntity> findTokensToExpire(TokenStatus status, Timestamp currentTime) {
+    public List<Token> findTokensToExpire(TokenStatus status, Timestamp currentTime) {
         logger.info("만료될 토큰을 조회합니다. 상태={}, 현재 시간={}", status, currentTime);
-        List<TokenEntity> tokens = queueJpaRepository.findTokensToExpire(TokenStatus.ACTIVE, currentTime);
+        List<Token> tokens = queueJpaRepository.findTokensToExpire(TokenStatus.ACTIVE, currentTime);
         logger.info("만료될 토큰 조회 결과: {}개", tokens.size());
         return tokens;
     }
 
     @Override
-    public List<TokenEntity> findTokensToActivate(Pageable pageable, TokenStatus status) {
+    public List<Token> findTokensToActivate(Pageable pageable, TokenStatus status) {
         logger.info("활성화할 토큰을 조회합니다. 상태={}, 페이지={}", status, pageable);
-        List<TokenEntity> tokens = queueJpaRepository.findTokensToActivate(pageable, status);
+        List<Token> tokens = queueJpaRepository.findTokensToActivate(pageable, status);
         logger.info("활성화할 토큰 조회 결과: {}개", tokens.size());
         return tokens;
     }
@@ -62,7 +62,7 @@ public class QueueRepositoryImpl implements QueueRepository {
     }
 
     @Override
-    public TokenEntity save(TokenEntity tokenEntity) {
-        return queueJpaRepository.save(tokenEntity);
+    public Token save(Token token) {
+        return queueJpaRepository.save(token);
     }
 }

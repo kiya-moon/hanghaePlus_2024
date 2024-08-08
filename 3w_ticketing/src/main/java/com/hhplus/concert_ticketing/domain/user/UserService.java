@@ -4,7 +4,6 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -13,8 +12,8 @@ public class UserService {
     private final UserRepository userRepository;
 
     // 사용자 조회
-    public UserEntity getUserInfo(Long userId) {
-        Optional <UserEntity> userEntity = userRepository.findById(userId);
+    public User getUserInfo(Long userId) {
+        Optional <User> userEntity = userRepository.findById(userId);
         if(userEntity.isEmpty()) {
             throw new IllegalStateException("사용자 정보가 없습니다.");
         }
@@ -28,12 +27,12 @@ public class UserService {
     @Transactional
     public int chargePoint(Long userId, int point) {
         // 낙관적락(기존 구현)
-        // UserEntity userEntity = getUserInfo(userId);
-        // int balance = userEntity.getBalance();
+        // User user = getUserInfo(userId);
+        // int balance = user.getBalance();
         // int chargeResult = balance + point;
 
         // // chargePoint 메서드 호출 시 낙관적 락을 위해 version 필드를 사용
-        // int updatedRows = userRepository.chargePoint(userId, chargeResult, userEntity.getVersion());
+        // int updatedRows = userRepository.chargePoint(userId, chargeResult, user.getVersion());
         // if (updatedRows == 0) {
         //     throw new RuntimeException("낙관적 락 예외. 다른 트랜잭션에서 엔티티가 수정되었습니다.");
         // }
@@ -47,10 +46,10 @@ public class UserService {
         // return newBalance;
 
         // 비관적락
-        UserEntity userEntity = userRepository.findByIdForUpdate(userId)
+        User user = userRepository.findByIdForUpdate(userId)
         .orElseThrow(() -> new IllegalStateException("사용자 정보가 없습니다."));
 
-        int chargeResult = userEntity.getBalance() + point;
+        int chargeResult = user.getBalance() + point;
 
         int updatedRows = userRepository.chargePoint(userId, chargeResult);
         if (updatedRows == 0) {
@@ -64,10 +63,10 @@ public class UserService {
     // 포인트 사용
     @Transactional
     public int usePoint(Long userId, int price) {
-        UserEntity userEntity = userRepository.getUserInfo(userId);
-        userEntity.decreaseBalance(price);
+        User user = userRepository.getUserInfo(userId);
+        user.decreaseBalance(price);
 
-        int updatedRows = userRepository.usePoint(userId, userEntity.getBalance(), userEntity.getVersion());
+        int updatedRows = userRepository.usePoint(userId, user.getBalance(), user.getVersion());
         if (updatedRows == 0) {
             throw new RuntimeException("낙관적 락 예외. 다른 트랜잭션에서 엔티티가 수정되었습니다.");
         }

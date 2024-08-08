@@ -15,11 +15,10 @@ import java.util.Optional;
 import static com.hhplus.concert_ticketing.domain.concert.SeatStatus.LOCKED;
 import static com.hhplus.concert_ticketing.domain.concert.SeatStatus.UNLOCKED;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-class ConcertDtoServiceTest {
+class ConcertServiceTest {
 
     @Mock
     private ConcertRepository concertRepository;
@@ -43,13 +42,13 @@ class ConcertDtoServiceTest {
 
     @Test
     void 콘서트_목록_조회_성공() {
-        List<ConcertEntity> concerts = new ArrayList<>();
-        concerts.add(new ConcertEntity(1L, "2024-07-15"));
-        concerts.add(new ConcertEntity(2L, "2024-07-16"));
+        List<Concert> concerts = new ArrayList<>();
+        concerts.add(new Concert(1L, "2024-07-15"));
+        concerts.add(new Concert(2L, "2024-07-16"));
 
         when(concertRepository.findAll()).thenReturn(concerts);
 
-        List<ConcertEntity> result = concertService.getConcerts();
+        List<Concert> result = concertService.getConcerts();
         assertNotNull(result);
         assertEquals(2, result.size());
     }
@@ -68,14 +67,14 @@ class ConcertDtoServiceTest {
     @Test
     void 예약_가능한_날짜_조회_성공() {
         Long concertId = 1L;
-        List<ConcertOptionEntity> concertOptions = new ArrayList<>();
-        concertOptions.add(new ConcertOptionEntity(concertId, "2024-07-15"));
-        concertOptions.add(new ConcertOptionEntity(concertId, "2024-07-16"));
+        List<ConcertOption> concertOptions = new ArrayList<>();
+        concertOptions.add(new ConcertOption(concertId, "2024-07-15"));
+        concertOptions.add(new ConcertOption(concertId, "2024-07-16"));
 
         when(concertOptionRepository.findByConcertId(concertId))
                 .thenReturn(Optional.of(concertOptions));
 
-        List<ConcertOptionEntity> result = concertService.getAvailableDates(concertId);
+        List<ConcertOption> result = concertService.getAvailableDates(concertId);
         assertNotNull(result);
         assertEquals(2, result.size());
     }
@@ -97,14 +96,14 @@ class ConcertDtoServiceTest {
     @Test
     void 좌석_조회_성공() {
         Long concertOptionId = 1L;
-        List<SeatEntity> seats = new ArrayList<>();
-        seats.add(new SeatEntity(concertOptionId, "1", UNLOCKED, 120000));
-        seats.add(new SeatEntity(concertOptionId, "2", LOCKED, 120000));
+        List<Seat> seats = new ArrayList<>();
+        seats.add(new Seat(concertOptionId, "1", UNLOCKED, 120000));
+        seats.add(new Seat(concertOptionId, "2", LOCKED, 120000));
 
         when(seatRepository.findByConcertOptionId(concertOptionId))
                 .thenReturn(Optional.of(seats));
 
-        List<SeatEntity> result = concertService.getAvailableSeats(concertOptionId);
+        List<Seat> result = concertService.getAvailableSeats(concertOptionId);
         assertNotNull(result);
         assertEquals(2, result.size());
     }
@@ -125,13 +124,13 @@ class ConcertDtoServiceTest {
 
     @Test
     void 선택한_좌석_조회_성공() {
-        SeatEntity seat = new SeatEntity(1L, "1", UNLOCKED, 120000);
+        Seat seat = new Seat(1L, "1", UNLOCKED, 120000);
         Long seatId = 1L;
 
         when(seatRepository.findById(seatId))
                 .thenReturn(Optional.of(seat));
 
-        SeatEntity result = concertService.getSeatStatus(seatId);
+        Seat result = concertService.getSeatStatus(seatId);
         assertNotNull(result);
         assertEquals(UNLOCKED, result.getStatus());
     }
@@ -152,7 +151,7 @@ class ConcertDtoServiceTest {
 
     @Test
     void 선택한_좌석_조회_실패_좌석_잠금() {
-        SeatEntity seat = new SeatEntity(1L, "1", LOCKED, 120000);
+        Seat seat = new Seat(1L, "1", LOCKED, 120000);
         Long seatId = 1L;
 
         when(seatRepository.findById(seatId))
@@ -168,7 +167,7 @@ class ConcertDtoServiceTest {
     @Test
     void testSaveConcert() {
         // Given
-        ConcertEntity concertEntity = ConcertEntity.builder()
+        Concert concertEntity = Concert.builder()
                 .name("Test Concert")
                 .build();
 
@@ -184,17 +183,34 @@ class ConcertDtoServiceTest {
     @Test
     void testSaveConcertOption() {
         // Given
-        ConcertOptionEntity concertOptionEntity = ConcertOptionEntity.builder()
+        ConcertOption concertOption = ConcertOption.builder()
                 .concertId(1L)
                 .concertDate(Timestamp.valueOf("2024-07-15"))
                 .build();
 
         // When
-        concertService.saveConcertOption(concertOptionEntity);
+        concertService.saveConcertOption(concertOption);
 
         // Then
-        verify(concertOptionRepository).save(concertOptionEntity);
+        verify(concertOptionRepository).save(concertOption);
         // 캐시가 삭제되었는지 확인
         verify(redisTemplate).delete("concerts::SimpleKey []");
+    }
+
+    @Test
+    void 콘서트_옵션_조회_성공() {
+        // 뭘 만들어야 하지...
+        // 콘서트 옵션을 조회할 때 콘서트 아이디를 넘겨주면...
+        Long concertId = 1L;
+        List<ConcertOption> concertOptions = new ArrayList<>();
+        concertOptions.add(new ConcertOption(concertId, "2024-07-15"));
+        concertOptions.add(new ConcertOption(concertId, "2024-07-16"));
+
+        when(concertOptionRepository.findByConcertId(concertId))
+                .thenReturn(Optional.of(concertOptions));
+
+        List<ConcertOption> result = concertService.getAvailableConcertOptions(concertId);
+        assertNotNull(result);
+        assertEquals(2, result.size());
     }
 }

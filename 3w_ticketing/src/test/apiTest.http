@@ -43,7 +43,7 @@ Content-Type: application/json
 ###
 
 ### 예약 가능 좌석 조회 API 테스트
-GET http://localhost:8080/api/1/available-seatDtos?token=validToken
+GET http://localhost:8080/api/concert/1/available-seats?token=e6e10516-7dec-47eb-83d2-fa0297b7a6b5
 Accept: application/json
 
 ###
@@ -53,7 +53,7 @@ POST http://localhost:8080/api/reserve
 Content-Type: application/json
 
 {
-  "token": "validToken",
+  "token": "0567556e-77de-4b73-9bd1-f5a1dfd0fe84",
   "concertOptionId": 1,
   "seatId": 1,
   "userId": 1

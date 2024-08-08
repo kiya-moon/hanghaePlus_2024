@@ -1,6 +1,6 @@
 package com.hhplus.concert_ticketing.infra.user;
 
-import com.hhplus.concert_ticketing.domain.user.UserEntity;
+import com.hhplus.concert_ticketing.domain.user.User;
 import com.hhplus.concert_ticketing.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -28,7 +28,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Optional<UserEntity> findByIdForUpdate(Long userId) {
+    public Optional<User> findByIdForUpdate(Long userId) {
         return userJpaRepository.findByIdForUpdate(userId);
     }
 
@@ -46,12 +46,12 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Optional<UserEntity> findById(Long userId) {
+    public Optional<User> findById(Long userId) {
         return userJpaRepository.findById(userId);
     }
 
     @Override
-    public UserEntity save(UserEntity user) {
+    public User save(User user) {
         return userJpaRepository.save(user);
     }
 
@@ -69,7 +69,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public UserEntity getUserInfo(Long userId) {
+    public User getUserInfo(Long userId) {
         return userJpaRepository.findById(userId)
                 .orElseThrow(() -> new IllegalStateException("사용자 정보가 없습니다."));
     }

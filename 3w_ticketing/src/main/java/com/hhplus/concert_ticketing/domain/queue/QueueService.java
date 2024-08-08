@@ -71,5 +71,4 @@ public class QueueService {
         // TTL 설정을 제거하여 즉시 만료 처리
         redisTemplate.delete(token);
     }
-
 }

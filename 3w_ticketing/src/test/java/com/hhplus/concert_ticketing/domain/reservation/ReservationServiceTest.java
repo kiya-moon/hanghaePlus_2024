@@ -1,7 +1,7 @@
 package com.hhplus.concert_ticketing.domain.reservation;
 
-import com.hhplus.concert_ticketing.domain.concert.SeatEntity;
-import com.hhplus.concert_ticketing.domain.user.UserEntity;
+import com.hhplus.concert_ticketing.domain.concert.Seat;
+import com.hhplus.concert_ticketing.domain.user.User;
 import com.hhplus.concert_ticketing.domain.user.UserRepository;
 import com.hhplus.concert_ticketing.domain.concert.SeatRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,8 +41,8 @@ class ReservationServiceTest {
     @Test
     void 예약_저장_성공_테스트() {
         // given
-        SeatEntity seat = mock(SeatEntity.class);
-        UserEntity user = mock(UserEntity.class);
+        Seat seat = mock(Seat.class);
+        User user = mock(User.class);
 
         when(userRepository.findById(1L)).thenReturn(java.util.Optional.of(user));
         when(seatRepository.findById(1L)).thenReturn(java.util.Optional.of(seat));
@@ -53,15 +53,15 @@ class ReservationServiceTest {
 
         // then
         verify(seatRepository, times(1)).save(seat);
-        verify(reservationRepository, times(1)).save(any(ReservationEntity.class));
+        verify(reservationRepository, times(1)).save(any(Reservation.class));
         verify(seat, times(1)).setStatus(LOCKED);
     }
 
     @Test
     void 예약_저장_좌석이_LOCKED인_경우_테스트() {
         // given
-        SeatEntity seat = mock(SeatEntity.class);
-        UserEntity user = mock(UserEntity.class);
+        Seat seat = mock(Seat.class);
+        User user = mock(User.class);
 
         when(userRepository.findById(1L)).thenReturn(java.util.Optional.of(user));
         when(seatRepository.findById(1L)).thenReturn(java.util.Optional.of(seat));
@@ -89,7 +89,7 @@ class ReservationServiceTest {
     @Test
     void 존재하지_않는_좌석_테스트() {
         // given
-        UserEntity user = mock(UserEntity.class);
+        User user = mock(User.class);
         when(userRepository.findById(1L)).thenReturn(java.util.Optional.of(user));
         when(seatRepository.findById(1L)).thenReturn(java.util.Optional.empty());
 
@@ -104,13 +104,13 @@ class ReservationServiceTest {
     void 예약_조회_성공_테스트() {
         // given
         Long reservationId = 1L;
-        ReservationEntity reservation = new ReservationEntity();
+        Reservation reservation = new Reservation();
         reservation.setExpiresAt(new Timestamp(System.currentTimeMillis() + 10000));  // 유효한 예약
 
         when(reservationRepository.findById(reservationId)).thenReturn(java.util.Optional.of(reservation));
 
         // when
-        ReservationEntity result = reservationService.getReservationInfo(reservationId);
+        Reservation result = reservationService.getReservationInfo(reservationId);
 
         // then
         assertEquals(reservation, result);
@@ -120,7 +120,7 @@ class ReservationServiceTest {
     void 예약_조회_만료된_예약_테스트() {
         // given
         Long reservationId = 1L;
-        ReservationEntity reservation = new ReservationEntity();
+        Reservation reservation = new Reservation();
         reservation.setExpiresAt(new Timestamp(System.currentTimeMillis() - 1000));  // 이미 만료된 예약
 
         when(reservationRepository.findById(reservationId)).thenReturn(java.util.Optional.of(reservation));

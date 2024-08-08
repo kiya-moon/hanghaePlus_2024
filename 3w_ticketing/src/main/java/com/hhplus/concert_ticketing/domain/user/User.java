@@ -8,7 +8,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class UserEntity {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,13 +18,13 @@ public class UserEntity {
     @Version
     private int version;  // 낙관적 락을 위한 버전 필드 추가
 
-    public UserEntity(Long id, int balance) {
+    public User(Long id, int balance) {
         this.id = id;
         this.balance = balance;
     }
 
-    public static UserEntity createUser(Long id, int balance) {
-        return new UserEntity(id, balance);
+    public static User createUser(Long id, int balance) {
+        return new User(id, balance);
     }
 
     public void decreaseBalance(int price) {

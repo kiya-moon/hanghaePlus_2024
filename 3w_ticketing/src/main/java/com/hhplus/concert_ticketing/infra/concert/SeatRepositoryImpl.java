@@ -1,6 +1,6 @@
 package com.hhplus.concert_ticketing.infra.concert;
 
-import com.hhplus.concert_ticketing.domain.concert.SeatEntity;
+import com.hhplus.concert_ticketing.domain.concert.Seat;
 import com.hhplus.concert_ticketing.domain.concert.SeatRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -14,17 +14,17 @@ public class SeatRepositoryImpl implements SeatRepository {
     private final SeatJpaRepository seatJpaRepository;
 
     @Override
-    public Optional<List<SeatEntity>> findByConcertOptionId(Long concertOptionId) {
+    public Optional<List<Seat>> findByConcertOptionId(Long concertOptionId) {
         return seatJpaRepository.findByConcertOptionId(concertOptionId);
     }
 
     @Override
-    public Optional<SeatEntity> findById(Long seatId) {
+    public Optional<Seat> findById(Long seatId) {
         return seatJpaRepository.findById(seatId);
     }
 
     @Override
-    public void save(SeatEntity seat) {
+    public void save(Seat seat) {
         seatJpaRepository.save(seat);
     }
 
