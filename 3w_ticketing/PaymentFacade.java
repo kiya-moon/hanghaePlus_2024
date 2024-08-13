@@ -19,7 +19,7 @@ public class PaymentFacade {
     private final UserService userService;
     private final ReservationService reservationService;
     private final ReservationRepository reservationRepository;
-    private final ReservationEventListener reservationEventListener;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
     // 결제
     @Transactional
