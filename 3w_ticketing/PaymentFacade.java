@@ -54,7 +54,7 @@ public class PaymentFacade {
         }
 
         // 이벤트 발행
-        reservationEventListener.sendReservationInfo(reservation);
+        applicationEventPublihser.publishEvent(new PaidEvent(reservation));
     }
 }
 
