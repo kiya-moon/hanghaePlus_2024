@@ -1,7 +1,7 @@
 package com.hhplus.concert_ticketing.presentation;
 
 import com.hhplus.concert_ticketing.application.ReservationFacade;
-import com.hhplus.concert_ticketing.presentation.reservation.ReservationScheduler;
+import com.hhplus.concert_ticketing.interfaces.api.reservation.ReservationScheduler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

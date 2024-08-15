@@ -2,9 +2,9 @@ package com.hhplus.concert_ticketing.application;
 
 import com.hhplus.concert_ticketing.domain.concert.*;
 import com.hhplus.concert_ticketing.domain.queue.QueueService;
-import com.hhplus.concert_ticketing.presentation.concert.ConcertDto;
-import com.hhplus.concert_ticketing.presentation.concert.ConcertOptionDto;
-import com.hhplus.concert_ticketing.presentation.concert.SeatDto;
+import com.hhplus.concert_ticketing.interfaces.api.concert.ConcertDto;
+import com.hhplus.concert_ticketing.interfaces.api.concert.ConcertOptionDto;
+import com.hhplus.concert_ticketing.interfaces.api.concert.SeatDto;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

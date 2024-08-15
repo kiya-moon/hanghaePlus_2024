@@ -4,15 +4,52 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9d8606a-99af-4f76-a512-fb2a53087a14" name="변경" comment="feat: 8주차 init">
-      <change afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/PaidEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/ReservationEventListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/config/AppConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/infra/external/DataPlatformMockApiClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/interceptor/UserInterceptor.java" afterDir="false" />
+    <list default="true" id="d9d8606a-99af-4f76-a512-fb2a53087a14" name="변경" comment="feat: 이벤트 발행 수정 및 유저 확인 인터셉터로 역할 변경">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/prometheus/prometheus.yml" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/prometheus/prometheus.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/ConcertFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/ConcertFacade.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/PaymentFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/PaymentFacade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/config/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/QueueFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/QueueFacade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/ReservationEventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/event/ReservationEventListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/concert/ConcertMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/concert/ConcertMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/ErrorResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/ErrorResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/AvailableDatesResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/concert/AvailableDatesResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/AvailableSeatsResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/concert/AvailableSeatsResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/ConcertController.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/concert/ConcertController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/ConcertDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/concert/ConcertDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/ConcertListResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/concert/ConcertListResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/ConcertOptionDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/concert/ConcertOptionDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/ConcertOptionRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/concert/ConcertOptionRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/ConcertRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/concert/ConcertRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/SeatDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/concert/SeatDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/config/SpringDocConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/config/SpringDocConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/config/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/interceptor/TokenInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/interceptor/TokenInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/interceptor/UserInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/interceptor/UserInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/payment/PayDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/payment/PayDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/payment/PayRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/payment/PayRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/payment/PayResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/payment/PayResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/payment/PaymentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/payment/PaymentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/queue/QueueController.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/queue/QueueController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/queue/TokenRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/queue/TokenRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/queue/TokenResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/queue/TokenResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/reservation/ReservationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/reservation/ReservationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/reservation/ReservationScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/reservation/ReservationScheduler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/reservation/ReserveDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/reservation/ReserveDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/reservation/ReserveRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/reservation/ReserveRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/reservation/ReserveResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/reservation/ReserveResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/user/BalanceResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/user/BalanceResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/user/ChargeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/user/ChargeRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/user/ChargeResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/user/ChargeResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/user/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/ConcertIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/ConcertIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/LoggingFilterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/LoggingFilterTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/QueueIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/QueueIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/ReservationIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/ReservationIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/UserIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/UserIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/presentation/ReservationSchedulerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/presentation/ReservationSchedulerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/presentation/TicketingControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/presentation/TicketingControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +117,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/queue-with-redis" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -123,139 +160,139 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Docker.3w_ticketing/Dockerfile.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.3w_ticketing: Compose 배포.executor&quot;: &quot;Run&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Gradle.'concert-ticketing'에 있는 테스트.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.1w-tdd 빌드.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.3w_ticketing 빌드.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Build lecture.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ConcertIntegrationTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ConcertIntegrationTest.getAvailableSeats_성공.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ConcertServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ConcertServiceTest.get_available_dates_success.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ConcertServiceTest.콘서트_유효여부_테스트.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureControllerIntegrationTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureControllerIntegrationTest.testApplyLecture.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureControllerIntegrationTest.testGetLectureList.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureControllerIntegrationTest.testIsAppliedLecture.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureControllerTest.applyLectureTest_FAIL.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureControllerTest.applyLectureTest_SUCCESS.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureControllerTest.applyLecture_Success.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureControllerTest.getAllLecuresTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureControllerTest.getLectureListTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureControllerTest.isAppliedLectureTest_FAIL.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureControllerTest.isAppliedLectureTest_SUCCESS.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureControllerTest.signUpLectureSuccessTest (1).executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureControllerTest.signUpLectureSuccessTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureControllerTest.signUpLectureTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureControllerTest.testSignUpLecture.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureServiceIntegrationTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureServiceIntegrationTest.testApplyLecture.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureServiceTest.getLectureInfo.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureServiceTest.getLectureInfoFailure.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureServiceTest.isValidLectureTime.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureServiceTest.testApplyLecture_FullCapacity.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureServiceTest.testApplyLecture_LectureNotFound.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureServiceTest.testApplyLecture_SUCCESS.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureServiceTest.testGetLectureList.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureServiceTest.testIsAppliedLecture_FAIL.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureServiceTest.testIsAppliedLecture_NotFound.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureServiceTest.testIsAppliedLecture_SUCCESS.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LectureServiceTest.testIsAppliedLecture_Success.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LoggingFilterTest.로깅_필터_테스트.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.LoggingFilterTest.콘서트_목록이_빈경우_예외처리_테스트.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PaymentIntegrationTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PaymentIntegrationTest.결제_포인트_테스트_성공.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PointControllerTest.testGetUserPoint.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PointManagementTest.isChargePointSuccess.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PointServiceConcurrencyTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PointServiceConcurrencyTest.testConcurrentOperations.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PointServiceTest.ReturnUsePoint.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PointServiceTest.ReturnUsePointTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PointServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PointServiceTest.returnChargePoint.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PointServiceTest.returnFailUsePointInsufficientBalance.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PointServiceTest.returnGetPointHistoryTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PointServiceTest.returnGetPointTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PointServiceTest.testConcurrency.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.QueueControllerIntegrationTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.QueueIntegrationTest (1).executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.QueueIntegrationTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.QueueIntegrationTest.testCheckQueueEndpoint.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.QueueIntegrationTest.testIssueTokenEndpoint (1).executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.QueueIntegrationTest.testIssueTokenEndpoint.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.QueueSchedulerTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.QueueServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.QueueServiceTest.expireToken_정상적으로_만료처리_테스트.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.QueueServiceTest.유저_ID로_토큰_발급_여부_확인_테스트.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.QueueServiceTest.유저_ID로_토큰_생성_테스트.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.QueueServiceTest.토큰_유효성_확인_테스트.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.QueueServiceTest.토큰_조회_상태에_따른_반환_테스트.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ReservationIntegrationTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ReservationIntegrationTest.reserveSeat_성공.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ReservationServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.ReservationServiceTest.결제_시간_만료_테스트.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.SeatReservationConcurrencyTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.SeatReservationConcurrencyTest.testConcurrentSeatReservation.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.SeatServiceConcurrencyTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TicketingControllerTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TicketingControllerTest.testGetAvailableDates.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TicketingControllerTest.testIssueToken.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TicketingControllerTest.testPay.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.TicketingControllerTest.testReserveSeat.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.UserEntityTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.UserServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.hhplus_3week_ticketing-pr1 [dependencies].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.hhplus_3week_ticketing-pr1 빌드.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.lecture 빌드.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.apiTest | #7.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP 요청.apiTest | 유저 토큰 발급 성공 테스트.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP 요청.apiTest | 유저 토큰 발급 실패 - concertId 누락.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP 요청.apiTest | 유저 토큰 발급 실패 - userId 누락.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP 요청.apiTest | 토큰 발급 API 테스트.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP 요청.apiTest 내 전체.executor&quot;: &quot;Run&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.ConcertTicketingApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.LectureApplication.executor&quot;: &quot;Run&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_directory_selection&quot;: &quot;/Users/kiya/IdeaProjects/hanghaePlus_2024/3w_ticketing/src/test/java/com/hhplus/concert_ticketing&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/kiya/IdeaProjects/hanghaePlus_2024/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;모듈&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Docker.3w_ticketing/Dockerfile.executor": "Run",
+    "Docker.3w_ticketing: Compose 배포.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Gradle.'concert-ticketing'에 있는 테스트.executor": "Run",
+    "Gradle.1w-tdd 빌드.executor": "Run",
+    "Gradle.3w_ticketing 빌드.executor": "Run",
+    "Gradle.Build lecture.executor": "Run",
+    "Gradle.ConcertIntegrationTest.executor": "Run",
+    "Gradle.ConcertIntegrationTest.getAvailableSeats_성공.executor": "Run",
+    "Gradle.ConcertServiceTest.executor": "Run",
+    "Gradle.ConcertServiceTest.get_available_dates_success.executor": "Run",
+    "Gradle.ConcertServiceTest.콘서트_유효여부_테스트.executor": "Run",
+    "Gradle.LectureControllerIntegrationTest.executor": "Run",
+    "Gradle.LectureControllerIntegrationTest.testApplyLecture.executor": "Run",
+    "Gradle.LectureControllerIntegrationTest.testGetLectureList.executor": "Run",
+    "Gradle.LectureControllerIntegrationTest.testIsAppliedLecture.executor": "Run",
+    "Gradle.LectureControllerTest.applyLectureTest_FAIL.executor": "Run",
+    "Gradle.LectureControllerTest.applyLectureTest_SUCCESS.executor": "Run",
+    "Gradle.LectureControllerTest.applyLecture_Success.executor": "Run",
+    "Gradle.LectureControllerTest.getAllLecuresTest.executor": "Run",
+    "Gradle.LectureControllerTest.getLectureListTest.executor": "Run",
+    "Gradle.LectureControllerTest.isAppliedLectureTest_FAIL.executor": "Run",
+    "Gradle.LectureControllerTest.isAppliedLectureTest_SUCCESS.executor": "Run",
+    "Gradle.LectureControllerTest.signUpLectureSuccessTest (1).executor": "Run",
+    "Gradle.LectureControllerTest.signUpLectureSuccessTest.executor": "Run",
+    "Gradle.LectureControllerTest.signUpLectureTest.executor": "Run",
+    "Gradle.LectureControllerTest.testSignUpLecture.executor": "Run",
+    "Gradle.LectureServiceIntegrationTest.executor": "Run",
+    "Gradle.LectureServiceIntegrationTest.testApplyLecture.executor": "Run",
+    "Gradle.LectureServiceTest.executor": "Run",
+    "Gradle.LectureServiceTest.getLectureInfo.executor": "Run",
+    "Gradle.LectureServiceTest.getLectureInfoFailure.executor": "Run",
+    "Gradle.LectureServiceTest.isValidLectureTime.executor": "Run",
+    "Gradle.LectureServiceTest.testApplyLecture_FullCapacity.executor": "Run",
+    "Gradle.LectureServiceTest.testApplyLecture_LectureNotFound.executor": "Run",
+    "Gradle.LectureServiceTest.testApplyLecture_SUCCESS.executor": "Run",
+    "Gradle.LectureServiceTest.testGetLectureList.executor": "Run",
+    "Gradle.LectureServiceTest.testIsAppliedLecture_FAIL.executor": "Run",
+    "Gradle.LectureServiceTest.testIsAppliedLecture_NotFound.executor": "Run",
+    "Gradle.LectureServiceTest.testIsAppliedLecture_SUCCESS.executor": "Run",
+    "Gradle.LectureServiceTest.testIsAppliedLecture_Success.executor": "Run",
+    "Gradle.LoggingFilterTest.로깅_필터_테스트.executor": "Run",
+    "Gradle.LoggingFilterTest.콘서트_목록이_빈경우_예외처리_테스트.executor": "Run",
+    "Gradle.PaymentIntegrationTest.executor": "Run",
+    "Gradle.PaymentIntegrationTest.결제_포인트_테스트_성공.executor": "Run",
+    "Gradle.PointControllerTest.testGetUserPoint.executor": "Run",
+    "Gradle.PointManagementTest.isChargePointSuccess.executor": "Run",
+    "Gradle.PointServiceConcurrencyTest.executor": "Run",
+    "Gradle.PointServiceConcurrencyTest.testConcurrentOperations.executor": "Run",
+    "Gradle.PointServiceTest.ReturnUsePoint.executor": "Run",
+    "Gradle.PointServiceTest.ReturnUsePointTest.executor": "Run",
+    "Gradle.PointServiceTest.executor": "Run",
+    "Gradle.PointServiceTest.returnChargePoint.executor": "Run",
+    "Gradle.PointServiceTest.returnFailUsePointInsufficientBalance.executor": "Run",
+    "Gradle.PointServiceTest.returnGetPointHistoryTest.executor": "Run",
+    "Gradle.PointServiceTest.returnGetPointTest.executor": "Run",
+    "Gradle.PointServiceTest.testConcurrency.executor": "Run",
+    "Gradle.QueueControllerIntegrationTest.executor": "Run",
+    "Gradle.QueueIntegrationTest (1).executor": "Run",
+    "Gradle.QueueIntegrationTest.executor": "Run",
+    "Gradle.QueueIntegrationTest.testCheckQueueEndpoint.executor": "Run",
+    "Gradle.QueueIntegrationTest.testIssueTokenEndpoint (1).executor": "Run",
+    "Gradle.QueueIntegrationTest.testIssueTokenEndpoint.executor": "Run",
+    "Gradle.QueueSchedulerTest.executor": "Run",
+    "Gradle.QueueServiceTest.executor": "Run",
+    "Gradle.QueueServiceTest.expireToken_정상적으로_만료처리_테스트.executor": "Run",
+    "Gradle.QueueServiceTest.유저_ID로_토큰_발급_여부_확인_테스트.executor": "Run",
+    "Gradle.QueueServiceTest.유저_ID로_토큰_생성_테스트.executor": "Run",
+    "Gradle.QueueServiceTest.토큰_유효성_확인_테스트.executor": "Run",
+    "Gradle.QueueServiceTest.토큰_조회_상태에_따른_반환_테스트.executor": "Run",
+    "Gradle.ReservationIntegrationTest.executor": "Run",
+    "Gradle.ReservationIntegrationTest.reserveSeat_성공.executor": "Run",
+    "Gradle.ReservationServiceTest.executor": "Run",
+    "Gradle.ReservationServiceTest.결제_시간_만료_테스트.executor": "Run",
+    "Gradle.SeatReservationConcurrencyTest.executor": "Run",
+    "Gradle.SeatReservationConcurrencyTest.testConcurrentSeatReservation.executor": "Run",
+    "Gradle.SeatServiceConcurrencyTest.executor": "Run",
+    "Gradle.TicketingControllerTest.executor": "Run",
+    "Gradle.TicketingControllerTest.testGetAvailableDates.executor": "Run",
+    "Gradle.TicketingControllerTest.testIssueToken.executor": "Run",
+    "Gradle.TicketingControllerTest.testPay.executor": "Run",
+    "Gradle.TicketingControllerTest.testReserveSeat.executor": "Run",
+    "Gradle.UserEntityTest.executor": "Run",
+    "Gradle.UserServiceTest.executor": "Run",
+    "Gradle.hhplus_3week_ticketing-pr1 [dependencies].executor": "Run",
+    "Gradle.hhplus_3week_ticketing-pr1 빌드.executor": "Run",
+    "Gradle.lecture 빌드.executor": "Run",
+    "HTTP Request.apiTest | #7.executor": "Run",
+    "HTTP 요청.apiTest | 유저 토큰 발급 성공 테스트.executor": "Run",
+    "HTTP 요청.apiTest | 유저 토큰 발급 실패 - concertId 누락.executor": "Run",
+    "HTTP 요청.apiTest | 유저 토큰 발급 실패 - userId 누락.executor": "Run",
+    "HTTP 요청.apiTest | 토큰 발급 API 테스트.executor": "Run",
+    "HTTP 요청.apiTest 내 전체.executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.ConcertTicketingApplication.executor": "Run",
+    "Spring Boot.LectureApplication.executor": "Run",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "9w-kafka",
+    "jdk.selected.JAVA_MODULE": "17",
+    "kotlin-language-version-configured": "true",
+    "last_directory_selection": "/Users/kiya/IdeaProjects/hanghaePlus_2024/3w_ticketing/src/test/java/com/hhplus/concert_ticketing",
+    "last_opened_file_path": "/Users/kiya/IdeaProjects/hanghaePlus_2024/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "모듈",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.configurations.included.in.services": "true",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;h2&quot;,
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "h2",
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -284,6 +321,7 @@
       <recent name="io.hhplus.tdd.point.service" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.hhplus.concert_ticketing.event" />
       <recent name="com.hhplus.concert_ticketing.application" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
@@ -566,7 +604,8 @@
       <workItem from="1722958902100" duration="2279000" />
       <workItem from="1722963594192" duration="34300000" />
       <workItem from="1723292144939" duration="8000" />
-      <workItem from="1723536947128" duration="3162000" />
+      <workItem from="1723536947128" duration="8868000" />
+      <workItem from="1723721614039" duration="4008000" />
     </task>
     <task id="LOCAL-00001" summary="feat: 1주차 과제 베이스">
       <option name="closed" value="true" />
@@ -808,7 +847,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723146969111</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="feat: 이벤트 발행 수정 및 유저 확인 인터셉터로 역할 변경">
+      <option name="closed" value="true" />
+      <created>1723548202357</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1723548202357</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -827,7 +874,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="feat: 기타2" />
     <MESSAGE value="init: 2주차 프로젝트 폴더 생성" />
     <MESSAGE value="refactor: 1주차 과제 스케치 파일 위치 이동" />
     <MESSAGE value="feat: 기본 구조 및 DB 생성" />
@@ -852,7 +898,8 @@
     <MESSAGE value="init: 레디스 queue로 대기열 구현" />
     <MESSAGE value="feat: 레디스로 대기열 구현" />
     <MESSAGE value="feat: 8주차 init" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 8주차 init" />
+    <MESSAGE value="feat: 이벤트 발행 수정 및 유저 확인 인터셉터로 역할 변경" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 이벤트 발행 수정 및 유저 확인 인터셉터로 역할 변경" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
