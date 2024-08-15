@@ -54,6 +54,9 @@ public class PaymentFacade {
             throw e;
         }
 
+        // 결제 완료 이벤트 outbox에 저장
+
+
         // 이벤트 발행
         applicationEventPublisher.publishEvent(new PaidEvent(this, reservation));
     }

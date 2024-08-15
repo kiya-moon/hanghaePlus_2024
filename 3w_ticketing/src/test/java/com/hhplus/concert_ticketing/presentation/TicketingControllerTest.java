@@ -1,6 +1,6 @@
 //package com.hhplus.concert_ticketing.presentation;
 //
-//import com.hhplus.concert_ticketing.presentation.user.ChargeRequest;
+//import com.hhplus.concert_ticketing.interfaces.api.user.ChargeRequest;
 //import org.junit.jupiter.api.Test;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

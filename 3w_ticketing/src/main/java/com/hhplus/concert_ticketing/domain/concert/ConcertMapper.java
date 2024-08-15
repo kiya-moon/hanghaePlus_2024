@@ -1,8 +1,8 @@
 package com.hhplus.concert_ticketing.domain.concert;
 
-import com.hhplus.concert_ticketing.presentation.concert.ConcertDto;
-import com.hhplus.concert_ticketing.presentation.concert.ConcertOptionDto;
-import com.hhplus.concert_ticketing.presentation.concert.SeatDto;
+import com.hhplus.concert_ticketing.interfaces.api.concert.ConcertDto;
+import com.hhplus.concert_ticketing.interfaces.api.concert.ConcertOptionDto;
+import com.hhplus.concert_ticketing.interfaces.api.concert.SeatDto;
 
 public class ConcertMapper {
     public static ConcertDto toDTO(Concert entity) {
