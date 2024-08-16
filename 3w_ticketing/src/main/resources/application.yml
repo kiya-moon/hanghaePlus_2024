@@ -8,7 +8,7 @@ Spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         use_new_id_generator_mappings: true
@@ -20,6 +20,22 @@ Spring:
     redis:
       host: localhost
       port: 6379
+
+  kafka:
+    bootstrap-servers:
+      - localhost:9092
+    schema-registry:
+      url: http://localhost:8081  # Schema Registry의 URL
+    consumer:
+      group-id: concert-ticketing-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      properties:
+        specific.avro.reader: true  # Avro의 특정 클래스를 사용하여 메시지를 역직렬화합니다.
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
 
 logging:
   level:

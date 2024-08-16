@@ -1,15 +1,20 @@
 package com.hhplus.concert_ticketing.application;
 
+import com.hhplus.concert_ticketing.domain.event.PaidReservationEvent;
 import com.hhplus.concert_ticketing.domain.reservation.Reservation;
 import com.hhplus.concert_ticketing.domain.reservation.ReservationRepository;
 import com.hhplus.concert_ticketing.domain.reservation.ReservationService;
 import com.hhplus.concert_ticketing.domain.user.UserService;
+import com.hhplus.concert_ticketing.infra.event.OutboxEvent;
+import com.hhplus.concert_ticketing.infra.event.OutboxEventRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+
+import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +25,7 @@ public class PaymentFacade {
     private final UserService userService;
     private final ReservationService reservationService;
     private final ReservationRepository reservationRepository;
+    private final OutboxEventRepository outboxEventRepository;
     private final ApplicationEventPublisher applicationEventPublisher;
 
     // 결제
@@ -55,10 +61,37 @@ public class PaymentFacade {
         }
 
         // 결제 완료 이벤트 outbox에 저장
+        try {
+            OutboxEvent outboxEvent = OutboxEvent.create(
+                    reservationId.toString(),
+                    "payment",
+                    "PaidReservationEvent",
+                    "Reservation ID: " + reservationId + " 결제 완료됨",
+                    String.valueOf(reservation)
+            );
+            outboxEventRepository.save(outboxEvent);
+        } catch (Exception e) {
+            logger.error("결제 완료 이벤트 저장 실패: {}", e.getMessage());
+            throw e;
+        }
 
+        com.hhplus.concert_ticketing.domain.reservation.Reservation domainReservation = reservation;
+        com.hhplus.concert_ticketing.avro.Reservation avroReservation = convertToAvroReservation(domainReservation);
 
         // 이벤트 발행
-        applicationEventPublisher.publishEvent(new PaidEvent(this, reservation));
+        applicationEventPublisher.publishEvent(new PaidReservationEvent(reservationId, avroReservation));
+    }
+
+    private com.hhplus.concert_ticketing.avro.Reservation convertToAvroReservation(com.hhplus.concert_ticketing.domain.reservation.Reservation domainReservation) {
+        return com.hhplus.concert_ticketing.avro.Reservation.newBuilder()
+                .setId(domainReservation.getId())
+                .setUserId(domainReservation.getUserId())
+                .setSeatId(domainReservation.getSeatId())
+                .setStatus(domainReservation.getStatus())
+                .setCreatedAt(Instant.ofEpochSecond(domainReservation.getCreatedAt().getTime()))
+                .setExpiresAt(Instant.ofEpochSecond(domainReservation.getExpiresAt().getTime()))
+                .setPrice(domainReservation.getPrice())
+                .build();
     }
 }
 
