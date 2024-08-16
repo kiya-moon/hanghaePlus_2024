@@ -2,7 +2,6 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.3.1'
     id 'io.spring.dependency-management' version '1.1.5'
-    id 'com.github.davidmc24.gradle.plugin.avro' version '1.5.0'
 }
 
 group = 'com.hhplus'
@@ -32,8 +31,6 @@ dependencies {
     implementation 'net.datafaker:datafaker:2.3.1'
     implementation 'org.springframework.kafka:spring-kafka'
     implementation 'org.apache.kafka:kafka-clients'
-    implementation 'io.confluent:kafka-avro-serializer:7.7.0'
-    implementation 'org.apache.avro:avro:1.12.0'
     testImplementation 'org.springframework.kafka:spring-kafka-test'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
@@ -45,9 +42,14 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     testImplementation 'io.rest-assured:rest-assured'
     testImplementation 'org.springframework.kafka:spring-kafka-test'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
     jvmArgs '-Xshare:off' // JVM 아규먼트 설정
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs << '-parameters'
 }

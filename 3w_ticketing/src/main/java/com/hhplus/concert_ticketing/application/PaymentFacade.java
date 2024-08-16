@@ -1,5 +1,7 @@
 package com.hhplus.concert_ticketing.application;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hhplus.concert_ticketing.domain.event.PaidReservationEvent;
 import com.hhplus.concert_ticketing.domain.reservation.Reservation;
 import com.hhplus.concert_ticketing.domain.reservation.ReservationRepository;
@@ -27,6 +29,7 @@ public class PaymentFacade {
     private final ReservationRepository reservationRepository;
     private final OutboxEventRepository outboxEventRepository;
     private final ApplicationEventPublisher applicationEventPublisher;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     // 결제
     @Transactional
@@ -66,8 +69,7 @@ public class PaymentFacade {
                     reservationId.toString(),
                     "payment",
                     "PaidReservationEvent",
-                    "Reservation ID: " + reservationId + " 결제 완료됨",
-                    String.valueOf(reservation)
+                    "Reservation ID: " + reservationId + " 결제 완료됨"
             );
             outboxEventRepository.save(outboxEvent);
         } catch (Exception e) {
@@ -75,23 +77,20 @@ public class PaymentFacade {
             throw e;
         }
 
-        com.hhplus.concert_ticketing.domain.reservation.Reservation domainReservation = reservation;
-        com.hhplus.concert_ticketing.avro.Reservation avroReservation = convertToAvroReservation(domainReservation);
+        // Reservation 객체를 JSON 문자열로 변환
+        String reservationJson = convertToJsonReservation(reservation);
 
         // 이벤트 발행
-        applicationEventPublisher.publishEvent(new PaidReservationEvent(reservationId, avroReservation));
+        applicationEventPublisher.publishEvent(new PaidReservationEvent(reservationId.toString(), reservationJson));
     }
 
-    private com.hhplus.concert_ticketing.avro.Reservation convertToAvroReservation(com.hhplus.concert_ticketing.domain.reservation.Reservation domainReservation) {
-        return com.hhplus.concert_ticketing.avro.Reservation.newBuilder()
-                .setId(domainReservation.getId())
-                .setUserId(domainReservation.getUserId())
-                .setSeatId(domainReservation.getSeatId())
-                .setStatus(domainReservation.getStatus())
-                .setCreatedAt(Instant.ofEpochSecond(domainReservation.getCreatedAt().getTime()))
-                .setExpiresAt(Instant.ofEpochSecond(domainReservation.getExpiresAt().getTime()))
-                .setPrice(domainReservation.getPrice())
-                .build();
+    private String convertToJsonReservation(Reservation domainReservation) {
+        try {
+            return objectMapper.writeValueAsString(domainReservation);
+        } catch (JsonProcessingException e) {
+            logger.error("Reservation 객체를 JSON으로 직렬화 실패: {}", e.getMessage());
+            throw new RuntimeException("JSON 직렬화 실패", e);
+        }
     }
 }
 

@@ -1,6 +1,6 @@
 package com.hhplus.concert_ticketing.domain.event;
 
-import com.hhplus.concert_ticketing.avro.Reservation;
+import com.hhplus.concert_ticketing.domain.reservation.Reservation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
