@@ -1,7 +1,7 @@
 package com.hhplus.concert_ticketing;
 
 import com.hhplus.concert_ticketing.application.ConcertFacade;
-import com.hhplus.concert_ticketing.presentation.concert.ConcertDto;
+import com.hhplus.concert_ticketing.interfaces.api.concert.ConcertDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

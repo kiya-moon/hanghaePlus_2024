@@ -4,63 +4,52 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9d8606a-99af-4f76-a512-fb2a53087a14" name="변경" comment="feat: 레디스로 대기열 구현">
+    <list default="true" id="d9d8606a-99af-4f76-a512-fb2a53087a14" name="변경" comment="feat: 이벤트 발행 수정 및 유저 확인 인터셉터로 역할 변경">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/3주차 과제 README.md" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/3주차 과제 README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/prometheus/prometheus.yml" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/prometheus/prometheus.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/ConcertFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/ConcertFacade.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/PaymentFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/PaymentFacade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/ReservationFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/ReservationFacade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/UserFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/UserFacade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/concert/ConcertEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/concert/Concert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/QueueFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/QueueFacade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/application/ReservationEventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/event/ReservationEventListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/concert/ConcertMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/concert/ConcertMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/concert/ConcertOptionEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/concert/ConcertOption.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/concert/ConcertOptionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/concert/ConcertOptionRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/concert/ConcertRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/concert/ConcertRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/concert/ConcertService.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/concert/ConcertService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/concert/SeatEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/concert/Seat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/concert/SeatRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/concert/SeatRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/queue/QueueMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/queue/QueueRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/queue/QueueRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/queue/QueueService.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/queue/QueueService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/queue/TokenEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/queue/Token.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/reservation/ReservationEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/reservation/Reservation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/reservation/ReservationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/reservation/ReservationRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/reservation/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/reservation/ReservationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/user/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/user/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/user/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/user/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/user/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain/user/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/infra/concert/ConcertJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/infra/concert/ConcertJpaRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/infra/concert/ConcertOptionJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/infra/concert/ConcertOptionJpaRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/infra/concert/ConcertOptionRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/infra/concert/ConcertOptionRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/infra/concert/ConcertRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/infra/concert/ConcertRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/infra/concert/SeatJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/infra/concert/SeatJpaRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/infra/concert/SeatRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/infra/concert/SeatRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/infra/config/DataInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/infra/config/DataInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/infra/queue/QueueJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/infra/queue/QueueJpaRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/infra/queue/QueueRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/infra/queue/QueueRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/infra/reservation/ReservationJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/infra/reservation/ReservationJpaRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/infra/reservation/ReservationRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/infra/reservation/ReservationRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/infra/user/UserJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/infra/user/UserJpaRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/infra/user/UserRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/infra/user/UserRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/ConcertController.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/ConcertController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/interceptor/TokenInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/interceptor/TokenInterceptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/queue/QueueScheduler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/queue/TokenDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/queue/TokenResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/queue/TokenResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/reservation/ReservationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/reservation/ReservationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/apiTest.http" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/apiTest.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/PaymentIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/PaymentIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/ErrorResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/ErrorResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/AvailableDatesResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/concert/AvailableDatesResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/AvailableSeatsResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/concert/AvailableSeatsResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/ConcertController.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/concert/ConcertController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/ConcertDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/concert/ConcertDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/ConcertListResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/concert/ConcertListResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/ConcertOptionDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/concert/ConcertOptionDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/ConcertOptionRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/concert/ConcertOptionRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/ConcertRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/concert/ConcertRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/concert/SeatDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/concert/SeatDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/config/SpringDocConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/config/SpringDocConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/config/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/interceptor/TokenInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/interceptor/TokenInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/interceptor/UserInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/interceptor/UserInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/payment/PayDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/payment/PayDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/payment/PayRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/payment/PayRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/payment/PayResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/payment/PayResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/payment/PaymentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/payment/PaymentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/queue/QueueController.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/queue/QueueController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/queue/TokenRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/queue/TokenRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/queue/TokenResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/queue/TokenResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/reservation/ReservationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/reservation/ReservationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/reservation/ReservationScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/reservation/ReservationScheduler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/reservation/ReserveDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/reservation/ReserveDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/reservation/ReserveRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/reservation/ReserveRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/reservation/ReserveResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/reservation/ReserveResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/user/BalanceResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/user/BalanceResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/user/ChargeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/user/ChargeRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/user/ChargeResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/user/ChargeResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/presentation/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/interfaces/api/user/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/ConcertIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/ConcertIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/LoggingFilterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/LoggingFilterTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/QueueIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/QueueIntegrationTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/ReservationIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/ReservationIntegrationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/SeatReservationConcurrencyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/SeatReservationConcurrencyTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/UserIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/UserIntegrationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/domain/concert/ConcertDtoServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/domain/concert/ConcertServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/domain/queue/QueueServiceTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/domain/reservation/ReservationServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/domain/reservation/ReservationServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/domain/user/UserEntityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/domain/user/UserTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/domain/user/UserServiceConcurrencyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/domain/user/UserServiceConcurrencyTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/domain/user/UserServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/domain/user/UserServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/presentation/ReservationSchedulerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/presentation/ReservationSchedulerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/presentation/TicketingControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/3w_ticketing/src/test/java/com/hhplus/concert_ticketing/presentation/TicketingControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +117,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/queue-with-redis" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -280,7 +269,7 @@
     "Spring Boot.LectureApplication.executor": "Run",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "9w-kafka",
     "jdk.selected.JAVA_MODULE": "17",
     "kotlin-language-version-configured": "true",
     "last_directory_selection": "/Users/kiya/IdeaProjects/hanghaePlus_2024/3w_ticketing/src/test/java/com/hhplus/concert_ticketing",
@@ -309,11 +298,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.hhplus.concert_ticketing.application" />
       <recent name="com.hhplus.concert_ticketing.domain.reservation" />
       <recent name="com.hhplus.concert_ticketing.domain.queue" />
       <recent name="com.hhplus.concert_ticketing.domain.user" />
       <recent name="com.hhplus.concert_ticketing.domain.concert" />
-      <recent name="com.hhplus.concert_ticketing.presentation.dto" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/3w_ticketing/src/main/java/com/hhplus/concert_ticketing/domain" />
@@ -330,6 +319,10 @@
     </key>
     <key name="MoveInnerDialog.RECENTS_KEY">
       <recent name="io.hhplus.tdd.point.service" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.hhplus.concert_ticketing.event" />
+      <recent name="com.hhplus.concert_ticketing.application" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="com.hhplus.concert_ticketing" />
@@ -609,7 +602,10 @@
       <workItem from="1722362610992" duration="14649000" />
       <workItem from="1722860207230" duration="2281000" />
       <workItem from="1722958902100" duration="2279000" />
-      <workItem from="1722963594192" duration="21118000" />
+      <workItem from="1722963594192" duration="34300000" />
+      <workItem from="1723292144939" duration="8000" />
+      <workItem from="1723536947128" duration="8868000" />
+      <workItem from="1723721614039" duration="4008000" />
     </task>
     <task id="LOCAL-00001" summary="feat: 1주차 과제 베이스">
       <option name="closed" value="true" />
@@ -843,7 +839,23 @@
       <option name="project" value="LOCAL" />
       <updated>1722588275560</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="feat: 8주차 init">
+      <option name="closed" value="true" />
+      <created>1723146969111</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1723146969111</updated>
+    </task>
+    <task id="LOCAL-00031" summary="feat: 이벤트 발행 수정 및 유저 확인 인터셉터로 역할 변경">
+      <option name="closed" value="true" />
+      <created>1723548202357</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1723548202357</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -862,8 +874,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="feat: 기타" />
-    <MESSAGE value="feat: 기타2" />
     <MESSAGE value="init: 2주차 프로젝트 폴더 생성" />
     <MESSAGE value="refactor: 1주차 과제 스케치 파일 위치 이동" />
     <MESSAGE value="feat: 기본 구조 및 DB 생성" />
@@ -887,7 +897,9 @@
     <MESSAGE value="feat: 에러가 나고 있따ㅏㅏㅏㅏ" />
     <MESSAGE value="init: 레디스 queue로 대기열 구현" />
     <MESSAGE value="feat: 레디스로 대기열 구현" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 레디스로 대기열 구현" />
+    <MESSAGE value="feat: 8주차 init" />
+    <MESSAGE value="feat: 이벤트 발행 수정 및 유저 확인 인터셉터로 역할 변경" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 이벤트 발행 수정 및 유저 확인 인터셉터로 역할 변경" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

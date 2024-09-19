@@ -39,7 +39,7 @@ public class DataInitializer {
         return (args) -> {
             Faker faker = new Faker(new Locale("ko", "KOREA"));
             Random random = new Random();
-            for (int i = 1; i <= 100; i++) {
+            for (int i = 1; i <= 10; i++) {
                 // 콘서트 이름 생성
                 String concertName = faker.kpop().girlGroups() + " 콘서트";
                 Concert concert = Concert.builder()
@@ -76,7 +76,7 @@ public class DataInitializer {
                     int price = minPrice + (random.nextInt((maxPrice - minPrice) / 10000 + 1)) * 10000;
 
                     // 좌석 생성
-                    for (int k = 1; k <= 200; k++) {
+                    for (int k = 1; k <= 50; k++) {
                         String seatNumber = String.format("Seat-%03d", k);
 
                         Seat seatEntity = Seat.builder()

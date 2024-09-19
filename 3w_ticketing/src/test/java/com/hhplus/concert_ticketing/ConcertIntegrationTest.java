@@ -1,8 +1,8 @@
 package com.hhplus.concert_ticketing;
 
 import com.hhplus.concert_ticketing.application.ConcertFacade;
-import com.hhplus.concert_ticketing.presentation.ErrorResponse;
-import com.hhplus.concert_ticketing.presentation.concert.*;
+import com.hhplus.concert_ticketing.interfaces.api.concert.*;
+import com.hhplus.concert_ticketing.interfaces.api.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.BeforeEach;

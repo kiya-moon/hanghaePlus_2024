@@ -1,7 +1,7 @@
 package com.hhplus.concert_ticketing.application;
 
 import com.hhplus.concert_ticketing.domain.queue.QueueService;
-import com.hhplus.concert_ticketing.presentation.queue.TokenResponse;
+import com.hhplus.concert_ticketing.interfaces.api.queue.TokenResponse;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
