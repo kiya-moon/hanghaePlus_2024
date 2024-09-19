@@ -20,6 +20,20 @@ services:
     ports:
       - "6379:6379"
 
+  locust-master:
+    image: locustio/locust:latest
+    ports:
+      - "8089:8089"
+    volumes:
+      - ./locust:/mnt/locust
+    command: -f /mnt/locust/locustfile.py --master -H http://host.docker.internal:8080
+
+  locust-worker:
+    image: locustio/locust:latest
+    volumes:
+      - ./locust:/mnt/locust
+    command: -f /mnt/locust/locustfile.py --worker --master-host locust-master
+
   zookeeper:
     image: confluentinc/cp-zookeeper:7.2.1
     ports:
